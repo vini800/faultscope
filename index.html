@@ -36,7 +36,7 @@
         margin-left: 0;
         height: 100vh;
         display: grid;
-        grid-template-rows: 46px 1fr 34px;
+        grid-template-rows: 44px 1fr 28px;
         overflow: hidden;
       }
       .top {
@@ -364,32 +364,39 @@
       }
       .status {
         border-top: 1px solid var(--line);
-        background: #091523;
+        background: #070e1b;
         display: flex;
         align-items: center;
-        gap: 14px;
-        padding: 0 13px;
-        color: #8297af;
+        gap: 12px;
+        padding: 0 10px;
+        color: #7187a2;
+        font-size: 10.5px;
+        line-height: 1;
         min-width: 0;
         overflow-x: auto;
         overflow-y: hidden;
         white-space: nowrap;
+        scrollbar-width: none;
       }
+      .status::-webkit-scrollbar { display: none; }
       .status b {
         color: #dce9f7;
+        font-weight: 600;
+        font-size: 10.5px;
+        font-variant-numeric: tabular-nums;
       }
       .footer-recording {
         display: flex;
         align-items: center;
-        gap: 7px;
+        gap: 6px;
         min-width: 0;
-        padding-right: 16px;
-        border-right: 1px solid var(--line);
+        padding-right: 12px;
+        border-right: 1px solid #1a2a3f;
       }
       .footer-recording-label {
-        color: #7187a2;
-        font-size: 9px;
-        letter-spacing: .12em;
+        color: #64748b;
+        font-size: 9.5px;
+        letter-spacing: .08em;
         text-transform: uppercase;
       }
       .footer-recording-value {
@@ -397,22 +404,52 @@
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        max-width: 380px;
+        max-width: 320px;
       }
       .footer-record-group {
         display: flex;
         align-items: center;
-        gap: 10px;
+        gap: 8px;
         min-width: 0;
-        padding-right: 12px;
-        border-right: 1px solid var(--line);
+        padding-right: 10px;
+        border-right: 1px solid #1a2a3f;
       }
       .footer-record-group[hidden] { display: none; }
-      .footer-item { color: #8297af; }
-      .footer-item b { margin-left: 3px; }
-      .footer-analysis { display:flex;align-items:center;gap:12px;flex:0 0 auto; }
-      .footer-analysis span { white-space:nowrap; }
-      .footer-analysis b { margin-left:3px; }
+      .footer-item {
+        color: #64748b;
+        font-size: 10.5px;
+        display: inline-flex;
+        align-items: center;
+        gap: 3px;
+      }
+      .footer-item b {
+        color: #dce9f7;
+      }
+      .footer-analysis {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex: 0 0 auto;
+        font-size: 10.5px;
+      }
+      .footer-analysis span {
+        white-space: nowrap;
+        color: #64748b;
+        font-size: 10.5px;
+        display: inline-flex;
+        align-items: center;
+        gap: 3px;
+      }
+      .footer-analysis b {
+        color: #dce9f7;
+      }
+      .footer-fault.fault-active {
+        color: #fb7185 !important;
+        background: rgba(244, 63, 94, 0.15);
+        padding: 1px 5px;
+        border-radius: 4px;
+        border: 1px solid rgba(244, 63, 94, 0.3);
+      }
 
       .cards {
         display: grid;
@@ -939,11 +976,18 @@
       .chip-fault b {
         color: #fb7185;
       }
-      .top-controls {
+      .top-controls,
+      .top-actions {
         display: flex;
         align-items: center;
         gap: 8px;
         flex-shrink: 0;
+      }
+      .top-actions .btn {
+        padding: 5px 10px;
+        font-size: 11.5px;
+        border-radius: 6px;
+        white-space: nowrap;
       }
       .segmented-ctrl {
         display: inline-flex;
@@ -1529,7 +1573,7 @@
       </div>
     </div>
     <div id="companionBanner">
-      <span><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:4px"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg><b>Arquivo de dados necessário (.dat)</b> para concluir o carregamento.</span>
+      <span><b>Arquivo .dat necessário</b> para continuar.</span>
       <button class="tool" id="btnBrowseCompanion" style="padding:4px 8px;font-size:11px">Selecionar .dat</button>
       <button class="channel-filter-close" id="btnCloseCompanion" title="Fechar"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
     </div>
@@ -1545,25 +1589,19 @@
           <span class="brand-title">FaultScope Studio</span>
           <span class="brand-badge">v7.00</span>
         </div>
-        <div class="meta-strip" id="hdrMetaStrip">
-          <div class="meta-chip" title="Subestação do registro"><span style="color:#64748b">SE:</span> <b id="hdrStation">Aguardando arquivo</b></div>
-          <div class="meta-chip" title="Dispositivo / IED"><span style="color:#64748b">IED:</span> <b id="hdrDevice">-</b></div>
-          <div class="meta-chip" title="Taxa de amostragem"><span style="color:#64748b">Taxa:</span> <b id="hdrRate">-</b></div>
-          <div class="meta-chip" title="Duração total"><span style="color:#64748b">Dur:</span> <b id="hdrDuration">-</b></div>
-          <div class="meta-chip chip-fault" id="hdrFaultChip" title="Classificação da Falta"><span style="color:#64748b">Falta:</span> <b id="hdrFaultType">-</b></div>
-        </div>
         <div class="top-actions">
-          <div class="segmented-ctrl" title="Alternar entre grandezas primárias da rede ou secundárias do relé">
-            <button class="seg-btn on" id="hdrRatioPrimary">Primário</button>
-            <button class="seg-btn" id="hdrRatioSecondary">Secundário</button>
-          </div>
+          <input id="comtradeFiles1" type="file" accept=".cfg,.dat,.inf,.zip,.zic" multiple hidden />
+          <input id="comtradeFiles2" type="file" accept=".cfg,.dat,.inf,.zip,.zic" multiple hidden />
+          <input id="companionFile" type="file" hidden />
+          <button class="btn primary" id="openBtn1" title="Aceita CFG/DAT/INF, ZIP e ZIC">Oscilografia 1</button>
+          <button class="btn" id="openBtn2" title="Aceita CFG/DAT/INF, ZIP e ZIC">Oscilografia 2</button>
           <div class="dropdown">
             <button class="btn" id="btnExportMenu" title="Exportações de imagem, dados e relatórios">Exportar ▾</button>
             <div class="dropdown-menu" id="exportDropdown">
-              <button class="dropdown-item" id="exportPngDark"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:6px"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>Imagem PNG (Escura)</button>
-              <button class="dropdown-item" id="exportPngLight"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:6px"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Imagem PNG (Fundo Branco)</button>
-              <button class="dropdown-item" id="exportCsv"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:6px"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>Exportar CSV (Cursores A-B)</button>
-              <button class="dropdown-item" id="exportPrintReport"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:6px"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>Imprimir Laudo / PDF</button>
+              <button class="dropdown-item" id="exportPngDark">PNG (Escuro)</button>
+              <button class="dropdown-item" id="exportPngLight">PNG (Claro)</button>
+              <button class="dropdown-item" id="exportCsv">CSV (Cursores)</button>
+              <button class="dropdown-item" id="exportPrintReport">Relatório PDF</button>
             </div>
           </div>
         </div>
@@ -1573,51 +1611,38 @@
         <div class="channel-filter-modal" id="channelFilterModal">
           <div class="channel-filter-head"><b id="channelFilterTitle">Filtrar canais</b><button class="channel-filter-close" id="channelFilterClose" type="button">×</button></div>
           <input class="channel-filter-input" id="channelFilterInput" type="text" placeholder="Ex.: I?a encontra I1a, I2a, I3a" autocomplete="off" />
-          <div class="channel-filter-help" id="channelFilterHelp">Os canais correspondentes permanecem visíveis. Use ? como curinga de um caractere.</div>
+          <div class="channel-filter-help" id="channelFilterHelp">Filtrar por nome (? = curinga).</div>
           <div class="channel-filter-inf" id="channelFilterInf">
             <div class="channel-filter-inf-title">Linhas de transmissão do INF · seleção múltipla</div>
             <div class="channel-filter-inf-list" id="channelFilterInfList"></div>
           </div>
-          <div class="channel-filter-actions"><button class="tool" id="channelFilterSelect">Selecionar encontrados</button><button class="tool" id="channelFilterClear">Desmarcar encontrados</button><button class="tool" id="channelFilterReset">Limpar filtro</button></div>
+          <div class="channel-filter-actions"><button class="tool" id="channelFilterSelect">Marcar todos</button><button class="tool" id="channelFilterClear">Desmarcar todos</button><button class="tool" id="channelFilterReset">Limpar</button></div>
         </div>
         <main class="main">
           <nav class="tabs">
-            <button class="tab on" data-id="wave">Oscilografias</button
+            <button class="tab on" data-id="wave">Oscilografia</button
             ><button class="tab" data-id="phasor">Fasores</button
-            ><button class="tab" data-id="fault">Identificação da Falta</button
-            ><button class="tab" data-id="location">Localização da Falta</button
-
+            ><button class="tab" data-id="fault">Identificação</button
+            ><button class="tab" data-id="location">Localização</button
             ><button class="tab" data-id="settings">Configurações</button
             ><button class="tab" data-id="report">Relatório</button>
             <button class="tab" data-id="log">Log</button>
-            <span class="tab-tools-spacer"></span>
-            <div class="tab-import-actions">
-              <input id="comtradeFiles1" type="file" accept=".cfg,.dat,.inf,.zip,.zic" multiple hidden />
-              <input id="comtradeFiles2" type="file" accept=".cfg,.dat,.inf,.zip,.zic" multiple hidden />
-              <input id="companionFile" type="file" hidden />
-              <button class="btn primary" id="openBtn1" title="Aceita CFG/DAT/INF, ZIP e ZIC">Abrir Oscilografia 1</button>
-              <button class="btn" id="openBtn2" title="Aceita CFG/DAT/INF, ZIP e ZIC">Abrir Oscilografia 2</button>
-              <button class="btn" id="demoBtn">Sample fault</button>
-            </div>
           </nav>
           <!-- OSCILOGRAFIA INTERATIVA -->
           <section class="view on" id="wave">
             <div class="wave-toolbar" id="waveToolbar" style="position:relative">
               <button class="tool on" id="viewTogether">Juntos</button>
               <button class="tool" id="viewSideBySide">Lado a Lado</button>
-              <button class="tool on" id="cursorTool">Cursor A/B</button>
-              <button class="tool" id="groupTool" title="Agrupar ou desagrupar sinais"><svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg> Agrupar</button>
+              <button class="tool on" id="cursorTool">Cursores</button>
+              <button class="tool" id="groupTool" title="Agrupar ou desagrupar sinais">Agrupar</button>
               <button class="tool" id="panTool">Pan</button>
-              <button class="tool" id="zoomTool" title="Zoom por área: selecione uma janela no gráfico clicando e arrastando (ou segure o botão direito do mouse e arraste em qualquer modo)">Zoom</button>
+              <button class="tool" id="zoomTool" title="Zoom por área">Zoom</button>
               <button class="tool" id="resetZoom">Reset</button>
               <span style="width:1px;height:18px;background:var(--line);margin:0 2px"></span>
-              <button class="tool" id="btnYScale" title="Ajuste manual da escala vertical Y">Escala Y ▾</button>
-              <button class="tool" id="btnAddMarker" title="Adicionar anotação/marcador de evento na tela">+ Marcador</button>
-              <button class="tool" id="btnRmsEnvelope" title="Exibir envoltória RMS cycle-by-cycle">RMS</button>
-              <button class="tool" id="btnCalcChannels" title="Cálculos e operações com canais analógicos" style="background:#0e294b;border-color:#245484;color:#93c5fd">
-                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:3px"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="16" y1="14" x2="16" y2="18"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/></svg>Cálculos<span id="toolbarCalcBadge" class="channel-count" style="display:none;margin-left:4px;background:#0284c7">0</span>
-              </button>
-
+              <button class="tool" id="btnYScale" title="Escala vertical Y">Escala Y ▾</button>
+              <button class="tool" id="btnAddMarker" title="Adicionar marcador">Marcador</button>
+              <button class="tool" id="btnRmsEnvelope" title="Envoltória RMS">RMS</button>
+              <button class="tool" id="btnCalcChannels" title="Cálculos com canais analógicos" style="background:#0e294b;border-color:#245484;color:#93c5fd">Cálculos<span id="toolbarCalcBadge" class="channel-count" style="display:none;margin-left:4px;background:#0284c7">0</span></button>
             </div>
             <div class="wave-stack" id="waveStack">
               <div class="wave-pane" id="currentWavePane"><div class="analog-panel-title"><b>Correntes</b><span id="currentVisibleInfo"></span></div><div class="analog-chartbox"><canvas id="currentCanvas"></canvas></div></div>
@@ -1631,7 +1656,7 @@
                     <span id="calculatedVisibleInfo" style="font-size:11px;color:#8196ae">0 ativos</span>
                   </div>
                   <div style="display:flex;align-items:center;gap:6px">
-                    <button class="tool" id="btnAddCalculationInline" style="height:22px;padding:1px 8px;font-size:11px;background:#0d2645;border-color:#2a5080;color:#93c5fd">+ Novo Cálculo</button>
+                    <button class="tool" id="btnAddCalculationInline" style="height:22px;padding:1px 8px;font-size:11px;background:#0d2645;border-color:#2a5080;color:#93c5fd">Novo</button>
                     <button class="tool" id="btnManageCalculationsInline" style="height:22px;padding:1px 8px;font-size:11px">Gerenciar</button>
                   </div>
                 </div>
@@ -1697,26 +1722,23 @@
           <section class="view" id="fault">
             <div class="fault-id-layout">
               <div class="panel fault-timeline-panel">
-                <div class="fault-timeline-head"><div><small>Timeline de Distúrbios</small> <span class="badge" id="faultTimelineType">Aguardando</span></div><span class="fault-timeline-range" id="faultTimelineRange">-</span></div>
+                <div class="fault-timeline-head"><div><small>Linha do Tempo</small> <span class="badge" id="faultTimelineType">Aguardando</span></div><span class="fault-timeline-range" id="faultTimelineRange">-</span></div>
                 <div class="fault-timeline-episodes" id="faultTimelineEpisodes"></div>
                 <div class="timeline" id="timeline"></div>
-                <div class="legend" id="faultTimelineLegend">Janela protegida · varredura de meio ciclo</div>
+                <div class="legend" id="faultTimelineLegend">Varredura de meio ciclo</div>
               </div>
 
               <div class="panel fault-summary">
                 <div><div class="fault-summary-label">Tipo de falta</div><h2 id="faultVerdict">Pressione Calcular</h2><div class="fault-phase-badges" id="faultPhaseBadges"></div><div id="faultMethod" class="crumb">Delta sequences from V + I</div><div class="pole-clearance-strip" id="faultPoleClearance"></div></div>
-                <div class="fault-summary-actions"><span class="badge" id="faultCalcStatus">AGUARDANDO CÁLCULO</span><button class="btn primary" id="calculateFault">Calcular Fault ID</button></div>
+                <div class="fault-summary-actions"><span class="badge" id="faultCalcStatus">AGUARDANDO</span><button class="btn primary" id="calculateFault">Calcular</button></div>
               </div>
 
               <div class="fault-channel-strip" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
                 <div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center">
-                  <div class="calc-channel-group"><b>Tensões no Cálculo:</b><div class="calc-channel-list" id="faultVoltageChannels"></div></div>
-                  <div class="calc-channel-group"><b>Correntes no Cálculo:</b><div class="calc-channel-list" id="faultCurrentChannels"></div></div>
+                  <div class="calc-channel-group"><b>Tensões:</b><div class="calc-channel-list" id="faultVoltageChannels"></div></div>
+                  <div class="calc-channel-group"><b>Correntes:</b><div class="calc-channel-list" id="faultCurrentChannels"></div></div>
                 </div>
-                <button class="tool" id="btnEditChannelsFault" type="button" title="Alterar manualmente os canais considerados nos cálculos" style="padding:4px 10px;font-size:11px;display:inline-flex;align-items:center;gap:5px;cursor:pointer">
-                  <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="#38bdf8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
-                  <span>Alterar Canais</span>
-                </button>
+                <button class="tool" id="btnEditChannelsFault" type="button" title="Alterar canais dos cálculos" style="padding:4px 10px;font-size:11px;cursor:pointer">Canais</button>
               </div>
 
               <div class="fault-comparison-grid">
@@ -1749,18 +1771,15 @@
             <div class="location-topbar">
               <div class="location-topbar-channels">
                 <div class="calc-channel-groups" style="margin:0;display:flex;flex-wrap:wrap;gap:12px;align-items:center">
-                  <div class="calc-channel-group" style="margin:0;display:flex;align-items:center;gap:6px"><b style="color:#7890aa;font-size:11px;white-space:nowrap">Tensões no Cálculo:</b><div class="calc-channel-list" id="locationVoltageChannels"></div></div>
-                  <div class="calc-channel-group" style="margin:0;display:flex;align-items:center;gap:6px"><b style="color:#7890aa;font-size:11px;white-space:nowrap">Correntes no Cálculo:</b><div class="calc-channel-list" id="locationCurrentChannels"></div></div>
-                  <button class="tool" id="btnEditChannelsLoc" type="button" title="Alterar manualmente os canais considerados nos cálculos" style="padding:3px 8px;font-size:11px;display:inline-flex;align-items:center;gap:5px;cursor:pointer;margin-left:4px">
-                    <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="#38bdf8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
-                    <span>Alterar Canais</span>
-                  </button>
+                  <div class="calc-channel-group" style="margin:0;display:flex;align-items:center;gap:6px"><b style="color:#7890aa;font-size:11px;white-space:nowrap">Tensões:</b><div class="calc-channel-list" id="locationVoltageChannels"></div></div>
+                  <div class="calc-channel-group" style="margin:0;display:flex;align-items:center;gap:6px"><b style="color:#7890aa;font-size:11px;white-space:nowrap">Correntes:</b><div class="calc-channel-list" id="locationCurrentChannels"></div></div>
+                  <button class="tool" id="btnEditChannelsLoc" type="button" title="Alterar canais dos cálculos" style="padding:3px 8px;font-size:11px;cursor:pointer;margin-left:4px">Canais</button>
                 </div>
               </div>
               <div class="location-topbar-actions">
                 <span class="badge" id="locWindowBadge" style="background:#2e1065;color:#c084fc;border:1px solid #7e22ce;display:none">Janela: -</span>
-                <span class="badge" id="locConfidence">AGUARDANDO CÁLCULO</span>
-                <button class="btn primary" id="calculateLocation">Calcular Fault Location</button>
+                <span class="badge" id="locConfidence">AGUARDANDO</span>
+                <button class="btn primary" id="calculateLocation">Calcular</button>
               </div>
             </div>
 
@@ -1770,21 +1789,21 @@
               <div class="location-standard-card" id="oneTerminalCard">
                 <div class="loc-card-header">
                   <div style="display:flex;align-items:center;gap:8px">
-                    <span class="loc-card-badge">1 Terminal (1-Ended)</span>
-                    <h3 style="margin:0;font-size:12.5px;color:#f8fafc">Localização Unilateral (Takagi / Reatância / Sequências)</h3>
+                    <span class="loc-card-badge">1 Terminal</span>
+                    <h3 style="margin:0;font-size:12.5px;color:#f8fafc">Localização Unilateral</h3>
                   </div>
-                  <span class="badge" id="locConfidenceBadge" style="background:#1e293b;color:#94a3b8">Aguardando cálculo</span>
+                  <span class="badge" id="locConfidenceBadge" style="background:#1e293b;color:#94a3b8">Aguardando</span>
                 </div>
 
                 <div class="loc-card-hero">
                   <div>
-                    <span class="loc-hero-label">Localização Consolidada (1 Terminal)</span>
+                    <span class="loc-hero-label">Localização (1 Terminal)</span>
                     <div class="loc-hero-val" id="locHero">Pressione Calcular</div>
-                    <div class="loc-hero-sub" id="locSub">Mediana • Média (±σ) • Faixa • N amostras</div>
-                    <div id="locCalcTime" class="loc-calc-time">Janela Estável: -</div>
+                    <div class="loc-hero-sub" id="locSub">Mediana • Média ±σ</div>
+                    <div id="locCalcTime" class="loc-calc-time">Janela: -</div>
                   </div>
                   <div class="loc-hero-aux" style="text-align:right">
-                    <span class="loc-aux-label">Impedância Aparente (Zapp)</span>
+                    <span class="loc-aux-label">Impedância Aparente</span>
                     <div class="loc-aux-val" id="locZApp">- Ω</div>
                     <div class="loc-aux-sub" id="locLoopVI">Vloop: - V · Iloop: - A</div>
                   </div>
@@ -1798,12 +1817,12 @@
                   </div>
                   <div class="loc-method-pill">
                     <div class="method-title">Takagi Clássico</div>
-                    <div class="method-sub">Componente ΔI superposta</div>
+                    <div class="method-sub">ΔI superposta</div>
                     <b id="locTak" class="method-val">-</b>
                   </div>
                   <div class="loc-method-pill">
                     <div class="method-title">Takagi Modificado</div>
-                    <div class="method-sub">Seq. Negativa I2 (Imune carga)</div>
+                    <div class="method-sub">Seq. Negativa (I2)</div>
                     <b id="locMod" class="method-val">-</b>
                   </div>
                   <div class="loc-method-pill">
@@ -1817,8 +1836,8 @@
                 <div class="loc-traj-section">
                   <div class="loc-traj-header">
                     <div>
-                      <h4 style="margin:0;font-size:11.5px;color:#dce9f7">Trajetória Temporal da Distância de Falta (1 Terminal)</h4>
-                      <small style="color:#64748b;font-size:10px">Análise estatística contínua de todos os métodos unilaterais</small>
+                      <h4 style="margin:0;font-size:11.5px;color:#dce9f7">Trajetória Temporal (1 Terminal)</h4>
+                      <small style="color:#64748b;font-size:10px">Métodos unilaterais</small>
                     </div>
                     <span class="badge" id="locTraj1TBadge" style="background:#0e294b;color:#38bdf8;border:1px solid #1e4976;font-size:10px">Mediana ± σ</span>
                   </div>
@@ -1831,26 +1850,26 @@
               <div class="location-standard-card" id="twoTerminalCard">
                 <div class="loc-card-header">
                   <div style="display:flex;align-items:center;gap:8px">
-                    <span class="loc-card-badge two-terminal">Dois Terminais (2-Ended)</span>
-                    <h3 style="margin:0;font-size:12.5px;color:#f8fafc">Multi-Terminal Sincronizado e Não-Sincronizado</h3>
+                    <span class="loc-card-badge two-terminal">2 Terminais</span>
+                    <h3 style="margin:0;font-size:12.5px;color:#f8fafc">Localização Bilateral</h3>
                   </div>
-                  <span class="badge" id="twoTermStatus" style="background:#1e293b;color:#94a3b8">Aguardando cálculo</span>
+                  <span class="badge" id="twoTermStatus" style="background:#1e293b;color:#94a3b8">Aguardando</span>
                 </div>
 
-                <div id="twoTermEmptyPrompt" style="display:none;padding:12px 14px;background:#091220;border:1px dashed #1e3a5f;border-radius:6px;color:#94a3b8;font-size:11px;line-height:1.5">
-                  <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#eab308" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:4px"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7Z"/></svg><b>Modo 1 Terminal Ativo:</b> Carregue a <b>Oscilografia 2</b> (Terminal Remoto) pelo botão superior <b>"Abrir Oscilografia 2"</b> para desbloquear a localização de dois terminais (imune a resistência de falta e infeed remoto), ou clique em <b>"Sample fault"</b> para demonstrar ambos os terminais sincronizados.
+                <div id="twoTermEmptyPrompt" style="display:none;padding:10px 12px;background:#091220;border:1px dashed #1e3a5f;border-radius:6px;color:#94a3b8;font-size:11px;line-height:1.4">
+                  <b>Modo 1 Terminal:</b> Abra a <b>Oscilografia 2</b> para análise a dois terminais ou use <b>Exemplo</b>.
                 </div>
 
                 <div id="twoTermContent">
                   <div class="loc-card-hero">
                     <div>
-                      <span class="loc-hero-label" style="color:#c084fc">Localização Consolidada (2 Terminais)</span>
+                      <span class="loc-hero-label" style="color:#c084fc">Localização (2 Terminais)</span>
                       <div class="loc-hero-val" id="twoTermHero">- km</div>
-                      <div class="loc-hero-sub" id="twoTermSub">Mediana • Média (±σ) • Faixa • N amostras</div>
-                      <div id="twoTermCalcTime" class="loc-calc-time">Janela Estável: -</div>
+                      <div class="loc-hero-sub" id="twoTermSub">Mediana • Média ±σ</div>
+                      <div id="twoTermCalcTime" class="loc-calc-time">Janela: -</div>
                     </div>
                     <div class="loc-hero-aux" style="text-align:right">
-                      <span class="loc-aux-label two-term">Resistência do Arco (Rf)</span>
+                      <span class="loc-aux-label two-term">Resistência de Falta (Rf)</span>
                       <div class="loc-aux-val" id="twoTermRf" style="color:#34d399">- Ω</div>
                       <div class="loc-aux-sub" id="twoTermIf">If total: - A · Xf: - Ω</div>
                     </div>
@@ -1859,39 +1878,39 @@
                   <div class="loc-methods-grid" style="margin-top:10px">
                     <div class="loc-method-pill">
                       <div class="method-title">Sincronizado (Loop)</div>
-                      <div class="method-sub">IEEE C37.114 · V + I</div>
+                      <div class="method-sub">V + I</div>
                       <b id="locSyncLoop" class="method-val two-term">-</b>
                     </div>
                     <div class="loc-method-pill">
                       <div class="method-title">Sincronizado (Seq. Neg.)</div>
-                      <div class="method-sub">Eriksson · Imune Carga/Z0</div>
+                      <div class="method-sub">Imune a Carga/Z0</div>
                       <b id="locSyncNeg" class="method-val two-term">-</b>
                     </div>
                     <div class="loc-method-pill">
                       <div class="method-title">Não-Sincronizado (|VF|)</div>
-                      <div class="method-sub">Kezunovic · Quadrático</div>
+                      <div class="method-sub">Quadrático</div>
                       <b id="locUnsyncMag" class="method-val two-term">-</b>
                     </div>
                     <div class="loc-method-pill">
                       <div class="method-title">Não-Sincronizado (Pré δ)</div>
-                      <div class="method-sub">Novosel · Ângulo Carga</div>
+                      <div class="method-sub">Ângulo de Carga</div>
                       <b id="locUnsyncPre" class="method-val two-term">-</b>
                     </div>
                   </div>
 
                   <div class="two-term-telemetry" style="margin-top:8px;padding:6px 10px;gap:12px;font-size:10.5px">
-                    <div><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:4px"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Desvio Temporal: <b id="twoTermTimeSkew" style="color:#e2e8f0">-</b></div>
-                    <div><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="#38bdf8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:4px"><path d="M3 21h18"/><path d="M3 21V3l18 18"/></svg>Ângulo Sincronismo (δ): <b id="twoTermDeltaAngle" style="color:#e2e8f0">-</b></div>
-                    <div><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="#a78bfa" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:4px"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h18"/></svg>Seq. Zero (Terra): <b id="locSyncZero" style="color:#e2e8f0">-</b></div>
-                    <div><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="#34d399" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:4px"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>Incerteza (σ): <b id="twoTermSd" style="color:#e2e8f0">-</b></div>
+                    <div>Desvio: <b id="twoTermTimeSkew" style="color:#e2e8f0">-</b></div>
+                    <div>Ângulo δ: <b id="twoTermDeltaAngle" style="color:#e2e8f0">-</b></div>
+                    <div>Seq. Zero: <b id="locSyncZero" style="color:#e2e8f0">-</b></div>
+                    <div>Incerteza: <b id="twoTermSd" style="color:#e2e8f0">-</b></div>
                   </div>
 
                   <!-- Gráfico Trajetória Temporal 2 Terminais -->
                   <div class="loc-traj-section">
                     <div class="loc-traj-header">
                       <div>
-                        <h4 style="margin:0;font-size:11.5px;color:#dce9f7">Trajetória Temporal da Distância de Falta (2 Terminais)</h4>
-                        <small style="color:#64748b;font-size:10px">Análise estatística contínua de todos os métodos bilaterais</small>
+                        <h4 style="margin:0;font-size:11.5px;color:#dce9f7">Trajetória Temporal (2 Terminais)</h4>
+                        <small style="color:#64748b;font-size:10px">Métodos bilaterais</small>
                       </div>
                       <span class="badge" id="locTraj2TBadge" style="background:#2e1065;color:#c084fc;border:1px solid #7e22ce;font-size:10px">Mediana ± σ</span>
                     </div>
@@ -1904,8 +1923,8 @@
               <!-- BARRA COMPARATIVA DOS MÉTODOS (1-TERM VS 2-TERM) -->
               <div class="location-chart-panel" style="grid-column: 1 / -1; margin-top: 4px;">
                 <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
-                  <h3 style="margin:0;font-size:12px;color:#dce9f7">Comparação Consolidada dos Métodos (1 Terminal vs 2 Terminais)</h3>
-                  <span style="font-size:10px;color:#64748b">Mediana das distâncias estimadas (km)</span>
+                  <h3 style="margin:0;font-size:12px;color:#dce9f7">Comparação dos Métodos</h3>
+                  <span style="font-size:10px;color:#64748b">Distâncias estimadas (km)</span>
                 </div>
                 <canvas id="locationCanvas" style="height:170px;width:100%;display:block"></canvas>
               </div>
@@ -1914,15 +1933,13 @@
           <section class="view" id="settings">
             <div class="panel" id="settingsPanel">
               <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;">
-                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#38bdf8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-                <h2 style="margin:0">Parâmetros da Linha e da Análise</h2>
+                <h2 style="margin:0">Parâmetros da Linha</h2>
               </div>
 
               <!-- Subdivisão 1: Parâmetros Elétricos da Linha de Transmissão -->
               <div class="settings-group-card" style="background:#071220;border:1px solid #162942;border-radius:8px;padding:14px;margin-bottom:14px">
                 <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;border-bottom:1px solid #142844;padding-bottom:8px">
-                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#38bdf8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
-                  <h3 style="margin:0;font-size:12.5px;color:#dce9f7;font-weight:600">Parâmetros Elétricos da Linha de Transmissão</h3>
+                  <h3 style="margin:0;font-size:12.5px;color:#dce9f7;font-weight:600">Parâmetros Elétricos da Linha</h3>
                 </div>
                 <div class="settings-grid">
                   <div class="field"><label>Tensão Nominal Vnom (kV)</label><input id="vnom" type="number" value="500" step="0.1" /></div>
@@ -1939,8 +1956,7 @@
               <!-- Subdivisão 2: Identificação e Detecção da Falta -->
               <div class="settings-group-card" style="background:#071220;border:1px solid #162942;border-radius:8px;padding:14px;margin-bottom:14px">
                 <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;border-bottom:1px solid #142844;padding-bottom:8px">
-                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#eab308" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-                  <h3 style="margin:0;font-size:12.5px;color:#dce9f7;font-weight:600">Identificação e Detecção da Falta</h3>
+                  <h3 style="margin:0;font-size:12.5px;color:#dce9f7;font-weight:600">Identificação da Falta</h3>
                 </div>
                 <div class="settings-grid">
                   <div class="field"><label>I2/I1 threshold (Seq. Negativa)</label><input id="t21" type="number" value="0.15" step="0.01" /></div>
@@ -1956,8 +1972,7 @@
               <!-- Subdivisão 3: Localização da Falta & Janela de Cálculo -->
               <div class="settings-group-card" style="background:#071220;border:1px solid #162942;border-radius:8px;padding:14px;">
                 <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;border-bottom:1px solid #142844;padding-bottom:8px">
-                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#a78bfa" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
-                  <h3 style="margin:0;font-size:12.5px;color:#dce9f7;font-weight:600">Localização da Falta & Janela de Cálculo</h3>
+                  <h3 style="margin:0;font-size:12.5px;color:#dce9f7;font-weight:600">Localização da Falta</h3>
                 </div>
                 <div class="settings-grid">
                   <div class="field"><label>Fonte do cálculo</label><select id="analysisSource"><option value="0">Oscilografia 1</option><option value="1">Oscilografia 2</option></select></div>
@@ -1972,15 +1987,14 @@
             <!-- Bloco Dedicado de Dados do Arquivo INF e Grupos de Linha -->
             <div class="panel" id="infConfigPanel" style="margin-top:16px;">
               <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
-                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-                <h2 style="margin:0">Parâmetros Lidos do Arquivo INF (.inf)</h2>
+                <h2 style="margin:0">Parâmetros do INF</h2>
               </div>
               <div id="infConfigContainer"></div>
             </div>
           </section>
           <section class="view" id="report">
             <div class="toolbar">
-              <h2>Relatório de engenharia</h2>
+              <h2>Relatório</h2>
               <button class="btn primary" id="downloadReport">
                 Baixar TXT
               </button>
@@ -1989,10 +2003,10 @@
           </section>
           <section class="view" id="log">
             <div class="toolbar">
-              <h2>Log de Auditoria dos Cálculos</h2>
+              <h2>Log de Auditoria</h2>
               <div style="display:flex;gap:8px;align-items:center;">
-                <button class="btn" id="copyLogBtn" title="Copiar log completo para a área de transferência">Copiar Log</button>
-                <button class="btn primary" id="downloadLogBtn" title="Baixar relatório de auditoria em arquivo .txt">Baixar TXT</button>
+                <button class="btn" id="copyLogBtn" title="Copiar log">Copiar</button>
+                <button class="btn primary" id="downloadLogBtn" title="Baixar .txt">Baixar TXT</button>
               </div>
             </div>
             <pre class="panel" id="auditLogText" style="white-space:pre-wrap;font-family:Consolas,Monaco,'Fira Code',monospace;font-size:12px;line-height:1.55;overflow-y:auto;height:calc(100% - 48px);max-height:none;background:#0d1117;color:#e6edf3;border-color:#30363d;padding:16px;user-select:text;"></pre>
@@ -2003,18 +2017,17 @@
           <div class="modal-dialog" style="width:min(640px, 94vw);max-height:88vh;display:flex;flex-direction:column;">
             <div class="popover-head" style="margin-bottom:6px">
               <div style="display:flex;align-items:center;gap:8px">
-                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="16" y1="14" x2="16" y2="18"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/></svg>
-                <span style="font-weight:600;color:#f1f5f9;font-size:14px">Canais Calculados & Operações</span>
+                <span style="font-weight:600;color:#f1f5f9;font-size:14px">Canais Calculados</span>
               </div>
               <button class="channel-filter-close" id="btnCloseCalcModal" type="button" title="Fechar"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
             </div>
-            <p style="font-size:11px;color:#94a3b8;margin:0 0 10px;line-height:1.4">Realize operações matemáticas entre os canais analógicos existentes. Os sinais calculados são exibidos em um painel dedicado logo abaixo dos canais analógicos.</p>
+            <p style="font-size:11px;color:#94a3b8;margin:0 0 10px;line-height:1.4">Operações matemáticas entre canais analógicos.</p>
 
             <!-- Abas do Modal -->
             <div class="calc-tabs">
-              <button class="calc-tab on" id="tabPresetsBtn" type="button"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="#eab308" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:4px"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>Presets Rápidos</button>
-              <button class="calc-tab" id="tabCustomBtn" type="button"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="#38bdf8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:4px"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg>Fórmula Personalizada</button>
-              <button class="calc-tab" id="tabActiveBtn" type="button"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="#93c5fd" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:4px"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>Canais Ativos (<span id="calcModalActiveCount">0</span>)</button>
+              <button class="calc-tab on" id="tabPresetsBtn" type="button">Presets</button>
+              <button class="calc-tab" id="tabCustomBtn" type="button">Fórmula</button>
+              <button class="calc-tab" id="tabActiveBtn" type="button">Ativos (<span id="calcModalActiveCount">0</span>)</button>
             </div>
 
             <!-- Painel 1: Presets -->
@@ -2078,7 +2091,7 @@
 
               <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:12px">
                 <button type="button" class="tool" id="btnClearCustomForm">Limpar</button>
-                <button type="button" class="btn primary" id="btnSaveCustomCalc">+ Adicionar Canal Calculado</button>
+                <button type="button" class="btn primary" id="btnSaveCustomCalc">Adicionar</button>
               </div>
             </div>
 
@@ -2089,7 +2102,7 @@
               </div>
               <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px;padding-top:10px;border-top:1px solid #1e304b">
                 <span style="font-size:11px;color:#7890aa" id="calcSummaryText">0 canais configurados</span>
-                <button type="button" class="tool" id="btnClearAllCalcs" style="color:#f87171;border-color:#7f1d1d">Limpar Todos os Canais</button>
+                <button type="button" class="tool" id="btnClearAllCalcs" style="color:#f87171;border-color:#7f1d1d">Limpar Todos</button>
               </div>
             </div>
           </div>
@@ -2104,17 +2117,17 @@
           <div style="display:flex;flex-direction:column;gap:6px">
             <button class="yscale-menu-item on" id="btnYScaleJoint" type="button">
               <div style="display:flex;align-items:center;justify-content:space-between;width:100%">
-                <span style="font-weight:600;font-size:12px">Automática Conjunto</span>
+                <span style="font-weight:600;font-size:12px">Automática (Conjunto)</span>
                 <span class="yscale-check" id="checkYScaleJoint"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="#34d399" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:3px"><polyline points="20 6 9 17 4 12"/></svg></span>
               </div>
-              <small style="color:#7890aa;font-size:10px;margin-top:3px;display:block">Mesma escala para correntes e mesma para tensões</small>
+              <small style="color:#7890aa;font-size:10px;margin-top:3px;display:block">Mesma escala por grandeza</small>
             </button>
             <button class="yscale-menu-item" id="btnYScaleIndividual" type="button">
               <div style="display:flex;align-items:center;justify-content:space-between;width:100%">
-                <span style="font-weight:600;font-size:12px">Automática Individual</span>
+                <span style="font-weight:600;font-size:12px">Automática (Individual)</span>
                 <span class="yscale-check" id="checkYScaleIndividual" style="display:none"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="#34d399" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:3px"><polyline points="20 6 9 17 4 12"/></svg></span>
               </div>
-              <small style="color:#7890aa;font-size:10px;margin-top:3px;display:block">Cada canal com sua própria escala independente</small>
+              <small style="color:#7890aa;font-size:10px;margin-top:3px;display:block">Escala individual por canal</small>
             </button>
           </div>
         </div>
@@ -2179,17 +2192,16 @@
           <div class="modal-dialog" style="width:min(860px, 96vw);max-height:88vh;display:flex;flex-direction:column;padding:18px">
             <div class="popover-head" style="margin-bottom:8px">
               <div style="display:flex;align-items:center;gap:8px">
-                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
-                <span style="font-weight:600;color:#f1f5f9;font-size:14px">Mapeamento Manual dos Canais de Cálculo</span>
+                <span style="font-weight:600;color:#f1f5f9;font-size:14px">Canais para Cálculo</span>
               </div>
               <button class="channel-filter-close" id="btnCloseMapModal" type="button" title="Fechar"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
             </div>
-            <p style="font-size:11.5px;color:#94a3b8;margin:0 0 10px;line-height:1.4">Selecione manualmente quais canais analógicos do arquivo COMTRADE correspondem a cada fase e neutro para alimentar os algoritmos de identificação e localização de falta.</p>
+            <p style="font-size:11.5px;color:#94a3b8;margin:0 0 10px;line-height:1.4">Selecione os canais de tensão e corrente para os cálculos.</p>
 
             <!-- Seletor de Oscilografia (visível se houver 2 oscilografias) -->
             <div id="mapModalSlotSelector" style="display:none;margin-bottom:10px;background:#091524;border:1px solid #1a304e;border-radius:6px;padding:4px;gap:6px">
-              <button class="calc-tab on" id="mapSlotBtn0" type="button" style="flex:1;text-align:center;padding:5px">Oscilografia 1 (Terminal Local S)</button>
-              <button class="calc-tab" id="mapSlotBtn1" type="button" style="flex:1;text-align:center;padding:5px">Oscilografia 2 (Terminal Remoto R)</button>
+              <button class="calc-tab on" id="mapSlotBtn0" type="button" style="flex:1;text-align:center;padding:5px">Terminal Local (S)</button>
+              <button class="calc-tab" id="mapSlotBtn1" type="button" style="flex:1;text-align:center;padding:5px">Terminal Remoto (R)</button>
             </div>
 
             <!-- Barra de Ações Rápidas: .INF e Visualização -->
@@ -2197,18 +2209,12 @@
               <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
                 <!-- Dropdown / Botão Selecionar do .INF -->
                 <div style="display:inline-flex;align-items:center;gap:6px">
-                  <button type="button" class="tool" id="btnMapFromInf" style="padding:4px 9px;font-size:11px;display:inline-flex;align-items:center;gap:5px;border-color:#1e3a63;color:#38bdf8;cursor:pointer" title="Carregar canais de uma linha/grupo lida do arquivo .inf">
-                    <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-                    <span>Selecionar do .INF</span>
-                  </button>
+                  <button type="button" class="tool" id="btnMapFromInf" style="padding:4px 9px;font-size:11px;border-color:#1e3a63;color:#38bdf8;cursor:pointer" title="Carregar do .inf">Do .INF</button>
                   <select id="mapInfLineSelect" class="popover-input" style="display:none;padding:4px 8px;font-size:11px;background:#0d1e34;color:#f1f5f9;border-color:#20395c;border-radius:4px;max-width:240px"></select>
                 </div>
 
                 <!-- Botão Importar da Visualização -->
-                <button type="button" class="tool" id="btnMapFromViewer" style="padding:4px 9px;font-size:11px;display:inline-flex;align-items:center;gap:5px;border-color:#1e3a63;color:#c084fc;cursor:pointer" title="Importar os canais analógicos atualmente selecionados na árvore de sinais">
-                  <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-                  <span>Importar da Visualização</span>
-                </button>
+                <button type="button" class="tool" id="btnMapFromViewer" style="padding:4px 9px;font-size:11px;border-color:#1e3a63;color:#c084fc;cursor:pointer" title="Importar canais da tela">Da Visualização</button>
               </div>
               <div id="mapQuickActionStatus" style="font-size:11px;color:#94a3b8"></div>
             </div>
@@ -2217,8 +2223,7 @@
               <!-- Coluna Tensões -->
               <div style="background:#071220;border:1px solid #162942;border-radius:8px;padding:12px;height:fit-content">
                 <div style="display:flex;align-items:center;gap:6px;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid #142844">
-                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-                  <span style="font-size:12px;font-weight:700;color:#38bdf8;text-transform:uppercase;letter-spacing:.04em">Tensões Trifásicas</span>
+                  <span style="font-size:12px;font-weight:700;color:#38bdf8;text-transform:uppercase;letter-spacing:.04em">Tensões</span>
                 </div>
                 <div style="display:flex;flex-direction:column;gap:9px">
                   <div><label style="font-size:11px;color:#94a3b8;display:block;margin-bottom:3px;font-weight:600">Fase A (Va):</label><select id="mapSelVa" class="popover-input" style="padding:6px 8px;font-size:11.5px;background:#0d1a2d;color:#f1f5f9;border-color:#20395c;border-radius:5px;width:100%"></select></div>
@@ -2232,13 +2237,12 @@
               <div style="background:#071220;border:1px solid #162942;border-radius:8px;padding:12px">
                 <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid #142844;flex-wrap:wrap;gap:6px">
                   <div style="display:flex;align-items:center;gap:6px">
-                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#eab308" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-                    <span style="font-size:12px;font-weight:700;color:#eab308;text-transform:uppercase;letter-spacing:.04em">Correntes Trifásicas</span>
+                    <span style="font-size:12px;font-weight:700;color:#eab308;text-transform:uppercase;letter-spacing:.04em">Correntes</span>
                   </div>
                   <!-- Modo 1 TC vs 2 TCs -->
                   <div style="display:inline-flex;background:#091524;border:1px solid #1b3252;border-radius:5px;padding:2px;gap:2px">
-                    <button type="button" id="btnCurrentMode1TC" class="calc-tab on" style="padding:2px 8px;font-size:10.5px;border-radius:4px" title="Um conjunto convencional de TCs">1 TC (Padrão)</button>
-                    <button type="button" id="btnCurrentMode2TC" class="calc-tab" style="padding:2px 8px;font-size:10.5px;border-radius:4px" title="Dois conjuntos de TCs para subestações com arranjo disjuntor e meio ou barra dupla">2 TCs (1½ DJ)</button>
+                    <button type="button" id="btnCurrentMode1TC" class="calc-tab on" style="padding:2px 8px;font-size:10.5px;border-radius:4px" title="Um conjunto de TCs">1 TC</button>
+                    <button type="button" id="btnCurrentMode2TC" class="calc-tab" style="padding:2px 8px;font-size:10.5px;border-radius:4px" title="Dois conjuntos de TCs (1½ DJ)">2 TCs (1½ DJ)</button>
                   </div>
                 </div>
 
@@ -2256,7 +2260,7 @@
                   <div style="background:#09182b;border:1px solid #162f50;border-radius:6px;padding:8px">
                     <div style="font-size:10.5px;font-weight:700;color:#93c5fd;margin-bottom:6px;text-transform:uppercase;display:flex;align-items:center;gap:5px">
                       <span style="background:#1d3860;color:#bfdbfe;padding:1px 5px;border-radius:3px;font-size:9.5px">TC 1</span>
-                      <span>Disjuntor 1 / Ramo 1</span>
+                      <span>Ramo 1</span>
                     </div>
                     <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
                       <div><label style="font-size:10px;color:#94a3b8;display:block;margin-bottom:2px">Ia1:</label><select id="mapSelIa1" class="popover-input" style="padding:4px 6px;font-size:11px;background:#0d1a2d;color:#f1f5f9;border-color:#20395c;border-radius:4px;width:100%"></select></div>
@@ -2283,7 +2287,7 @@
                   <div style="background:#09182b;border:1px solid #162f50;border-radius:6px;padding:8px">
                     <div style="font-size:10.5px;font-weight:700;color:#fcd34d;margin-bottom:6px;text-transform:uppercase;display:flex;align-items:center;gap:5px">
                       <span style="background:#422e06;color:#fde047;border:1px solid #713f12;padding:1px 5px;border-radius:3px;font-size:9.5px">TC 2</span>
-                      <span>Disjuntor 2 / Ramo 2</span>
+                      <span>Ramo 2</span>
                     </div>
                     <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
                       <div><label style="font-size:10px;color:#94a3b8;display:block;margin-bottom:2px">Ia2:</label><select id="mapSelIa2" class="popover-input" style="padding:4px 6px;font-size:11px;background:#0d1a2d;color:#f1f5f9;border-color:#20395c;border-radius:4px;width:100%"></select></div>
@@ -2297,13 +2301,10 @@
             </div>
 
             <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
-              <button type="button" class="tool" id="btnResetAutoMap" style="padding:5px 10px;font-size:11px;display:inline-flex;align-items:center;gap:5px">
-                <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
-                Restaurar Detecção Automática
-              </button>
+              <button type="button" class="tool" id="btnResetAutoMap" style="padding:5px 10px;font-size:11px">Restaurar Padrão</button>
               <div style="display:flex;gap:8px">
                 <button type="button" class="tool" id="btnCancelMapModal">Cancelar</button>
-                <button type="button" class="btn primary" id="btnSaveMapModal" style="padding:5px 14px;font-size:12px">Salvar e Aplicar Canais</button>
+                <button type="button" class="btn primary" id="btnSaveMapModal" style="padding:5px 14px;font-size:12px">Salvar</button>
               </div>
             </div>
           </div>
@@ -2314,11 +2315,13 @@
       <footer class="status">
         <span class="footer-record-group" id="footerRecord1">
           <span class="footer-item"><span id="sRecordingLabel1">Registro</span> <b id="sRecording1">-</b></span>
+          <span class="footer-item">Taxa <b id="sRate1">-</b></span>
           <span class="footer-item">Canais <b id="sChannels1">-</b></span>
           <span class="footer-item">Duração <b id="sDuration1">-</b></span>
         </span>
         <span class="footer-record-group" id="footerRecord2" hidden>
           <span class="footer-item"><span id="sRecordingLabel2">2: Registro</span> <b id="sRecording2">-</b></span>
+          <span class="footer-item">Taxa <b id="sRate2">-</b></span>
           <span class="footer-item">Canais <b id="sChannels2">-</b></span>
           <span class="footer-item">Duração <b id="sDuration2">-</b></span>
         </span>
@@ -2328,7 +2331,7 @@
           <span>Cursor B <b id="sCursorAbsoluteB">-</b></span>
           <span>ΔA-B <b id="sCursorDelta">-</b></span>
           <span>Freq (1/Δ) <b id="sCursorFreq">-</b></span>
-          <span>Falta <b id="sFault">-</b></span>
+          <span>Falta <b id="sFault" class="footer-fault">-</b></span>
         </span>
       </footer>
     </div>
@@ -5140,28 +5143,54 @@
         if(document.getElementById("faultCurrentComparison"))document.getElementById("faultCurrentComparison").innerHTML="";
         if(document.getElementById("faultVoltageComparison"))document.getElementById("faultVoltageComparison").innerHTML="";
         if(lh)lh.textContent="Pressione Calcular";if(ls)ls.textContent="Os cálculos ainda não foram executados.";
-        if(fcs)fcs.textContent="AGUARDANDO CÁLCULO";if(lc)lc.textContent="AGUARDANDO CÁLCULO";if(sf)sf.textContent="-";let logEl=document.getElementById("auditLogText");if(logEl)logEl.textContent="Cálculo pendente. Abra uma oscilografia para gerar o log de auditoria dos cálculos.";let lct=document.getElementById("locCalcTime");if(lct)lct.textContent="";let lwb=document.getElementById("locWindowBadge");if(lwb)lwb.style.display="none";
+        if(fcs)fcs.textContent="AGUARDANDO CÁLCULO";if(lc)lc.textContent="AGUARDANDO CÁLCULO";if(sf)updateFooterFault();let logEl=document.getElementById("auditLogText");if(logEl)logEl.textContent="Cálculo pendente. Abra uma oscilografia para gerar o log de auditoria dos cálculos.";let lct=document.getElementById("locCalcTime");if(lct)lct.textContent="";let lwb=document.getElementById("locWindowBadge");if(lwb)lwb.style.display="none";
       }
 
       function updateFooterRecordInfo(){
         let hasSecond=Boolean(comtradeSlots[1]);
-        document.getElementById("sRecordingLabel1").textContent=hasSecond?"1: Registro":"Registro";
-        document.getElementById("sRecordingLabel2").textContent="2: Registro";
+        let lbl1 = document.getElementById("sRecordingLabel1");
+        let lbl2 = document.getElementById("sRecordingLabel2");
+        if(lbl1) lbl1.textContent=hasSecond?"1: Registro":"Registro";
+        if(lbl2) lbl2.textContent="2: Registro";
         [0,1].forEach(slot=>{
           let rec=comtradeSlots[slot],group=document.getElementById(`footerRecord${slot+1}`);
           if(!group) return;
           group.hidden=!rec;
           if(!rec)return;
           let meta=rec.meta||{},recordName=[meta.station,meta.device,meta.kind].filter(Boolean).join(" · ")||rec.base||"-";
-          group.title=meta.infSelectedLine?`INF: ${meta.infFileName||"-"} · Linha ${meta.infSelectedLine.name} · ${meta.infSelectedLine.nominalVoltageKV} kV · ${meta.infSelectedLine.nominalCurrentA} A · ${meta.infSelectedLine.lengthKm} km`:"";
-          document.getElementById(`sRecording${slot+1}`).textContent=recordName;
-          document.getElementById(`sChannels${slot+1}`).textContent=`${(meta.analog||[]).length}A + ${(meta.digital||[]).length}D`;
-          let durationSeconds=rec.rows.at(-1).t-rec.rows[0].t;
-          document.getElementById(`sDuration${slot+1}`).textContent=durationSeconds>1?fmt(durationSeconds,2)+" s":fmt(durationSeconds*1000,0)+" ms";
+          group.title=meta.infSelectedLine?`INF: ${meta.infFileName||"-"} · Linha ${meta.infSelectedLine.name} · ${meta.infSelectedLine.nominalVoltageKV} kV · ${meta.infSelectedLine.nominalCurrentA} A · ${meta.infSelectedLine.lengthKm} km`:(meta.station?`Estação: ${meta.station} · IED: ${meta.device||"-"}`:"");
+          let elRec = document.getElementById(`sRecording${slot+1}`);
+          if(elRec) elRec.textContent=recordName;
+
+          let fs = rec.fs || rec.meta?.rates?.[0]?.fs || (rec.rows?.length > 1 ? 1 / (rec.rows[1].t - rec.rows[0].t) : 0);
+          let fNom = rec.f || 60;
+          let spc = fNom > 0 ? Math.round(fs / fNom) : 0;
+          let rateText = fs ? (fs >= 1000 ? `${(fs / 1000).toFixed(2)} kHz (${spc} s/c)` : `${fs.toFixed(0)} Hz (${spc} s/c)`) : "-";
+          let elRate = document.getElementById(`sRate${slot+1}`);
+          if(elRate) elRate.textContent=rateText;
+
+          let elChan = document.getElementById(`sChannels${slot+1}`);
+          if(elChan) elChan.textContent=`${(meta.analog||[]).length}A + ${(meta.digital||[]).length}D`;
+
+          let durationSeconds=rec.rows&&rec.rows.length?rec.rows.at(-1).t-rec.rows[0].t:0;
+          let elDur = document.getElementById(`sDuration${slot+1}`);
+          if(elDur) elDur.textContent=durationSeconds>=1?fmt(durationSeconds,2)+" s":fmt(durationSeconds*1000,1)+" ms";
         });
+        updateFooterFault();
       }
 
-      
+      function updateFooterFault() {
+        let el = document.getElementById("sFault");
+        if (!el) return;
+        if (state.faultCalculated && res?.verdict) {
+          el.textContent = `${res.verdict} · ${fmt(res.duration, 1)} ms`;
+          el.classList.add("fault-active");
+        } else {
+          el.textContent = (ds || comtradeSlots[0]) ? "Monitorando" : "-";
+          el.classList.remove("fault-active");
+        }
+      }
+
       /* ============================================================================
        * MOTOR DE ANÁLISE AVANÇADA (INSPIRAÇÃO DETEGO)
        * ============================================================================
@@ -5182,7 +5211,7 @@
 
         let fs = ds.fs || ds.meta?.rates?.[0]?.fs || (ds.rows?.length > 1 ? 1 / (ds.rows[1].t - ds.rows[0].t) : 0);
         let fNom = ds.f || 60;
-        let spc = Math.round(fs / fNom);
+        let spc = fNom > 0 ? Math.round(fs / fNom) : 0;
         if (rateEl) {
           rateEl.textContent = fs >= 1000
             ? `${(fs / 1000).toFixed(2)} kHz (${spc} s/c)`
@@ -5194,15 +5223,12 @@
           durEl.textContent = `${durMs.toFixed(1)} ms`;
         }
 
-        if (faultTypeEl && faultChipEl) {
-          if (state.faultCalculated && res?.verdict) {
-            faultTypeEl.textContent = `${res.verdict} · ${fmt(res.duration, 1)} ms`;
-            faultChipEl.classList.add("chip-fault");
-          } else {
-            faultTypeEl.textContent = "Monitorando";
-            faultChipEl.classList.remove("chip-fault");
-          }
-        }
+        let hasFault = Boolean(state.faultCalculated && res?.verdict);
+        let faultText = hasFault ? `${res.verdict} · ${fmt(res.duration, 1)} ms` : "Monitorando";
+        if (faultTypeEl) faultTypeEl.textContent = faultText;
+        if (faultChipEl) faultChipEl.classList.toggle("chip-fault", hasFault);
+
+        updateFooterFault();
 
         let isPrimary = settings.ratioMode === "primary";
         if (btnPrim) btnPrim.classList.toggle("on", isPrimary);
@@ -5372,7 +5398,7 @@
         setupChannels();
         updateFooterRecordInfo();
         updateHeaderMeta();
-        document.getElementById("sFault").textContent = state.faultCalculated ? res.verdict : "-";
+        updateFooterFault();
         if(state.faultCalculated){renderFault();document.getElementById("faultCalcStatus").textContent="CALCULADO";}
         if(state.locationCalculated){renderLocation();document.getElementById("locConfidence").textContent=res.confidence;}
         renderReadout();
@@ -5419,17 +5445,17 @@
             let epHtml = "";
             res.episodes.forEach((ep, i) => {
               let isAct = i === activeIdx;
-              epHtml += `<button class="timeline-episode-btn ${isAct ? 'active' : ''}" onclick="switchFaultEpisode(${i})"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="#eab308" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:4px"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Falta ${ep.id}: ${ep.type || res.verdict || 'Falta'} (${fmt(ep.durationMs, 1)} ms)</button>`;
+              epHtml += `<button class="timeline-episode-btn ${isAct ? 'active' : ''}" onclick="switchFaultEpisode(${i})">Falta ${ep.id}: ${ep.type || res.verdict || 'Falta'} (${fmt(ep.durationMs, 1)} ms)</button>`;
               if (i < res.episodes.length - 1) {
                 let dt = res.deadTimes && res.deadTimes[i] ? res.deadTimes[i].deadTimeMs : 0;
-                epHtml += `<span class="timeline-deadtime-badge"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:4px"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Tempo Morto (79): <b>${fmt(dt, 1)} ms</b></span>`;
+                epHtml += `<span class="timeline-deadtime-badge">Tempo Morto: <b>${fmt(dt, 0)} ms</b></span>`;
               }
             });
             if (res.successfulReclosing) {
               let dt = res.successfulReclosing.deadTimeMs;
               let recMs = res.successfulReclosing.timeMs;
-              epHtml += `<span class="timeline-deadtime-badge"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:4px"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Tempo Morto (79): <b>${fmt(dt, 1)} ms</b></span>`;
-              epHtml += `<button class="timeline-reclosing-btn" id="btnTimelineReclosing" onclick="jumpToReclosing()" title="Posicionar cursores e inspecionar religamento com sucesso em ${fmt(recMs, 1)} ms"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="#34d399" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:4px"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Religamento 79: Sucesso (${fmt(recMs, 1)} ms)</button>`;
+              epHtml += `<span class="timeline-deadtime-badge">Tempo Morto: <b>${fmt(dt, 0)} ms</b></span>`;
+              epHtml += `<button class="timeline-reclosing-btn" id="btnTimelineReclosing" onclick="jumpToReclosing()" title="Posicionar no religamento (${fmt(recMs, 1)} ms)">Religamento 79: Sucesso (${fmt(recMs, 0)} ms)</button>`;
             }
             epContainer.innerHTML = epHtml;
             epContainer.style.display = "flex";
@@ -5456,13 +5482,13 @@
             }
             return `<span class="${chipClass}">Polo ${p} <span class="${badgeClass}">${badgeText}</span>: <b>${fmt(val, 1)} ms</b></span>`;
           };
-          let totCyc = fmt(res.poleClearance.durationCycles || (res.duration / (1000 / nominalF)), 2);
+          let totCyc = fmt(res.poleClearance.durationCycles || (res.duration / (1000 / nominalF)), 1);
           let faultPhStr = res.poleClearance.faultedPhases?.join("") || res.phases?.join("") || "Falta";
           poleContainer.innerHTML = `
             ${formatPole('A')}
             ${formatPole('B')}
             ${formatPole('C')}
-            <span class="pole-chip pole-total">Extinção (${faultPhStr}): <b>${fmt(res.poleClearance.totalClearanceMs, 1)} ms (${totCyc} ciclos)</b></span>
+            <span class="pole-chip pole-total">Extinção (${faultPhStr}): <b>${fmt(res.poleClearance.totalClearanceMs, 1)} ms (${totCyc} c)</b></span>
           `;
         }
 
@@ -5505,10 +5531,10 @@
             if (tReclose > lastT) {
               let deadW = ((tReclose - lastT) / totalT) * 100;
               let deadLabel = `Tempo Morto (${fmt(res.successfulReclosing.deadTimeMs, 0)} ms)`;
-              tlHtml += `<div class="timeline-block" title="${deadLabel}" style="width:${deadW}%;background:#1e293b;color:#94a3b8;"><svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;margin-right:3px"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>${deadW > 10 ? deadLabel : (deadW > 5 ? '79' : '')}</div>`;
+              tlHtml += `<div class="timeline-block" title="${deadLabel}" style="width:${deadW}%;background:#1e293b;color:#94a3b8;">${deadW > 10 ? deadLabel : (deadW > 5 ? '79' : '')}</div>`;
             }
             let recloseW = Math.max(6, Math.min(12, 100 * 0.08));
-            tlHtml += `<div class="timeline-block timeline-block-reclose" onclick="jumpToReclosing()" title="Religamento com Sucesso em ${fmt(res.successfulReclosing.timeMs, 1)} ms (Tempo Morto: ${fmt(res.successfulReclosing.deadTimeMs, 1)} ms)" style="width:${recloseW}%;background:#15803d;color:#ffffff;box-shadow:inset 0 0 0 1.5px #4ade80;cursor:pointer"><svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="#4ade80" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;margin-right:3px"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>79 Sucesso (${fmt(res.successfulReclosing.timeMs, 0)} ms)</div>`;
+            tlHtml += `<div class="timeline-block timeline-block-reclose" onclick="jumpToReclosing()" title="Religamento em ${fmt(res.successfulReclosing.timeMs, 1)} ms" style="width:${recloseW}%;background:#15803d;color:#ffffff;box-shadow:inset 0 0 0 1.5px #4ade80;cursor:pointer">79 Sucesso (${fmt(res.successfulReclosing.timeMs, 0)} ms)</div>`;
             lastT = tReclose;
           }
 
@@ -9100,9 +9126,7 @@
       if(groupTool) groupTool.onclick=()=>{
         state.groupedAnalog=!state.groupedAnalog;
         groupTool.classList.toggle("on",state.groupedAnalog);
-        groupTool.innerHTML=state.groupedAnalog
-          ?`<svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg> Desagrupar`
-          :`<svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg> Agrupar`;
+        groupTool.textContent = state.groupedAnalog ? "Desagrupar" : "Agrupar";
         drawWave();
         if(state.waveformView==="side")drawSideBySide();
       };
