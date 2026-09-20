@@ -224,30 +224,48 @@
         min-height: 0;
         height: 100%;
         display: grid;
-        grid-template-rows: 44px 1fr;
+        grid-template-rows: 1fr;
         overflow: hidden;
       }
       .tabs {
         display: flex;
-        align-items: end;
+        align-items: stretch;
+        height: 100%;
         gap: 2px;
-        padding: 0 10px;
-        border-bottom: 1px solid var(--line);
-        overflow: auto;
+        padding: 0 4px;
+        border-bottom: none;
+        overflow-x: auto;
+        overflow-y: hidden;
+        scrollbar-width: none;
+        flex: 1;
+        min-width: 0;
+      }
+      .tabs::-webkit-scrollbar {
+        display: none;
       }
       .tab {
-        height: 43px;
+        height: 100%;
         border: 0;
         border-bottom: 2px solid transparent;
         background: transparent;
         color: #8094ac;
-        padding: 0 13px;
+        padding: 0 11px;
         cursor: pointer;
         white-space: nowrap;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        font-weight: 600;
+        transition: color 0.15s, border-color 0.15s;
+        box-sizing: border-box;
+      }
+      .tab:hover {
+        color: #dbeafe;
       }
       .tab.on {
         color: #eaf4ff;
-        border-color: var(--cy);
+        border-bottom-color: var(--cy);
       }
       .view {
         display: none;
@@ -906,15 +924,16 @@
         .phasor-vector-row .phasor-merged-panel { order:initial; }
       }
     
-      /* Detego-Inspired Top Header */
+      /* Unified Top Header */
       .top-header {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 0 14px;
+        height: 44px;
+        padding: 0 12px;
         background: #070b16;
         border-bottom: 1px solid var(--line);
-        gap: 12px;
+        gap: 10px;
         z-index: 40;
         user-select: none;
       }
@@ -924,6 +943,8 @@
         gap: 8px;
         flex-shrink: 0;
         cursor: pointer;
+        padding-right: 14px;
+        border-right: 1px solid rgba(255, 255, 255, 0.08);
       }
       .brand-icon {
         width: 22px;
@@ -936,6 +957,7 @@
         font-size: 13px;
         letter-spacing: -0.01em;
         color: #f8fafc;
+        white-space: nowrap;
       }
       .brand-badge {
         font-size: 10px;
@@ -946,6 +968,7 @@
         border: 1px solid rgba(6, 182, 212, 0.3);
         font-variant-numeric: tabular-nums;
         font-weight: 600;
+        white-space: nowrap;
       }
       .meta-strip {
         display: flex;
@@ -1596,6 +1619,15 @@
           <span class="brand-title">FaultScope Studio</span>
           <span class="brand-badge">v7.00</span>
         </div>
+        <nav class="tabs">
+          <button class="tab on" data-id="wave">Oscilografia</button
+          ><button class="tab" data-id="phasor">Fasores</button
+          ><button class="tab" data-id="fault">Identificação</button
+          ><button class="tab" data-id="location">Localização</button
+          ><button class="tab" data-id="settings">Configurações</button
+          ><button class="tab" data-id="report">Relatório</button>
+          <button class="tab" data-id="log">Log</button>
+        </nav>
         <div class="top-actions">
           <input id="comtradeFiles1" type="file" accept=".cfg,.dat,.inf,.zip,.zic" multiple hidden />
           <input id="comtradeFiles2" type="file" accept=".cfg,.dat,.inf,.zip,.zic" multiple hidden />
@@ -1615,15 +1647,6 @@
       </header>
       <div class="body">
         <main class="main">
-          <nav class="tabs">
-            <button class="tab on" data-id="wave">Oscilografia</button
-            ><button class="tab" data-id="phasor">Fasores</button
-            ><button class="tab" data-id="fault">Identificação</button
-            ><button class="tab" data-id="location">Localização</button
-            ><button class="tab" data-id="settings">Configurações</button
-            ><button class="tab" data-id="report">Relatório</button>
-            <button class="tab" data-id="log">Log</button>
-          </nav>
           <!-- OSCILOGRAFIA INTERATIVA -->
           <section class="view on" id="wave">
             <aside class="sidebar"><div class="channel-head">Canais</div><div class="channel-group-title"><button class="channel-chevron" id="toggleAnalog" title="Recolher ou expandir canais analógicos"><svg viewBox="0 0 24 24" width="15" height="15"><path d="m6 9 6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><span class="channel-group-label">Analog</span><span class="channel-count" id="analogChannelCount">0</span><span class="channel-visibility"><button class="eye-button" id="showAllAnalog" title="Exibir todos"><svg viewBox="0 0 24 24" width="16" height="16"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="2.7" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></button><button class="eye-button" id="hideAllAnalog" title="Ocultar todos"><svg viewBox="0 0 24 24" width="16" height="16"><path d="M3 3l18 18" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M10.6 6.15A10.8 10.8 0 0 1 12 6c6 0 9.5 6 9.5 6M6.2 6.2C3.8 7.8 2.5 12 2.5 12s3.5 6 9.5 6" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></button><button class="eye-button filter-button" id="filterAnalog" title="Filtrar canais analógicos"><svg viewBox="0 0 24 24" width="16" height="16"><path d="M3 5h18l-7 8v5l-4 2v-7L3 5Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button><span class="eye-button-spacer"></span></span></div><div id="channelList" class="channel-list-wrap"></div><div class="channel-group-title"><button class="channel-chevron" id="toggleDigital" title="Recolher ou expandir canais digitais"><svg viewBox="0 0 24 24" width="15" height="15"><path d="m6 9 6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><span class="channel-group-label">Digital</span><span class="channel-count" id="digitalChannelCount">0</span><span class="channel-visibility"><button class="eye-button" id="showAllDigital" title="Exibir todos"><svg viewBox="0 0 24 24" width="16" height="16"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="2.7" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></button><button class="eye-button" id="hideAllDigital" title="Ocultar todos"><svg viewBox="0 0 24 24" width="16" height="16"><path d="M3 3l18 18" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M10.6 6.15A10.8 10.8 0 0 1 12 6c6 0 9.5 6 9.5 6M6.2 6.2C3.8 7.8 2.5 12 2.5 12s3.5 6 9.5 6" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></button><button class="eye-button filter-button" id="filterDigital" title="Filtrar canais digitais"><svg viewBox="0 0 24 24" width="16" height="16"><path d="M3 5h18l-7 8v5l-4 2v-7L3 5Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button><button class="eye-button" id="showChangedDigital" title="Exibir apenas canais digitais que variaram"><svg viewBox="0 0 24 24" width="16" height="16"><path d="M3 12h4l2.2-5 4.1 10 2.2-5H21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button></span></div><div id="digitalList" class="channel-list-wrap unit">Nenhum canal</div></aside><div class="sidebar-resizer" id="sidebarResizer" title="Arraste para redimensionar o painel de canais"></div>
