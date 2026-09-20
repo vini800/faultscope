@@ -94,19 +94,24 @@
         opacity: .9;
       }
       .body {
-        display: grid;
-        grid-template-columns: auto minmax(0, 1fr);
+        display: flex;
+        flex-direction: column;
+        flex: 1;
         min-height: 0;
+        height: 100%;
+        position: relative;
       }
       .sidebar {
         width: var(--sidebar-width);
         min-width: var(--sidebar-min-width);
         max-width: 48vw;
+        height: 100%;
         border-right: 1px solid var(--line);
         background: #0a1524;
         padding: 11px 9px;
-        overflow: auto;
-        resize: none;
+        overflow-y: auto;
+        overflow-x: hidden;
+        box-sizing: border-box;
         scrollbar-width: thin;
         scrollbar-color: #29415e #081321;
       }
@@ -313,7 +318,9 @@
         color: #67e8f9;
         border-color: #24718e;
       }
-      #wave.view.on{height:100%;min-height:0;overflow:hidden;display:flex;flex-direction:column;padding:12px}.wave-stack{flex:1;min-height:0;display:grid;grid-template-rows:minmax(90px,1fr) 8px minmax(90px,1fr) 8px minmax(80px,.72fr);gap:0}.wave-pane{min-height:0;display:grid;grid-template-rows:28px minmax(0,1fr)}.wave-pane .analog-panel-title,.wave-pane .digital-toolbar{margin:0 2px 5px}.wave-pane .analog-chartbox,.wave-pane .digital-chartbox{height:auto;min-height:0;max-height:none;resize:none}.wave-splitter{height:8px;cursor:row-resize;position:relative}.wave-splitter:before{content:"";position:absolute;left:42%;right:42%;top:3px;height:2px;border-radius:2px;background:#29415e}.wave-splitter:hover:before,.wave-splitter.dragging:before{background:var(--cy)}
+      #wave.view.on{height:100%;min-height:0;overflow:hidden;display:grid;grid-template-columns:var(--sidebar-width) minmax(0,1fr);padding:0;position:relative}
+      .wave-content{min-width:0;min-height:0;display:flex;flex-direction:column;height:100%;overflow:hidden;padding:10px 12px 12px 12px;position:relative}
+      .wave-stack{flex:1;min-height:0;display:grid;grid-template-rows:minmax(90px,1fr) 8px minmax(90px,1fr) 8px minmax(80px,.72fr);gap:0}.wave-pane{min-height:0;display:grid;grid-template-rows:28px minmax(0,1fr)}.wave-pane .analog-panel-title,.wave-pane .digital-toolbar{margin:0 2px 5px}.wave-pane .analog-chartbox,.wave-pane .digital-chartbox{height:auto;min-height:0;max-height:none;resize:none}.wave-splitter{height:8px;cursor:row-resize;position:relative}.wave-splitter:before{content:"";position:absolute;left:42%;right:42%;top:3px;height:2px;border-radius:2px;background:#29415e}.wave-splitter:hover:before,.wave-splitter.dragging:before{background:var(--cy)}
 
       .side-comtrade-layout{display:none;flex:1;min-height:0;grid-template-columns:var(--side-col-left,1fr) 8px var(--side-col-right,1fr);gap:0}.side-comtrade-layout.on{display:grid}.side-vertical-splitter{width:8px;cursor:col-resize;position:relative;background:transparent;user-select:none;z-index:10}.side-vertical-splitter:before{content:"";position:absolute;top:8%;bottom:8%;left:3px;width:2px;border-radius:2px;background:#29415e;transition:background .15s}.side-vertical-splitter:hover:before,.side-vertical-splitter.dragging:before{background:var(--cy)}.side-record{min-width:0;min-height:0;display:grid;grid-template-rows:26px minmax(70px,1fr) 8px minmax(70px,1fr) 8px minmax(65px,.65fr);gap:0;padding:0 4px}.side-record.empty{display:none}.side-record.active{outline:1px solid #24718e;outline-offset:2px;border-radius:8px}.side-record-header{display:flex;align-items:center;justify-content:space-between;padding:2px 8px;margin-bottom:4px;background:#081524;border:1px solid #1e354f;border-radius:6px;font-size:11px;color:#93c5fd;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.side-record-title{font-weight:700;color:#e2e8f0;margin-right:8px;overflow:hidden;text-overflow:ellipsis}.side-record-meta{font-size:10px;color:#7187a2}.side-empty-card{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;min-height:250px;border:2px dashed #1e354f;border-radius:10px;background:rgba(6,16,28,0.5);color:#64748b;padding:24px;text-align:center;gap:12px}.side-empty-card button{padding:7px 14px;font-size:12px;font-weight:600;border-radius:6px;background:#0e2b4f;color:#38bdf8;border:1px solid #2563eb;cursor:pointer;transition:all .15s}.side-empty-card button:hover{background:#1d4ed8;color:#fff}@media(max-width:950px){.side-comtrade-layout.on{grid-template-columns:1fr;overflow:auto}.side-vertical-splitter{display:none}.side-record{min-height:650px}}
       .analog-panel-title{display:flex;align-items:center;justify-content:space-between;color:#8196ae}.analog-chartbox{background:#06101c;border:1px solid var(--line);border-radius:10px;overflow:hidden}.chart-zoom-box{display:none;position:fixed;z-index:1000;pointer-events:none;border-left:2px solid #38bdf8;border-right:2px solid #38bdf8;border-top:none;border-bottom:none;background:rgba(56,189,248,0.18);box-shadow:0 0 14px rgba(56,189,248,0.25)}.chart-zoom-box-tag{position:absolute;top:6px;left:6px;background:#081220;border:1px solid #38bdf8;color:#38bdf8;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,0.6)}
@@ -872,10 +879,10 @@
         display: none !important;
       }
       @media (max-width: 950px) {
-        .body {
+        #wave.view.on {
           grid-template-columns: 1fr;
         }
-        .sidebar {
+        .sidebar, .sidebar-resizer {
           display: none;
         }
         .cards,
@@ -1607,17 +1614,6 @@
         </div>
       </header>
       <div class="body">
-        <aside class="sidebar"><div class="channel-head">Canais</div><div class="channel-group-title"><button class="channel-chevron" id="toggleAnalog" title="Recolher ou expandir canais analógicos"><svg viewBox="0 0 24 24" width="15" height="15"><path d="m6 9 6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><span class="channel-group-label">Analog</span><span class="channel-count" id="analogChannelCount">0</span><span class="channel-visibility"><button class="eye-button" id="showAllAnalog" title="Exibir todos"><svg viewBox="0 0 24 24" width="16" height="16"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="2.7" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></button><button class="eye-button" id="hideAllAnalog" title="Ocultar todos"><svg viewBox="0 0 24 24" width="16" height="16"><path d="M3 3l18 18" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M10.6 6.15A10.8 10.8 0 0 1 12 6c6 0 9.5 6 9.5 6M6.2 6.2C3.8 7.8 2.5 12 2.5 12s3.5 6 9.5 6" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></button><button class="eye-button filter-button" id="filterAnalog" title="Filtrar canais analógicos"><svg viewBox="0 0 24 24" width="16" height="16"><path d="M3 5h18l-7 8v5l-4 2v-7L3 5Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button><span class="eye-button-spacer"></span></span></div><div id="channelList" class="channel-list-wrap"></div><div class="channel-group-title"><button class="channel-chevron" id="toggleDigital" title="Recolher ou expandir canais digitais"><svg viewBox="0 0 24 24" width="15" height="15"><path d="m6 9 6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><span class="channel-group-label">Digital</span><span class="channel-count" id="digitalChannelCount">0</span><span class="channel-visibility"><button class="eye-button" id="showAllDigital" title="Exibir todos"><svg viewBox="0 0 24 24" width="16" height="16"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="2.7" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></button><button class="eye-button" id="hideAllDigital" title="Ocultar todos"><svg viewBox="0 0 24 24" width="16" height="16"><path d="M3 3l18 18" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M10.6 6.15A10.8 10.8 0 0 1 12 6c6 0 9.5 6 9.5 6M6.2 6.2C3.8 7.8 2.5 12 2.5 12s3.5 6 9.5 6" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></button><button class="eye-button filter-button" id="filterDigital" title="Filtrar canais digitais"><svg viewBox="0 0 24 24" width="16" height="16"><path d="M3 5h18l-7 8v5l-4 2v-7L3 5Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button><button class="eye-button" id="showChangedDigital" title="Exibir apenas canais digitais que variaram"><svg viewBox="0 0 24 24" width="16" height="16"><path d="M3 12h4l2.2-5 4.1 10 2.2-5H21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button></span></div><div id="digitalList" class="channel-list-wrap unit">Nenhum canal</div></aside><div class="sidebar-resizer" id="sidebarResizer" title="Arraste para redimensionar o painel de canais"></div>
-        <div class="channel-filter-modal" id="channelFilterModal">
-          <div class="channel-filter-head"><b id="channelFilterTitle">Filtrar canais</b><button class="channel-filter-close" id="channelFilterClose" type="button">×</button></div>
-          <input class="channel-filter-input" id="channelFilterInput" type="text" placeholder="Ex.: I?a encontra I1a, I2a, I3a" autocomplete="off" />
-          <div class="channel-filter-help" id="channelFilterHelp">Filtrar por nome (? = curinga).</div>
-          <div class="channel-filter-inf" id="channelFilterInf">
-            <div class="channel-filter-inf-title">Linhas de transmissão do INF · seleção múltipla</div>
-            <div class="channel-filter-inf-list" id="channelFilterInfList"></div>
-          </div>
-          <div class="channel-filter-actions"><button class="tool" id="channelFilterSelect">Marcar todos</button><button class="tool" id="channelFilterClear">Desmarcar todos</button><button class="tool" id="channelFilterReset">Limpar</button></div>
-        </div>
         <main class="main">
           <nav class="tabs">
             <button class="tab on" data-id="wave">Oscilografia</button
@@ -1630,7 +1626,19 @@
           </nav>
           <!-- OSCILOGRAFIA INTERATIVA -->
           <section class="view on" id="wave">
-            <div class="wave-toolbar" id="waveToolbar" style="position:relative">
+            <aside class="sidebar"><div class="channel-head">Canais</div><div class="channel-group-title"><button class="channel-chevron" id="toggleAnalog" title="Recolher ou expandir canais analógicos"><svg viewBox="0 0 24 24" width="15" height="15"><path d="m6 9 6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><span class="channel-group-label">Analog</span><span class="channel-count" id="analogChannelCount">0</span><span class="channel-visibility"><button class="eye-button" id="showAllAnalog" title="Exibir todos"><svg viewBox="0 0 24 24" width="16" height="16"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="2.7" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></button><button class="eye-button" id="hideAllAnalog" title="Ocultar todos"><svg viewBox="0 0 24 24" width="16" height="16"><path d="M3 3l18 18" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M10.6 6.15A10.8 10.8 0 0 1 12 6c6 0 9.5 6 9.5 6M6.2 6.2C3.8 7.8 2.5 12 2.5 12s3.5 6 9.5 6" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></button><button class="eye-button filter-button" id="filterAnalog" title="Filtrar canais analógicos"><svg viewBox="0 0 24 24" width="16" height="16"><path d="M3 5h18l-7 8v5l-4 2v-7L3 5Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button><span class="eye-button-spacer"></span></span></div><div id="channelList" class="channel-list-wrap"></div><div class="channel-group-title"><button class="channel-chevron" id="toggleDigital" title="Recolher ou expandir canais digitais"><svg viewBox="0 0 24 24" width="15" height="15"><path d="m6 9 6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><span class="channel-group-label">Digital</span><span class="channel-count" id="digitalChannelCount">0</span><span class="channel-visibility"><button class="eye-button" id="showAllDigital" title="Exibir todos"><svg viewBox="0 0 24 24" width="16" height="16"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="2.7" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></button><button class="eye-button" id="hideAllDigital" title="Ocultar todos"><svg viewBox="0 0 24 24" width="16" height="16"><path d="M3 3l18 18" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M10.6 6.15A10.8 10.8 0 0 1 12 6c6 0 9.5 6 9.5 6M6.2 6.2C3.8 7.8 2.5 12 2.5 12s3.5 6 9.5 6" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></button><button class="eye-button filter-button" id="filterDigital" title="Filtrar canais digitais"><svg viewBox="0 0 24 24" width="16" height="16"><path d="M3 5h18l-7 8v5l-4 2v-7L3 5Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button><button class="eye-button" id="showChangedDigital" title="Exibir apenas canais digitais que variaram"><svg viewBox="0 0 24 24" width="16" height="16"><path d="M3 12h4l2.2-5 4.1 10 2.2-5H21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button></span></div><div id="digitalList" class="channel-list-wrap unit">Nenhum canal</div></aside><div class="sidebar-resizer" id="sidebarResizer" title="Arraste para redimensionar o painel de canais"></div>
+            <div class="channel-filter-modal" id="channelFilterModal">
+              <div class="channel-filter-head"><b id="channelFilterTitle">Filtrar canais</b><button class="channel-filter-close" id="channelFilterClose" type="button">×</button></div>
+              <input class="channel-filter-input" id="channelFilterInput" type="text" placeholder="Ex.: I?a encontra I1a, I2a, I3a" autocomplete="off" />
+              <div class="channel-filter-help" id="channelFilterHelp">Filtrar por nome (? = curinga).</div>
+              <div class="channel-filter-inf" id="channelFilterInf">
+                <div class="channel-filter-inf-title">Linhas de transmissão do INF · seleção múltipla</div>
+                <div class="channel-filter-inf-list" id="channelFilterInfList"></div>
+              </div>
+              <div class="channel-filter-actions"><button class="tool" id="channelFilterSelect">Marcar todos</button><button class="tool" id="channelFilterClear">Desmarcar todos</button><button class="tool" id="channelFilterReset">Limpar</button></div>
+            </div>
+            <div class="wave-content">
+              <div class="wave-toolbar" id="waveToolbar" style="position:relative">
               <button class="tool on" id="viewTogether">Juntos</button>
               <button class="tool" id="viewSideBySide">Lado a Lado</button>
               <button class="tool on" id="cursorTool">Cursores</button>
@@ -1752,6 +1760,7 @@
                 <button id="sideBtnOpenSlot2" type="button">+ Abrir Oscilografia 2</button>
               </div>
             </div><div class="curve-tooltip" id="curveTooltip"></div><div class="chart-zoom-box" id="chartZoomBox"><span class="chart-zoom-box-tag" id="chartZoomBoxTag">Zoom</span></div>
+            </div>
           </section>
           <!-- DIAGRAMA FASORIAL -->
           <section class="view" id="phasor">
@@ -8793,7 +8802,10 @@
         document.querySelector(`.tab[data-id="${id}"]`)?.classList.add("on");
         document.getElementById(id)?.classList.add("on");
         setTimeout(() => {
-          if (id === "wave") { applyWaveLayout(); }
+          if (id === "wave") {
+            if (state.waveformView === "side") drawSideBySide();
+            else applyWaveLayout();
+          }
           if (id === "phasor") {
             state.phasorT = state.cursorA;
             let slider = document.getElementById("timeSlider");
