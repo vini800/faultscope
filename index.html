@@ -315,7 +315,7 @@
       }
       #wave.view.on{height:100%;min-height:0;overflow:hidden;display:flex;flex-direction:column;padding:12px}.wave-stack{flex:1;min-height:0;display:grid;grid-template-rows:minmax(90px,1fr) 8px minmax(90px,1fr) 8px minmax(80px,.72fr);gap:0}.wave-pane{min-height:0;display:grid;grid-template-rows:28px minmax(0,1fr)}.wave-pane .analog-panel-title,.wave-pane .digital-toolbar{margin:0 2px 5px}.wave-pane .analog-chartbox,.wave-pane .digital-chartbox{height:auto;min-height:0;max-height:none;resize:none}.wave-splitter{height:8px;cursor:row-resize;position:relative}.wave-splitter:before{content:"";position:absolute;left:42%;right:42%;top:3px;height:2px;border-radius:2px;background:#29415e}.wave-splitter:hover:before,.wave-splitter.dragging:before{background:var(--cy)}
 
-      .side-comtrade-layout{display:none;flex:1;min-height:0;grid-template-columns:1fr 1fr;gap:8px}.side-comtrade-layout.on{display:grid}.side-record{min-width:0;min-height:0;display:grid;grid-template-rows:minmax(70px,1fr) 7px minmax(70px,1fr) 7px minmax(55px,.65fr);gap:0}.side-pane{min-height:0;display:grid;grid-template-rows:20px minmax(0,1fr);color:#8196ae}.side-pane canvas{background:#06101c;border:1px solid var(--line);border-radius:8px}.side-record.empty{display:none}.side-record.active{outline:1px solid #24718e;outline-offset:2px;border-radius:8px}.side-splitter{height:7px;cursor:row-resize;position:relative}.side-splitter:before{content:"";position:absolute;left:40%;right:40%;top:3px;height:2px;background:#29415e;border-radius:2px}.side-splitter:hover:before,.side-splitter.dragging:before{background:var(--cy)}@media(max-width:950px){.side-comtrade-layout.on{grid-template-columns:1fr;overflow:auto}.side-record{min-height:650px}}
+      .side-comtrade-layout{display:none;flex:1;min-height:0;grid-template-columns:var(--side-col-left,1fr) 8px var(--side-col-right,1fr);gap:0}.side-comtrade-layout.on{display:grid}.side-vertical-splitter{width:8px;cursor:col-resize;position:relative;background:transparent;user-select:none;z-index:10}.side-vertical-splitter:before{content:"";position:absolute;top:8%;bottom:8%;left:3px;width:2px;border-radius:2px;background:#29415e;transition:background .15s}.side-vertical-splitter:hover:before,.side-vertical-splitter.dragging:before{background:var(--cy)}.side-record{min-width:0;min-height:0;display:grid;grid-template-rows:26px minmax(70px,1fr) 8px minmax(70px,1fr) 8px minmax(65px,.65fr);gap:0;padding:0 4px}.side-record.empty{display:none}.side-record.active{outline:1px solid #24718e;outline-offset:2px;border-radius:8px}.side-record-header{display:flex;align-items:center;justify-content:space-between;padding:2px 8px;margin-bottom:4px;background:#081524;border:1px solid #1e354f;border-radius:6px;font-size:11px;color:#93c5fd;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.side-record-title{font-weight:700;color:#e2e8f0;margin-right:8px;overflow:hidden;text-overflow:ellipsis}.side-record-meta{font-size:10px;color:#7187a2}.side-empty-card{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;min-height:250px;border:2px dashed #1e354f;border-radius:10px;background:rgba(6,16,28,0.5);color:#64748b;padding:24px;text-align:center;gap:12px}.side-empty-card button{padding:7px 14px;font-size:12px;font-weight:600;border-radius:6px;background:#0e2b4f;color:#38bdf8;border:1px solid #2563eb;cursor:pointer;transition:all .15s}.side-empty-card button:hover{background:#1d4ed8;color:#fff}@media(max-width:950px){.side-comtrade-layout.on{grid-template-columns:1fr;overflow:auto}.side-vertical-splitter{display:none}.side-record{min-height:650px}}
       .analog-panel-title{display:flex;align-items:center;justify-content:space-between;color:#8196ae}.analog-chartbox{background:#06101c;border:1px solid var(--line);border-radius:10px;overflow:hidden}.chart-zoom-box{display:none;position:fixed;z-index:1000;pointer-events:none;border-left:2px solid #38bdf8;border-right:2px solid #38bdf8;border-top:none;border-bottom:none;background:rgba(56,189,248,0.18);box-shadow:0 0 14px rgba(56,189,248,0.25)}.chart-zoom-box-tag{position:absolute;top:6px;left:6px;background:#081220;border:1px solid #38bdf8;color:#38bdf8;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,0.6)}
       .curve-tooltip{display:none;position:fixed;z-index:50;width:max-content;min-width:0;max-width:min(520px,calc(100vw - 24px));background:#07121ff2;border:1px solid #29415e;border-radius:8px;padding:8px;color:#dce9f7;pointer-events:none;font-size:11px;box-shadow:0 8px 24px #0008}.curve-tooltip.on{display:block}.curve-tooltip-time{display:block;margin-bottom:5px}.curve-tooltip-row{display:flex;align-items:baseline;justify-content:flex-start;gap:6px;width:max-content;max-width:100%;padding:2px 0}.curve-tooltip-name{font-weight:600;white-space:nowrap}.curve-tooltip-value{color:#dce9f7;white-space:nowrap}
       .chartbox {
@@ -1669,8 +1669,88 @@
               <div class="wave-pane" id="digitalWavePane"><div class="digital-toolbar"><b>Canais digitais</b><span id="digitalVisibleInfo"></span></div><div class="digital-chartbox" id="digitalChartBox"><canvas id="digitalCanvas"></canvas><div class="digital-empty" id="digitalEmpty">Nenhum canal digital selecionado</div></div></div>
             </div>
             <div class="side-comtrade-layout" id="sideComtradeLayout">
-              <div class="side-record" id="sideRecord1"><div class="side-pane" id="sideCurrentPane1"><b>1:Correntes</b><canvas id="sideCurrent1"></canvas></div><div class="side-splitter" id="sideSplit11"></div><div class="side-pane" id="sideVoltagePane1"><b>1:Tensões</b><canvas id="sideVoltage1"></canvas></div><div class="side-splitter" id="sideSplit12"></div><div class="side-pane side-digital" id="sideDigitalPane1"><b>1:Digitais</b><canvas id="sideDigital1"></canvas></div></div>
-              <div class="side-record" id="sideRecord2"><div class="side-pane" id="sideCurrentPane2"><b>2:Correntes</b><canvas id="sideCurrent2"></canvas></div><div class="side-splitter" id="sideSplit21"></div><div class="side-pane" id="sideVoltagePane2"><b>2:Tensões</b><canvas id="sideVoltage2"></canvas></div><div class="side-splitter" id="sideSplit22"></div><div class="side-pane side-digital" id="sideDigitalPane2"><b>2:Digitais</b><canvas id="sideDigital2"></canvas></div></div>
+              <!-- Coluna 1 (Oscilografia 1) -->
+              <div class="side-record" id="sideRecord1">
+                <div class="side-record-header" id="sideRecordHeader1">
+                  <span class="side-record-title" id="sideRecordTitle1">1: Oscilografia 1</span>
+                  <span class="side-record-meta" id="sideRecordMeta1">-</span>
+                </div>
+                <div class="wave-pane side-pane" id="sideCurrentPane1">
+                  <div class="analog-panel-title">
+                    <b>Correntes</b>
+                    <span id="sideCurrentVisibleInfo1" style="font-size:11px;color:#8196ae"></span>
+                  </div>
+                  <div class="analog-chartbox"><canvas id="sideCurrent1"></canvas></div>
+                </div>
+                <div class="wave-splitter" id="sideSplit11" title="Arraste para redimensionar"></div>
+                <div class="wave-pane side-pane" id="sideVoltagePane1">
+                  <div class="analog-panel-title">
+                    <b>Tensões</b>
+                    <span id="sideVoltageVisibleInfo1" style="font-size:11px;color:#8196ae"></span>
+                  </div>
+                  <div class="analog-chartbox"><canvas id="sideVoltage1"></canvas></div>
+                </div>
+                <div class="wave-splitter" id="sideSplit12" title="Arraste para redimensionar"></div>
+                <div class="wave-pane side-pane side-digital" id="sideDigitalPane1">
+                  <div class="digital-toolbar">
+                    <b>Canais digitais</b>
+                    <span id="sideDigitalVisibleInfo1" style="font-size:11px;color:#8196ae"></span>
+                  </div>
+                  <div class="digital-chartbox" id="sideDigitalChartBox1">
+                    <canvas id="sideDigital1"></canvas>
+                    <div class="digital-empty" id="sideDigitalEmpty1" style="display:none">Nenhum canal digital selecionado</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Separador Vertical Central com Resizer -->
+              <div class="side-vertical-splitter" id="sideVerticalSplitter" title="Arraste para ajustar a largura entre as oscilografias"></div>
+
+              <!-- Coluna 2 (Oscilografia 2) -->
+              <div class="side-record" id="sideRecord2">
+                <div class="side-record-header" id="sideRecordHeader2">
+                  <span class="side-record-title" id="sideRecordTitle2">2: Oscilografia 2</span>
+                  <span class="side-record-meta" id="sideRecordMeta2">-</span>
+                </div>
+                <div class="wave-pane side-pane" id="sideCurrentPane2">
+                  <div class="analog-panel-title">
+                    <b>Correntes</b>
+                    <span id="sideCurrentVisibleInfo2" style="font-size:11px;color:#8196ae"></span>
+                  </div>
+                  <div class="analog-chartbox"><canvas id="sideCurrent2"></canvas></div>
+                </div>
+                <div class="wave-splitter" id="sideSplit21" title="Arraste para redimensionar"></div>
+                <div class="wave-pane side-pane" id="sideVoltagePane2">
+                  <div class="analog-panel-title">
+                    <b>Tensões</b>
+                    <span id="sideVoltageVisibleInfo2" style="font-size:11px;color:#8196ae"></span>
+                  </div>
+                  <div class="analog-chartbox"><canvas id="sideVoltage2"></canvas></div>
+                </div>
+                <div class="wave-splitter" id="sideSplit22" title="Arraste para redimensionar"></div>
+                <div class="wave-pane side-pane side-digital" id="sideDigitalPane2">
+                  <div class="digital-toolbar">
+                    <b>Canais digitais</b>
+                    <span id="sideDigitalVisibleInfo2" style="font-size:11px;color:#8196ae"></span>
+                  </div>
+                  <div class="digital-chartbox" id="sideDigitalChartBox2">
+                    <canvas id="sideDigital2"></canvas>
+                    <div class="digital-empty" id="sideDigitalEmpty2" style="display:none">Nenhum canal digital selecionado</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Card para quando houver apenas 1 oscilografia carregada -->
+              <div class="side-empty-card" id="sideEmptyCard2" style="display:none">
+                <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="#38bdf8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                  <line x1="12" y1="8" x2="12" y2="16"/>
+                  <line x1="8" y1="12" x2="16" y2="12"/>
+                </svg>
+                <div style="font-size:13.5px;font-weight:600;color:#cbd5e1">Segunda Oscilografia não carregada</div>
+                <div style="font-size:11px;color:#64748b;max-width:260px;line-height:1.4">Carregue o registro do Terminal Remoto para comparar formas de onda lado a lado e calcular a falta a dois terminais (IEEE C37.114).</div>
+                <button id="sideBtnOpenSlot2" type="button">+ Abrir Oscilografia 2</button>
+              </div>
             </div><div class="curve-tooltip" id="curveTooltip"></div><div class="chart-zoom-box" id="chartZoomBox"><span class="chart-zoom-box-tag" id="chartZoomBoxTag">Zoom</span></div>
           </section>
           <!-- DIAGRAMA FASORIAL -->
@@ -2433,6 +2513,7 @@
           waveformView: "together",
           sideViews: [{x0:0,x1:1,cursorA:.25,cursorB:.65},{x0:0,x1:1,cursorA:.25,cursorB:.65}],
           sideLayouts: [[.377,.377,.246],[.377,.377,.246]],
+          sideColumnSplitFrac: 0.5,
           activeSideSlot: 0,
           sideMiddleClicks: [0,0],
           faultCalculated: false,
@@ -2624,7 +2705,7 @@
           if (r.meta) {
             r.meta.infSelectedLine = selected;
             try {
-              let newMap = channelMap(r.meta);
+              let newMap = channelMap(r.meta, r.rows);
               r.meta.channelMap = newMap;
               if (r.rows && r.rows.length) {
                 for (let i = 0; i < r.rows.length; i++) {
@@ -2641,6 +2722,22 @@
             }
           }
         });
+
+        // Atualizar também os canais visíveis no osciloscópio para o conjunto da linha selecionada
+        let newSel = [];
+        let curMap = records[0]?.meta?.channelMap || {};
+        for (let k of ["Ia", "Ib", "Ic", "In", "Va", "Vb", "Vc", "Vn", "Ia2", "Ib2", "Ic2", "In2"]) {
+          let id = curMap[k];
+          if (Number.isInteger(id) && id >= 0 && id < (records[0]?.meta?.analog?.length || 0) && !newSel.includes(id)) {
+            newSel.push(id);
+          }
+        }
+        if (newSel.length) {
+          state.selectedAnalogRaw = new Set(newSel);
+          state.analogInitializedFor = "";
+          setupChannels();
+          applyWaveLayout();
+        }
 
         if (Number.isFinite(selected.nominalVoltageKV) && selected.nominalVoltageKV > 0) {
           settings.vnom = Number(selected.nominalVoltageKV);
@@ -2884,13 +2981,110 @@
         found = infCandidates.find(item => normalizedStationName(leafFileName(item.file?.name || "").replace(/\.inf$/i, "")) === stationNorm);
         return found || infCandidates[0];
       }
-      function selectInfTransmissionLine(inf,cfg){
-        if(!inf?.transmissionLines?.length)return null;
-        const analogCount=cfg.na||0,digitalCount=cfg.nd||0;
-        return inf.transmissionLines.find(line=>line.groups.some(group=>{
-          const isDigital=group.normalizedName.startsWith("DIGITA");
-          return group.channels.every(ch=>ch===0||(isDigital?ch<=digitalCount:ch<=analogCount));
-        }))||inf.transmissionLines[0];
+      function selectInfTransmissionLine(inf, cfg, hdrText, rows) {
+        if (!inf?.transmissionLines?.length) return null;
+        const analogCount = cfg?.na || 0, digitalCount = cfg?.nd || 0;
+        let candidates = inf.transmissionLines.filter(line => line.groups.some(group => {
+          const isDigital = group.normalizedName.startsWith("DIGITA");
+          return group.channels.every(ch => ch === 0 || (isDigital ? ch <= digitalCount : ch <= analogCount));
+        }));
+        if (!candidates.length) candidates = inf.transmissionLines;
+        let completeLines = candidates.filter(line => infGroup(line, "TEN") && infGroup(line, "CORREN"));
+        if (completeLines.length > 0) candidates = completeLines;
+        if (candidates.length === 1) return candidates[0];
+
+        let scores = candidates.map(line => {
+          let score = 0;
+          let lineNorm = (line.name || "").replace(/[^A-Z0-9]/gi, "").toUpperCase();
+
+          // Tokens significativos do nome da linha e de seus canais no CFG
+          let tokens = (line.name || "").split(/[^A-Za-z0-9]+/).filter(t => t.length >= 2).map(t => t.toUpperCase());
+          if (tokens.includes("TERM") && tokens.includes("RIO")) tokens.push("TRIO");
+          let igChs = infGroup(line, "CORREN"), vgChs = infGroup(line, "TEN");
+          [...(vgChs?.channels || []), ...(igChs?.channels || [])].forEach(ch => {
+            if (ch > 0 && cfg?.analog && ch <= cfg.analog.length) {
+              let n = cfg.analog[ch - 1]?.name;
+              if (n) {
+                let parts = n.split(/[^A-Za-z0-9]+/).filter(p => p.length >= 3).map(p => p.toUpperCase());
+                tokens.push(...parts);
+              }
+            }
+          });
+          tokens = Array.from(new Set(tokens));
+
+          // 1. Identificação de falta explícita na seção Fault location do HDR
+          if (hdrText) {
+            let hdrLines = hdrText.split(/\r?\n/);
+            let inFaultLoc = false;
+            for (let hl of hdrLines) {
+              let tr = hl.trim();
+              if (/fault\s+location/i.test(tr)) { inFaultLoc = true; continue; }
+              if (inFaultLoc) {
+                if (!tr || (hl.indexOf("\t\t") === -1 && !hl.startsWith("\t") && !hl.startsWith(" ") && /^(date|equipment|memory|firmware|trigger)/i.test(tr))) {
+                  inFaultLoc = false;
+                  continue;
+                }
+                let parts = tr.split(/\s{2,}|\t+/);
+                if (parts.length >= 2) {
+                  let hdrLineName = parts[0].replace(/[^A-Z0-9]/gi, "").toUpperCase();
+                  let faultDesc = parts.slice(1).join(" ").toLowerCase();
+                  let isFaulted = !faultDesc.includes("no fault") && !faultDesc.includes("sem falta");
+                  if (hdrLineName.includes(lineNorm) || lineNorm.includes(hdrLineName)) {
+                    score += isFaulted ? 10000 : -500;
+                  }
+                }
+              }
+            }
+            // Triggers nomeando a linha, circuito ou canais no HDR
+            for (let hl of hdrLines) {
+              if (/trigger/i.test(hl)) {
+                let trNorm = hl.replace(/[^A-Z0-9]/gi, "").toUpperCase();
+                if (trNorm.includes(lineNorm)) score += 500;
+                for (let tok of tokens) {
+                  if (tok.length >= 3 && trNorm.includes(tok)) score += 300;
+                }
+              }
+            }
+          }
+
+          // 2. Coincidência com nome do arquivo, diretório, estação e tags de circuito (ex: C1, C2)
+          let contextStr = [cfg?.fileName, cfg?.station, cfg?.device].filter(Boolean).join(" ").replace(/[^A-Z0-9]/gi, "").toUpperCase();
+          if (contextStr.includes(lineNorm)) score += 300;
+          for (let tok of tokens) {
+            if (tok.length >= 3 && contextStr.includes(tok)) score += 150;
+          }
+          let cMatch = (line.name || "").match(/C(\d+)/i);
+          if (cMatch && cMatch[0]) {
+            let cTag = cMatch[0].toUpperCase();
+            if (contextStr.includes(cTag)) score += 200;
+            if (hdrText && hdrText.toUpperCase().includes(cTag)) score += 200;
+          }
+
+          // 3. Verificação de perturbação física nos canais de corrente da linha em rows
+          if (rows && rows.length > 0) {
+            let ig = infGroup(line, "CORREN");
+            if (ig && ig.channels && ig.channels.length >= 3) {
+              let chA = ig.channels[0] - 1, chB = ig.channels[1] - 1, chC = ig.channels[2] - 1;
+              let maxPk = 0;
+              let step = Math.max(1, Math.floor(rows.length / 5000));
+              for (let r = 0; r < rows.length; r += step) {
+                let all = rows[r]?.analogAll;
+                if (all) {
+                  let vA = Math.abs(all[chA] || 0), vB = Math.abs(all[chB] || 0), vC = Math.abs(all[chC] || 0);
+                  if (vA > maxPk) maxPk = vA;
+                  if (vB > maxPk) maxPk = vB;
+                  if (vC > maxPk) maxPk = vC;
+                }
+              }
+              score += Math.min(5000, maxPk);
+            }
+          }
+
+          return { line, score };
+        });
+
+        scores.sort((a, b) => b.score - a.score);
+        return scores[0]?.line || candidates[0];
       }
       function infGroup(line,prefix){return line?.groups?.find(g=>g.normalizedName.startsWith(prefix))||null}
 
@@ -2933,7 +3127,7 @@
         return null;
       }
 
-      function channelMap(g) {
+      function channelMap(g, rows) {
         let infLine=g.infSelectedLine;
         if(infLine){
           let vg=infGroup(infLine,"TEN");
@@ -2977,17 +3171,43 @@
           }
         });
 
-        // Atribuir tensões por fase identificada
-        if (vPhases.A.length) m.Va = vPhases.A[0];
-        if (vPhases.B.length) m.Vb = vPhases.B[0];
-        if (vPhases.C.length) m.Vc = vPhases.C[0];
-        if (vPhases.N.length) m.Vn = vPhases.N[0];
+        let bestCurrentTriplet = 0;
+        let numTriplets = Math.min(iPhases.A.length, iPhases.B.length, iPhases.C.length);
+        let rws = (Array.isArray(rows) && rows.length > 0) ? rows : (Array.isArray(g?.rows) && g.rows.length > 0 ? g.rows : null);
+        if (numTriplets > 1 && rws && rws.length > 0) {
+          let maxTripPeak = -1;
+          let step = Math.max(1, Math.floor(rws.length / 5000));
+          for (let j = 0; j < numTriplets; j++) {
+            let idA = iPhases.A[j], idB = iPhases.B[j], idC = iPhases.C[j];
+            let tripPeak = 0;
+            for (let r = 0; r < rws.length; r += step) {
+              let all = rws[r]?.analogAll;
+              if (all) {
+                let vA = Math.abs(all[idA] || 0), vB = Math.abs(all[idB] || 0), vC = Math.abs(all[idC] || 0);
+                if (vA > tripPeak) tripPeak = vA;
+                if (vB > tripPeak) tripPeak = vB;
+                if (vC > tripPeak) tripPeak = vC;
+              }
+            }
+            if (tripPeak > maxTripPeak) {
+              maxTripPeak = tripPeak;
+              bestCurrentTriplet = j;
+            }
+          }
+        }
 
-        // Atribuir correntes por fase identificada
-        if (iPhases.A.length) m.Ia = iPhases.A[0];
-        if (iPhases.B.length) m.Ib = iPhases.B[0];
-        if (iPhases.C.length) m.Ic = iPhases.C[0];
-        if (iPhases.N.length) m.In = iPhases.N[0];
+        // Atribuir correntes do conjunto com maior perturbação / sob falta
+        if (iPhases.A.length) m.Ia = iPhases.A[bestCurrentTriplet] ?? iPhases.A[0];
+        if (iPhases.B.length) m.Ib = iPhases.B[bestCurrentTriplet] ?? iPhases.B[0];
+        if (iPhases.C.length) m.Ic = iPhases.C[bestCurrentTriplet] ?? iPhases.C[0];
+        if (iPhases.N.length) m.In = iPhases.N[bestCurrentTriplet] ?? (iPhases.N.length ? iPhases.N[0] : -1);
+
+        // Atribuir tensões correspondentes ao grupo sob falta se houver paridade
+        let vTrip = (vPhases.A.length > bestCurrentTriplet && vPhases.B.length > bestCurrentTriplet && vPhases.C.length > bestCurrentTriplet) ? bestCurrentTriplet : 0;
+        if (vPhases.A.length) m.Va = vPhases.A[vTrip] ?? vPhases.A[0];
+        if (vPhases.B.length) m.Vb = vPhases.B[vTrip] ?? vPhases.B[0];
+        if (vPhases.C.length) m.Vc = vPhases.C[vTrip] ?? vPhases.C[0];
+        if (vPhases.N.length) m.Vn = vPhases.N[vTrip] ?? (vPhases.N.length ? vPhases.N[0] : -1);
 
         // Fallbacks heurísticos caso alguma fase não tenha sido identificada por nome
         let used = new Set(Object.values(m).filter(x => x >= 0));
@@ -3036,21 +3256,84 @@
         let map = channelMap(g),
           rows = [];
         g.channelMap = map;
+        let dwords = Math.ceil((g.nd || 0) / 16);
+        g.dwords = dwords;
+
+        // Mapeamento de canais digitais para leitura rápida por bitmask
+        let digitalMap = new Map();
+        if (g.digital && g.digital.length) {
+          for (let d = 0; d < g.digital.length; d++) {
+            digitalMap.set(g.digital[d].name, { word: d >> 4, bit: d & 15, id: d });
+          }
+        }
+        g.digitalMap = digitalMap;
+
+        // Pré-calcular fatores de conversão de engenharia e mapeamento de canais para máxima performance
+        let chScales = new Float64Array(g.na);
+        let chOffsets = new Float64Array(g.na);
+        let ratioMode = settings.ratioMode || "cfg";
+        for (let id = 0; id < g.na; id++) {
+          let ch = g.analog[id] || {};
+          let ratioApplied = 1;
+          if (ratioMode === "primary" || (ratioMode === "cfg" && String(ch.ps || "S").toUpperCase() === "S")) {
+            if (ch.secondary && ch.primary) ratioApplied = ch.primary / ch.secondary;
+          }
+          let m = ratioApplied * (Number(ch.siMultiplier) || 1);
+          chScales[id] = (ch.a ?? 1) * m;
+          chOffsets[id] = (ch.b ?? 0) * m;
+        }
+        let mapEntries = Object.entries(map).filter(([, id]) => Number.isInteger(id) && id >= 0 && id < g.na);
+
         if (g.kind === "ASCII") {
           let L = text.trim().split(/\r?\n/);
-          rows = new Array(L.length);
-          for (let n = 0; n < L.length; n++) {
-            let p = L[n].split(","),
-              o = { t: (Number(p[1]) * g.tm) / 1e6, analogAll: new Float64Array(g.na) };
-            for (let id=0;id<g.na;id++) o.analogAll[id]=eng(Number(p[2+id]),g.analog[id]);
-            for (let [k,id] of Object.entries(map)) o[k]=(Number.isInteger(id) && id >= 0 && id < g.na) ? o.analogAll[id] : 0;
-            for (let d = 0; d < g.nd; d++)
-              o[g.digital[d].name] = Number(p[2 + g.na + d]) || 0;
+          let count = L.length;
+          let analogData = new Float64Array(count * g.na);
+          let digitalData = new Uint16Array(count * dwords);
+          g.analogData = analogData;
+          g.digitalData = digitalData;
+
+          // Protótipo com Proxy único para compatibilidade transparente com row[digitalName]
+          let digitalProto = new Proxy({}, {
+            get(target, prop, receiver) {
+              if (typeof prop === "string" && digitalMap.has(prop)) {
+                let entry = digitalMap.get(prop);
+                let w = digitalData[receiver._i * dwords + entry.word];
+                return (w >> entry.bit) & 1;
+              }
+              return undefined;
+            },
+            has(target, prop) {
+              return typeof prop === "string" && digitalMap.has(prop);
+            }
+          });
+
+          rows = new Array(count);
+          for (let n = 0; n < count; n++) {
+            let p = L[n].split(",");
+            let o = Object.create(digitalProto);
+            o.t = (Number(p[1]) * g.tm) / 1e6;
+            let sub = analogData.subarray(n * g.na, (n + 1) * g.na);
+            o.analogAll = sub;
+            o._i = n;
+
+            for (let id = 0; id < g.na; id++) {
+              let raw = Number(p[2 + id]) || 0;
+              sub[id] = raw * chScales[id] + chOffsets[id];
+            }
+            for (let j = 0; j < mapEntries.length; j++) {
+              o[mapEntries[j][0]] = sub[mapEntries[j][1]];
+            }
+            let dBase = n * dwords;
+            for (let d = 0; d < g.nd; d++) {
+              let val = (Number(p[2 + g.na + d]) || 0) & 1;
+              if (val) {
+                digitalData[dBase + (d >> 4)] |= (1 << (d & 15));
+              }
+            }
             rows[n] = o;
           }
         } else {
           let bytes = g.kind === "BINARY" ? 2 : 4,
-            dwords = Math.ceil(g.nd / 16),
             size = 8 + g.na * bytes + dwords * 2;
           if (!["BINARY", "BINARY32", "FLOAT32"].includes(g.kind))
             throw Error("Formato DAT não suportado: " + g.kind);
@@ -3058,29 +3341,52 @@
             throw Error("DAT menor que um registro calculado pelo CFG.");
           let count = Math.floor(buf.byteLength / size),
             view = new DataView(buf);
+
+          let analogData = new Float64Array(count * g.na);
+          let digitalData = new Uint16Array(count * dwords);
+          g.analogData = analogData;
+          g.digitalData = digitalData;
+
+          // Protótipo com Proxy único: zero memória por amostra para os 256 digitais
+          let digitalProto = new Proxy({}, {
+            get(target, prop, receiver) {
+              if (typeof prop === "string" && digitalMap.has(prop)) {
+                let entry = digitalMap.get(prop);
+                let w = digitalData[receiver._i * dwords + entry.word];
+                return (w >> entry.bit) & 1;
+              }
+              return undefined;
+            },
+            has(target, prop) {
+              return typeof prop === "string" && digitalMap.has(prop);
+            }
+          });
+
+          let isBin16 = g.kind === "BINARY";
+          let isBin32 = g.kind === "BINARY32";
           rows = new Array(count);
           for (let n = 0, off = 0; n < count; n++, off += size) {
             let sn = view.getUint32(off, true),
-              ts = view.getUint32(off + 4, true),
-              o = { t: ts ? (ts * g.tm) / 1e6 : sampleTimeFromRates(sn,g.rates), analogAll: new Float64Array(g.na) };
-            for (let id=0;id<g.na;id++) {
-              let pos = off + 8 + id * bytes,
-                raw =
-                  g.kind === "BINARY"
-                    ? view.getInt16(pos, true)
-                    : g.kind === "BINARY32"
-                      ? view.getInt32(pos, true)
-                      : view.getFloat32(pos, true);
-              o.analogAll[id] = eng(raw,g.analog[id]);
+              ts = view.getUint32(off + 4, true);
+            let o = Object.create(digitalProto);
+            o.t = ts ? (ts * g.tm) / 1e6 : sampleTimeFromRates(sn, g.rates);
+            let sub = analogData.subarray(n * g.na, (n + 1) * g.na);
+            o.analogAll = sub;
+            o._i = n;
+
+            let aOff = off + 8;
+            for (let id = 0; id < g.na; id++) {
+              let pos = aOff + id * bytes;
+              let raw = isBin16 ? view.getInt16(pos, true) : (isBin32 ? view.getInt32(pos, true) : view.getFloat32(pos, true));
+              sub[id] = raw * chScales[id] + chOffsets[id];
             }
-            for(let [k,id] of Object.entries(map)) o[k]=(Number.isInteger(id) && id >= 0 && id < g.na) ? o.analogAll[id] : 0;
-            let db = off + 8 + g.na * bytes;
+            for (let j = 0; j < mapEntries.length; j++) {
+              o[mapEntries[j][0]] = sub[mapEntries[j][1]];
+            }
+            let db = aOff + g.na * bytes;
+            let dBase = n * dwords;
             for (let w = 0; w < dwords; w++) {
-              let bits = view.getUint16(db + w * 2, true);
-              for (let b = 0; b < 16; b++) {
-                let id = w * 16 + b;
-                if (id < g.nd) o[g.digital[id].name] = (bits >> b) & 1;
-              }
+              digitalData[dBase + w] = view.getUint16(db + w * 2, true);
             }
             rows[n] = o;
           }
@@ -3263,8 +3569,10 @@
       function finiteMax(values,start=0){let max=-Infinity;for(let i=start;i<values.length;i++){let v=values[i];if(Number.isFinite(v)&&v>max)max=v}return max}
       function interpAt(times,values,t){if(t<times[0]||t>times.at(-1))return NaN;let lo=0,hi=times.length-1;while(lo<hi){let m=(lo+hi)>>1;if(times[m]<t)lo=m+1;else hi=m}let i=lo;if(i===0||times[i]===t)return values[i];let t0=times[i-1],t1=times[i],p=(t-t0)/Math.max(1e-12,t1-t0);return values[i-1]+p*(values[i]-values[i-1])}
       function slidingRms(values,window){let out=new Float64Array(values.length),sum=0,count=0;for(let i=0;i<values.length;i++){let v=values[i];if(Number.isFinite(v)){sum+=v*v;count++}if(i>=window){let q=values[i-window];if(Number.isFinite(q)){sum-=q*q;count--}}out[i]=count?Math.sqrt(Math.max(0,sum)/count):0}return out}
-      function getChannelRms(rec, id) {
-        if (!rec || !rec.rows || !rec.rows.length) return null;
+      function getChannelRms(recordOrId, maybeId) {
+        let rec = (typeof recordOrId === "object" && recordOrId !== null) ? recordOrId : ds;
+        let id = (typeof recordOrId === "object" && recordOrId !== null) ? maybeId : recordOrId;
+        if (!rec || !rec.rows || !rec.rows.length || !Number.isInteger(id) || id < 0) return null;
         if (!rec._channelRmsCache) rec._channelRmsCache = {};
         if (!rec._channelRmsCache[id]) {
           let R = rec.rows;
@@ -3273,7 +3581,12 @@
           let f0 = rec.f || rec.meta?.f || 60;
           let Np = Math.max(4, Math.round(fs / f0));
           let raw = new Float64Array(N);
-          for (let i = 0; i < N; i++) raw[i] = R[i]?.analogAll?.[id] || 0;
+          let aData = rec.meta?.analogData, na = rec.meta?.na || (rec.meta?.analog?.length || 0);
+          if (aData) {
+            for (let i = 0; i < N; i++) raw[i] = aData[i * na + id] || 0;
+          } else {
+            for (let i = 0; i < N; i++) raw[i] = R[i]?.analogAll?.[id] || 0;
+          }
           rec._channelRmsCache[id] = slidingRms(raw, Np);
         }
         return rec._channelRmsCache[id];
@@ -3285,11 +3598,25 @@
       function persistentFlags3(Cd,p){let out=Array.from({length:Cd.length},()=>[false,false,false]),sum=[0,0,0],queue=[];for(let i=0;i<Cd.length;i++){queue.push(Cd[i]);for(let ph=0;ph<3;ph++)if(Cd[i][ph])sum[ph]++;if(queue.length>p){let old=queue.shift();for(let ph=0;ph<3;ph++)if(old[ph])sum[ph]--}for(let ph=0;ph<3;ph++)out[i][ph]=sum[ph]>=p}return out}
       function detectChannelInception(times,Y,fs,f){let N=Y.length,Np=Math.max(8,Math.round(fs/f)),phasor=rollingLsPhasor(times,Y,fs,f,Np),M=Array.from({length:N},()=>[NaN,NaN,NaN]),w=TAU*f;for(let k=Np-1;k<N;k++)for(let ph=0;ph<3;ph++){let y=Y[k][ph],z=phasor[k][ph];if(Number.isFinite(y)&&z)M[k][ph]=Math.abs(y-(z.re*Math.cos(w*times[k])-z.im*Math.sin(w*times[k])))}let Mf=movingMeanFinite3(M,Math.max(1,Math.round(settings.lsSmoothingSamples))),dM=Array.from({length:N},()=>[0,0,0]);for(let k=1;k<N;k++)for(let ph=0;ph<3;ph++)dM[k][ph]=Number.isFinite(Mf[k][ph])&&Number.isFinite(Mf[k-1][ph])?Mf[k][ph]-Mf[k-1][ph]:NaN;let preStart=Math.max(Np,Math.round(settings.lsPreFaultStartCycle*Np)),preEnd=Math.min(N-1,Math.round(settings.lsPreFaultEndCycle*Np)-1);if(preEnd<=preStart){preStart=Np;preEnd=Math.min(N-1,Math.max(preStart,Math.round(.25*N)))}let threshold=[0,0,0];for(let ph=0;ph<3;ph++){let mx=0;for(let k=preStart;k<=preEnd;k++){let v=Math.abs(dM[k][ph]);if(Number.isFinite(v)&&v>mx)mx=v}threshold[ph]=Math.max(settings.lsMinimumThreshold,settings.lsInceptionThresholdFactor*mx)}let flags=persistentFlags3(dM.map(r=>r.map((v,p)=>Number.isFinite(v)&&Math.abs(v)>threshold[p])),settings.lsInceptionPersistence),searchStart=Math.min(N-1,preEnd+1),ix=-1;for(let k=searchStart;k<N;k++)if(flags[k].some(Boolean)){ix=Math.max(0,k-settings.lsInceptionPersistence+1);break}return{inceptionIndex:ix,method:ix>=0?"ls_residual_derivative_3phase":"ls_residual_not_detected",phasor,monitor:M,smoothedMonitor:Mf,monitorDerivative:dM,threshold,flags,preFaultIndices:[preStart,preEnd],Np}}
 
-      function interpolatedSuperimposedDelta(times,values,period){
-        let out=new Float64Array(values.length);out.fill(NaN);
-        for(let i=0;i<values.length;i++){
-          let previous=interpAt(times,values,times[i]-period);
-          if(Number.isFinite(previous)&&Number.isFinite(values[i]))out[i]=values[i]-previous;
+      function interpolatedSuperimposedDelta(times, values, period) {
+        let N = values.length;
+        let out = new Float64Array(N);
+        out.fill(NaN);
+        if (N < 2) return out;
+        let dt = (times[N - 1] - times[0]) / (N - 1);
+        let checkIdx = Math.min(100, N - 1);
+        let isUniform = dt > 0 && Math.abs((times[checkIdx] - times[0]) / checkIdx - dt) < 1e-6;
+        let Np = Math.round(period / Math.max(1e-12, dt));
+        if (isUniform && Np > 0 && Np < N) {
+          for (let i = Np; i < N; i++) {
+            let p = values[i - Np], c = values[i];
+            if (Number.isFinite(p) && Number.isFinite(c)) out[i] = c - p;
+          }
+          return out;
+        }
+        for (let i = 0; i < N; i++) {
+          let previous = interpAt(times, values, times[i] - period);
+          if (Number.isFinite(previous) && Number.isFinite(values[i])) out[i] = values[i] - previous;
         }
         return out;
       }
@@ -3551,28 +3878,52 @@
           if(i<guardUntil)continue;
           if(stateMach==="IDLE"){
             let isReclosing=(lastClearIdx>=0)&&(i-lastClearIdx>5*Np);
-            let isUnderVoltage=(preVrms>0)?(min_V[i]<0.75*preVrms):false;
-            let currentThreshold=(isReclosing&&!isUnderVoltage)?(1.60*preRms):(1.15*preRms);
 
-            if(max_dI[i]>thrInc&&max_I[i]>currentThreshold){
+            if(max_dI[i]>thrInc){
               let p1=i+1<N?max_dI[i+1]:0,p2=i+2<N?max_dI[i+2]:0;
               if(p1>0.5*thrInc&&p2>0.5*thrInc){
-                let exactIx=i;
-                for(let b=i;b>=Math.max(0,i-Np);b--){
-                  let sampleDelta=Math.max(Math.abs(dIa[b]||0),Math.abs(dIb[b]||0),Math.abs(dIc[b]||0));
-                  if(sampleDelta<0.25*thrInc){exactIx=b+1;break}
+                // 1. Verificar se é religamento com sucesso (linha estava aberta/desenergizada durante o tempo morto)
+                let isLineOpenBefore=isReclosing&&(Math.min(...Array.from(max_I.subarray(Math.max(0,i-2*Np),i)))<0.40*preRms);
+                let look=Math.min(N-1,i+Math.round(1.5*Np)),sumV=0,sumI=0,countLook=0;
+                for(let k=i;k<=look;k++){sumV+=min_V[k];sumI+=max_I[k];countLook++;}
+                let futureV=countLook?sumV/countLook:min_V[i];
+                let futureI=countLook?sumI/countLook:max_I[i];
+
+                let isRecloseSuccess=isLineOpenBefore&&(preVrms>0?futureV>0.70*preVrms:true)&&(futureI<2.0*preRms);
+
+                if(isRecloseSuccess){
+                  if(!successfulReclosing){
+                    let recloseIdx=i;
+                    for(let b=i;b>=Math.max(0,i-Np);b--){
+                      if(max_dI[b]<0.25*thrInc){recloseIdx=b+1;break}
+                    }
+                    let dt=(times[recloseIdx]-times[lastClearIdx])*1000;
+                    successfulReclosing={recloseIndex:recloseIdx,timeMs:times[recloseIdx]*1000,deadTimeMs:Math.max(0,dt)};
+                  }
+                  guardUntil=i+Math.round(2*Np);
+                  continue;
                 }
-                curEp={id:episodes.length+1,ix:exactIx,tInc:times[exactIx],tIncMs:times[exactIx]*1000,peakI:max_I[i],clear:-1};
-                stateMach="IN_FAULT";
+
+                // 2. Se não for religamento com sucesso, verificar se corrente excede limiar para nova falta
+                let currentThreshold=isReclosing?(2.0*preRms):(1.15*preRms);
+                if(max_I[i]>currentThreshold){
+                  let exactIx=i;
+                  for(let b=i;b>=Math.max(0,i-Np);b--){
+                    let sampleDelta=Math.max(Math.abs(dIa[b]||0),Math.abs(dIb[b]||0),Math.abs(dIc[b]||0));
+                    if(sampleDelta<0.25*thrInc){exactIx=b+1;break}
+                  }
+                  curEp={id:episodes.length+1,ix:exactIx,tInc:times[exactIx],tIncMs:times[exactIx]*1000,peakI:max_I[i],clear:-1};
+                  stateMach="IN_FAULT";
+                }
               }
-            }else if(isReclosing&&!successfulReclosing&&max_I[i]>0.60*preRms&&!isUnderVoltage){
-              // Verificação de religamento com sucesso sustentado (tensão recuperada e corrente de carga estável)
+            }else if(isReclosing&&!successfulReclosing&&max_I[i]>0.60*preRms){
+              // Verificação alternativa de religamento com sucesso sustentado (tensão recuperada e corrente de carga estável)
               let checkSamples=Math.min(N-i,Math.round(5*Np));
               if(checkSamples>=Math.round(3*Np)){
                 let sumI=0,sumV=0;
                 for(let k=i;k<i+checkSamples;k++){sumI+=max_I[k];sumV+=min_V[k];}
                 let meanI=sumI/checkSamples,meanV=sumV/checkSamples;
-                if(meanI>0.60*preRms&&meanV>0.75*preVrms){
+                if(meanI>0.60*preRms&&(preVrms===0||meanV>0.75*preVrms)){
                   let dt=(times[i]-times[lastClearIdx])*1000;
                   successfulReclosing={recloseIndex:i,timeMs:times[i]*1000,deadTimeMs:Math.max(0,dt)};
                 }
@@ -4524,14 +4875,38 @@
             let offset=0;
             comtradeSlots.forEach(rec=>{
               if(!rec)return;
-              let currents=[],voltages=[];
-              (rec.meta.analog||[]).forEach((ch,i)=>{let k=channelKind(ch);if(k==="current"&&currents.length<3)currents.push(offset+i);else if(k==="voltage"&&voltages.length<3)voltages.push(offset+i)});
-              selected.push(...currents,...voltages);offset+=(rec.meta.analog||[]).length
+              let rMap = rec.meta?.channelMap || {};
+              let mapped = [];
+              for (let k of ["Ia", "Ib", "Ic", "In", "Va", "Vb", "Vc", "Vn", "Ia2", "Ib2", "Ic2", "In2"]) {
+                let id = rMap[k];
+                if (Number.isInteger(id) && id >= 0 && id < (rec.meta?.analog?.length || 0) && !mapped.includes(offset + id)) {
+                  mapped.push(offset + id);
+                }
+              }
+              if (mapped.length >= 3) {
+                selected.push(...mapped);
+              } else {
+                let currents=[],voltages=[];
+                (rec.meta.analog||[]).forEach((ch,i)=>{let k=channelKind(ch);if(k==="current"&&currents.length<3)currents.push(offset+i);else if(k==="voltage"&&voltages.length<3)voltages.push(offset+i)});
+                selected.push(...currents,...voltages);
+              }
+              offset+=(rec.meta.analog||[]).length;
             });
           } else {
-            let currents=[],voltages=[];
-            analog.forEach((ch,i)=>{let k=channelKind(ch);if(k==="current"&&currents.length<3)currents.push(i);else if(k==="voltage"&&voltages.length<3)voltages.push(i)});
-            selected.push(...currents,...voltages);
+            let mapped = [];
+            for (let k of ["Ia", "Ib", "Ic", "In", "Va", "Vb", "Vc", "Vn", "Ia2", "Ib2", "Ic2", "In2"]) {
+              let id = map[k];
+              if (Number.isInteger(id) && id >= 0 && id < analog.length && !mapped.includes(id)) {
+                mapped.push(id);
+              }
+            }
+            if (mapped.length >= 3) {
+              selected.push(...mapped);
+            } else {
+              let currents=[],voltages=[];
+              analog.forEach((ch,i)=>{let k=channelKind(ch);if(k==="current"&&currents.length<3)currents.push(i);else if(k==="voltage"&&voltages.length<3)voltages.push(i)});
+              selected.push(...currents,...voltages);
+            }
           }
           state.selectedAnalogRaw=new Set(selected);
           state.analogInitializedFor=sigA;
@@ -4557,7 +4932,22 @@
 
         let digs=ds.meta.digital||[],sig=digs.map(x=>x.name).join("|");
         if(state.digitalInitializedFor!==sig){
-          state.selectedDigital=new Set(digs.map(x=>x.name).filter(digitalChanged));
+          let activeDigs = digs.filter(digitalChanged);
+          let infLine = ds.meta.infSelectedLine;
+          let infDigGroup = infGroup(infLine, "DIGITA");
+          if (infDigGroup && infDigGroup.channels && infDigGroup.channels.length) {
+            let lineDigSet = new Set(infDigGroup.channels.map(ch => ch - 1));
+            let lineActiveDigs = activeDigs.filter(d => lineDigSet.has(digs.indexOf(d)));
+            if (lineActiveDigs.length > 0) {
+              let combinedDigs = [...lineActiveDigs];
+              activeDigs.forEach(d => { if (!combinedDigs.includes(d) && combinedDigs.length < 16) combinedDigs.push(d); });
+              state.selectedDigital = new Set(combinedDigs.map(x => x.name));
+            } else {
+              state.selectedDigital = new Set(activeDigs.map(x => x.name));
+            }
+          } else {
+            state.selectedDigital = new Set(activeDigs.map(x => x.name));
+          }
           state.digitalInitializedFor=sig;
           if(digitalCountEl) digitalCountEl.textContent=digs.length;
           if(digitalListEl) {
@@ -5272,6 +5662,7 @@
         }
         drawWave();
         drawDigital();
+        if (state.waveformView === "side") drawSideBySide();
         renderReadout();
       }
 
@@ -6252,11 +6643,38 @@
             x.globalAlpha = 0.35;
             x.beginPath();
             let first = true;
-            for(let i=i0;i<=i1;i+=step){
-              let value=R[i]?.analogAll?.[id],xx=plotLeft+(i-i0)/span*plotW;
-              if(!Number.isFinite(value)){first=true;continue}
-              let yy=mid-(value/max)*height*.42;
-              first?(x.moveTo(xx,yy),first=false):x.lineTo(xx,yy);
+            if (step <= 4) {
+              for(let i=i0;i<=i1;i+=step){
+                let value=R[i]?.analogAll?.[id],xx=plotLeft+(i-i0)/span*plotW;
+                if(!Number.isFinite(value)){first=true;continue}
+                let yy=mid-(value/max)*height*.42;
+                first?(x.moveTo(xx,yy),first=false):x.lineTo(xx,yy);
+              }
+            } else {
+              // Renderização Min-Max para garantir que nenhum pico transitório rápido de falta seja perdido
+              for (let i = i0; i <= i1; i += step) {
+                let limit = Math.min(i + step, i1 + 1);
+                let vMin = Infinity, vMax = -Infinity;
+                for (let k = i; k < limit; k++) {
+                  let v = R[k]?.analogAll?.[id];
+                  if (Number.isFinite(v)) {
+                    if (v < vMin) vMin = v;
+                    if (v > vMax) vMax = v;
+                  }
+                }
+                if (!Number.isFinite(vMin) || !Number.isFinite(vMax)) { first = true; continue; }
+                let xx = plotLeft + (i - i0) / span * plotW;
+                let yMin = mid - (vMin / max) * height * 0.42;
+                let yMax = mid - (vMax / max) * height * 0.42;
+                if (first) {
+                  x.moveTo(xx, yMin);
+                  x.lineTo(xx, yMax);
+                  first = false;
+                } else {
+                  x.lineTo(xx, yMin);
+                  x.lineTo(xx, yMax);
+                }
+              }
             }
             x.stroke();
             x.restore();
@@ -6827,7 +7245,28 @@
         }
       }
 
-      function digitalChanged(name){let first;for(let row of ds.rows){if(row[name]===undefined)continue;let v=row[name]?1:0;if(first===undefined)first=v;else if(v!==first)return true}return false}
+      function digitalChanged(name) {
+        let meta = ds?.meta;
+        if (meta && meta.digitalData && meta.digitalMap) {
+          let entry = meta.digitalMap.get(name);
+          if (!entry) return false;
+          let w = entry.word, mask = 1 << entry.bit, dwords = meta.dwords, data = meta.digitalData, N = ds.rows.length;
+          let first = (data[w] & mask) ? 1 : 0;
+          for (let i = 1; i < N; i++) {
+            let v = (data[i * dwords + w] & mask) ? 1 : 0;
+            if (v !== first) return true;
+          }
+          return false;
+        }
+        let first;
+        for (let row of (ds?.rows || [])) {
+          if (row[name] === undefined) continue;
+          let v = row[name] ? 1 : 0;
+          if (first === undefined) first = v;
+          else if (v !== first) return true;
+        }
+        return false;
+      }
 
       function drawDigital(){
         let c=document.getElementById("digitalCanvas");
@@ -7058,10 +7497,11 @@
       function drawSideAnalog(canvas,rec,kind,sv,slot){
         let {x,w,h}=sizeCanvas(canvas),chs=selectedSideAnalog(slot,kind),win=recordWindow(rec,sv),g=64,plotLeft=g,plotW=Math.max(1,w-g);
         x.clearRect(0,0,w,h);x.fillStyle="#081321";x.fillRect(0,0,g,h);x.strokeStyle="#29415e";x.lineWidth=1;x.beginPath();x.moveTo(g-.5,0);x.lineTo(g-.5,h);x.stroke();
+        // Grade vertical batelada
         x.strokeStyle="#17283d";x.lineWidth=1;x.beginPath();
         for(let n=0;n<=10;n++){let xx=plotLeft+n*plotW/10;x.moveTo(xx,0);x.lineTo(xx,h)}
         x.stroke();
-        if(!chs.length){x.fillStyle="#607790";x.fillText("Sem canais",plotLeft+10,22);return}
+        if(!chs.length){x.fillStyle="#607790";x.fillText(`Nenhum canal de ${kind==="current"?"corrente":"tensão"} selecionado`,plotLeft+10,22);return}
         if(win.empty){x.fillStyle="#607790";x.fillText("Sem dados nesta janela",plotLeft+10,22);return}
         let R=rec.rows,i0=win.i0,i1=Math.max(i0+1,win.i1),spanTime=Math.max(1e-12,win.range.end-win.range.start),
           step=Math.max(1,Math.ceil((i1-i0)/Math.max(plotW*MANUAL_CONFIG.performance.pointsPerPixel,1))),shared=1e-12;
@@ -7071,8 +7511,12 @@
         function drawScale(top,height,max,unit){
           let axisX=g-1,mid=top+height/2,yTop=top+10,yBottom=top+height-4;
           x.save();x.font="10px Segoe UI, Arial";x.textAlign="right";x.fillStyle="#7187a2";x.strokeStyle="#29415e";x.lineWidth=1;
-          [[yTop,max],[mid,0],[yBottom,-max]].forEach(([yy,val])=>{x.beginPath();x.moveTo(axisX-4,yy);x.lineTo(axisX,yy);x.stroke();if(Math.abs(val)>1e-12)x.fillText(analogScaleText(val)+(unit?" "+unit:""),axisX-7,yy+3)});x.strokeStyle="#20364d";x.lineWidth=1;x.setLineDash([3,5]);x.beginPath();x.moveTo(plotLeft,Math.round(mid)+.5);x.lineTo(w,Math.round(mid)+.5);x.stroke();x.restore()
+          [[yTop,max],[mid,0],[yBottom,-max]].forEach(([yy,val])=>{x.beginPath();x.moveTo(axisX-4,yy);x.lineTo(axisX,yy);x.stroke();if(Math.abs(val)>1e-12)x.fillText(analogScaleText(val)+(unit?" "+unit:""),axisX-7,yy+3)});
+          x.strokeStyle="#20364d";x.lineWidth=1;x.setLineDash([3,5]);x.beginPath();x.moveTo(plotLeft,Math.round(mid)+.5);x.lineTo(w,Math.round(mid)+.5);x.stroke();x.restore()
         }
+
+        let aData = rec.meta?.analogData, na = rec.meta?.na || (rec.meta?.analog?.length || 0);
+
         chs.forEach(({c,i},j)=>{
           let isJoint = (state.yScaleMode !== "individual");
           let max=(state.groupedAnalog || isJoint)?shared:exactVisibleMax(R,i,i0,i1),top=state.groupedAnalog?0:j*band,mid=top+band/2;
@@ -7080,56 +7524,124 @@
           let chColor = sideAnalogColor(slot,i);
 
           if (state.showRmsEnvelope) {
-            // Instantâneo atenuado
+            // 1. Instantâneo atenuado com decimação Min-Max
             x.save(); x.strokeStyle = chColor; x.lineWidth = 1.0; x.globalAlpha = 0.35;
             x.beginPath(); let first = true;
-            function point(q){
-              let value=R[q].analogAll?.[i];if(!Number.isFinite(value)){first=true;return}
-              let common=(win.offset+R[q].t-win.range.start)/spanTime,xx=plotLeft+common*plotW,yy=mid-value/max*band*.42;
-              first?(x.moveTo(xx,yy),first=false):x.lineTo(xx,yy);
+            if (step <= 4) {
+              for(let q=i0;q<=i1;q+=step){
+                let val = aData ? aData[q * na + i] : R[q]?.analogAll?.[i];
+                if(!Number.isFinite(val)){first=true;continue}
+                let common=(win.offset+R[q].t-win.range.start)/spanTime,xx=plotLeft+common*plotW,yy=mid-val/max*band*.42;
+                first?(x.moveTo(xx,yy),first=false):x.lineTo(xx,yy);
+              }
+            } else {
+              for (let q = i0; q <= i1; q += step) {
+                let limit = Math.min(q + step, i1 + 1);
+                let vMin = Infinity, vMax = -Infinity;
+                for (let k = q; k < limit; k++) {
+                  let v = aData ? aData[k * na + i] : R[k]?.analogAll?.[i];
+                  if (Number.isFinite(v)) { if (v < vMin) vMin = v; if (v > vMax) vMax = v; }
+                }
+                if (!Number.isFinite(vMin) || !Number.isFinite(vMax)) { first = true; continue; }
+                let common=(win.offset+R[q].t-win.range.start)/spanTime,xx=plotLeft+common*plotW;
+                let yMin = mid - (vMin / max) * band * 0.42, yMax = mid - (vMax / max) * band * 0.42;
+                if (first) { x.moveTo(xx, yMin); x.lineTo(xx, yMax); first = false; }
+                else { x.lineTo(xx, yMin); x.lineTo(xx, yMax); }
+              }
             }
-            for(let q=i0;q<=i1;q+=step)point(q);if((i1-i0)%step!==0)point(i1);
             x.stroke(); x.restore();
 
-            // Curva e envoltória RMS
+            // 2. Curva e envoltória RMS
             let rmsArr = getChannelRms(rec, i);
             if (rmsArr && rmsArr.length) {
               x.save(); x.strokeStyle = chColor; x.lineWidth = 2.0;
               x.beginPath(); let firstRms = true;
-              function pointRms(q){
-                let rmsVal=rmsArr[q];if(!Number.isFinite(rmsVal)){firstRms=true;return}
-                let common=(win.offset+R[q].t-win.range.start)/spanTime,xx=plotLeft+common*plotW,yy=mid-rmsVal/max*band*.42;
-                firstRms?(x.moveTo(xx,yy),firstRms=false):x.lineTo(xx,yy);
+              if (step <= 4) {
+                for(let q=i0;q<=i1;q+=step){
+                  let rmsVal=rmsArr[q];if(!Number.isFinite(rmsVal)){firstRms=true;continue}
+                  let common=(win.offset+R[q].t-win.range.start)/spanTime,xx=plotLeft+common*plotW,yy=mid-rmsVal/max*band*.42;
+                  firstRms?(x.moveTo(xx,yy),firstRms=false):x.lineTo(xx,yy);
+                }
+              } else {
+                for(let q=i0;q<=i1;q+=step){
+                  let limit=Math.min(q+step,i1+1), rMax=-Infinity;
+                  for(let k=q;k<limit;k++){let r=rmsArr[k];if(r>rMax)rMax=r;}
+                  if(!Number.isFinite(rMax)||rMax<0){firstRms=true;continue}
+                  let common=(win.offset+R[q].t-win.range.start)/spanTime,xx=plotLeft+common*plotW,yy=mid-rMax/max*band*.42;
+                  firstRms?(x.moveTo(xx,yy),firstRms=false):x.lineTo(xx,yy);
+                }
               }
-              for(let q=i0;q<=i1;q+=step)pointRms(q);if((i1-i0)%step!==0)pointRms(i1);
               x.stroke();
 
               x.lineWidth = 1.2; x.globalAlpha = 0.6; x.setLineDash([4, 3]);
               x.beginPath(); firstRms = true;
-              function pointRmsNeg(q){
-                let rmsVal=rmsArr[q];if(!Number.isFinite(rmsVal)){firstRms=true;return}
-                let common=(win.offset+R[q].t-win.range.start)/spanTime,xx=plotLeft+common*plotW,yy=mid+rmsVal/max*band*.42;
-                firstRms?(x.moveTo(xx,yy),firstRms=false):x.lineTo(xx,yy);
+              if (step <= 4) {
+                for(let q=i0;q<=i1;q+=step){
+                  let rmsVal=rmsArr[q];if(!Number.isFinite(rmsVal)){firstRms=true;continue}
+                  let common=(win.offset+R[q].t-win.range.start)/spanTime,xx=plotLeft+common*plotW,yy=mid+rmsVal/max*band*.42;
+                  firstRms?(x.moveTo(xx,yy),firstRms=false):x.lineTo(xx,yy);
+                }
+              } else {
+                for(let q=i0;q<=i1;q+=step){
+                  let limit=Math.min(q+step,i1+1), rMax=-Infinity;
+                  for(let k=q;k<limit;k++){let r=rmsArr[k];if(r>rMax)rMax=r;}
+                  if(!Number.isFinite(rMax)||rMax<0){firstRms=true;continue}
+                  let common=(win.offset+R[q].t-win.range.start)/spanTime,xx=plotLeft+common*plotW,yy=mid+rMax/max*band*.42;
+                  firstRms?(x.moveTo(xx,yy),firstRms=false):x.lineTo(xx,yy);
+                }
               }
-              for(let q=i0;q<=i1;q+=step)pointRmsNeg(q);if((i1-i0)%step!==0)pointRmsNeg(i1);
               x.stroke(); x.restore();
             }
           } else {
             x.strokeStyle=chColor;x.lineWidth=1.25;x.beginPath();let first=true;
-            function point(q){
-              let value=R[q].analogAll?.[i];if(!Number.isFinite(value)){first=true;return}
-              let common=(win.offset+R[q].t-win.range.start)/spanTime,xx=plotLeft+common*plotW,yy=mid-value/max*band*.42;
-              first?(x.moveTo(xx,yy),first=false):x.lineTo(xx,yy);
+            if (step <= 4) {
+              for(let q=i0;q<=i1;q+=step){
+                let val = aData ? aData[q * na + i] : R[q]?.analogAll?.[i];
+                if(!Number.isFinite(val)){first=true;continue}
+                let common=(win.offset+R[q].t-win.range.start)/spanTime,xx=plotLeft+common*plotW,yy=mid-val/max*band*.42;
+                first?(x.moveTo(xx,yy),first=false):x.lineTo(xx,yy);
+              }
+            } else {
+              // Min-Max para preservar picos e faltas
+              for (let q = i0; q <= i1; q += step) {
+                let limit = Math.min(q + step, i1 + 1);
+                let vMin = Infinity, vMax = -Infinity;
+                for (let k = q; k < limit; k++) {
+                  let v = aData ? aData[k * na + i] : R[k]?.analogAll?.[i];
+                  if (Number.isFinite(v)) { if (v < vMin) vMin = v; if (v > vMax) vMax = v; }
+                }
+                if (!Number.isFinite(vMin) || !Number.isFinite(vMax)) { first = true; continue; }
+                let common=(win.offset+R[q].t-win.range.start)/spanTime,xx=plotLeft+common*plotW;
+                let yMin = mid - (vMin / max) * band * 0.42, yMax = mid - (vMax / max) * band * 0.42;
+                if (first) { x.moveTo(xx, yMin); x.lineTo(xx, yMax); first = false; }
+                else { x.lineTo(xx, yMin); x.lineTo(xx, yMax); }
+              }
             }
-            for(let q=i0;q<=i1;q+=step)point(q);if((i1-i0)%step!==0)point(i1);x.stroke();
+            x.stroke();
           }
 
+          // Rótulo com halo de contorno escuro para legibilidade máxima
+          x.save();
+          x.font="bold 10px Segoe UI, Arial";
+          let labelText = c.name + (state.showRmsEnvelope ? " (RMS)" : "");
+          let labelY = state.groupedAnalog ? j * 14 + 13 : top + 13;
+          x.strokeStyle="rgba(4, 8, 16, 0.95)"; x.lineWidth=2.5;
+          x.strokeText(labelText, plotLeft + 6, labelY);
           x.fillStyle=chColor;
-          let label = c.name + (state.showRmsEnvelope ? " (RMS)" : "");
-          x.fillText(label,plotLeft+5,(state.groupedAnalog?j*14+13:top+13));
+          x.fillText(labelText, plotLeft + 6, labelY);
+          x.restore();
         });
+
+        // Trigger Line
         let trigger=commonFractionForRecordFraction(rec,sideTriggerFraction(rec));
-        function line(commonFrac,color,label,dash=[]){
+        if(Number.isFinite(trigger)&&trigger>=state.x0&&trigger<=state.x1){
+          let xx=plotLeft+(trigger-state.x0)/(state.x1-state.x0)*plotW;
+          x.save();x.strokeStyle="#ef4444";x.lineWidth=1.5;x.setLineDash([7,5]);
+          x.beginPath();x.moveTo(xx,0);x.lineTo(xx,h);x.stroke();x.restore();
+        }
+
+        // Cursors A and B Lines
+        function line(commonFrac,color,label){
           if(commonFrac<state.x0||commonFrac>state.x1){
             if(!label) return;
             let isLeft = commonFrac < state.x0;
@@ -7145,11 +7657,14 @@
             return;
           }
           let xx=plotLeft+(commonFrac-state.x0)/(state.x1-state.x0)*plotW;
-          x.save();x.strokeStyle=color;x.lineWidth=1.5;x.setLineDash(dash);x.beginPath();x.moveTo(xx,0);x.lineTo(xx,h);x.stroke();x.setLineDash([]);
+          x.save();x.strokeStyle=color;x.lineWidth=1.5;x.setLineDash([]);x.beginPath();x.moveTo(xx,0);x.lineTo(xx,h);x.stroke();
           if(label){
-            let sIdx=sampleIndex(commonFrac),row=rec?.rows?.[sIdx];
-            let tMs=row?(state.timeRefMode==="relative"?(row.t-state.timeRefZero)*1000:row.t*1000):null;
-            let text=tMs!==null?`${label}: ${(tMs>=0&&state.timeRefMode==="relative"?"+":"")}${tMs.toFixed(1)} ms`:label;
+            let sIdx = sampleIndex(commonFrac), row = ds?.rows?.[sIdx];
+            let duration = ds?.rows?.length ? (ds.rows.at(-1).t - ds.rows[0].t) : commonTimeBounds().duration;
+            let tSec = row ? row.t : (commonFrac * duration);
+            let tMs = state.timeRefMode === "relative" ? (tSec - state.timeRefZero) * 1000 : tSec * 1000;
+            let sign = (state.timeRefMode === "relative" && tMs >= 0) ? "+" : "";
+            let text = `${label}: ${sign}${tMs.toFixed(1)} ms`;
             x.font="bold 10px Segoe UI, Arial";
             let tw=x.measureText(text).width+8;
             let badgeX=(xx+tw+4>w)?xx-tw-4:xx+2;
@@ -7159,43 +7674,194 @@
           }
           x.restore();
         }
-        line(trigger,"#ef4444","",[7,5]);line(state.cursorA,"#38bdf8","A");line(state.cursorB,"#fb923c","B");
+        line(state.cursorA,"#38bdf8","A");line(state.cursorB,"#fb923c","B");
+
+        // Event Markers
         for(let mk of (state.eventMarkers||[])){
           let frac=Number.isFinite(mk.frac)?mk.frac:(Number.isFinite(mk.time)&&rec?.rows?.at(-1)?.t?mk.time/rec.rows.at(-1).t:NaN);
           if(Number.isFinite(frac)&&frac>=state.x0&&frac<=state.x1){
             let xx=plotLeft+(frac-state.x0)/(state.x1-state.x0)*plotW;
-            x.save();x.strokeStyle=mk.color||"#38bdf8";x.lineWidth=1.5;x.setLineDash([3,3]);
+            let isHovered = (state.hoverMarker === mk);
+            let showBadge = isHovered || !mk.auto;
+            x.save();x.strokeStyle=mk.color||"#38bdf8";x.lineWidth=isHovered?2.2:1.4;x.setLineDash(isHovered?[]:[3,3]);
             x.beginPath();x.moveTo(xx,0);x.lineTo(xx,h);x.stroke();x.setLineDash([]);
-            x.font="bold 10px Segoe UI, Arial";
-            let label=mk.text||mk.label||"";
-            let tw=x.measureText(label).width+10;
-            let badgeX=(xx+tw+6>w)?xx-tw-4:xx+2;
-            let badgeY=(mk.type==="end"?22:(mk.type==="location"||mk.type==="location_start")?38:mk.type==="location_end"?54:4)+((mk.episodeIndex||0)*38)%(Math.max(60,h-30));
-            x.fillStyle="#08101e";x.strokeStyle=mk.color||"#38bdf8";x.lineWidth=1;
-            x.fillRect(badgeX,badgeY,tw,17);x.strokeRect(badgeX,badgeY,tw,17);
-            x.fillStyle=mk.color||"#38bdf8";x.fillText(label,badgeX+4,badgeY+12);
+            x.fillStyle=mk.color||"#38bdf8";
+            x.beginPath();x.moveTo(xx-4,0);x.lineTo(xx+4,0);x.lineTo(xx,6);if(x.closePath)x.closePath();if(x.fill)x.fill();
+            if(showBadge){
+              x.font="bold 10px Segoe UI, Arial";
+              let label=mk.text||mk.label||"";
+              let tw=x.measureText(label).width+10;
+              let badgeX=(xx+tw+6>w)?xx-tw-4:xx+2;
+              let badgeY=(mk.type==="end"?22:(mk.type==="location"||mk.type==="location_start")?38:mk.type==="location_end"?54:4)+((mk.episodeIndex||0)*38)%(Math.max(60,h-30));
+              x.fillStyle="#08101e";x.strokeStyle=mk.color||"#38bdf8";x.lineWidth=1;
+              x.fillRect(badgeX,badgeY,tw,17);x.strokeRect(badgeX,badgeY,tw,17);
+              x.fillStyle=mk.color||"#38bdf8";x.fillText(label,badgeX+4,badgeY+12);
+            }
             x.restore();
           }
         }
       }
 
-      function drawSideDigital(canvas,rec,sv,slot){let {x,w,h}=sizeCanvas(canvas),chs=selectedSideDigital(slot),win=recordWindow(rec,sv),g=64,pw=Math.max(1,w-g);x.clearRect(0,0,w,h);if(!chs.length)return;if(win.empty){x.fillStyle="#607790";x.fillText("Sem dados nesta janela",g+8,18);return}let R=rec.rows,i0=win.i0,i1=Math.max(i0,win.i1),spanTime=Math.max(1e-12,win.range.end-win.range.start),band=h/chs.length;x.font="11px Segoe UI,Arial";function sampleX(index){return g+(win.offset+R[index].t-win.range.start)/spanTime*pw}chs.forEach((c,j)=>{let top=j*band,base=top+band*.76,barTop=top+band*.18,barH=Math.max(3,base-barTop),dataX0=sampleX(i0),dataX1=sampleX(i1);x.fillStyle="#b6c5d6";x.fillText(c.name,6,top+band*.56);x.strokeStyle="#20364d";x.lineWidth=1;x.setLineDash([3,5]);x.beginPath();x.moveTo(g,Math.round(base)+.5);x.lineTo(w,Math.round(base)+.5);x.stroke();x.setLineDash([]);x.strokeStyle="#4f5dff";x.lineWidth=1;x.beginPath();x.moveTo(dataX0,base);x.lineTo(dataX1,base);x.stroke();let runStart=i0,runValue=R[i0][c.name]?1:0;function paintRun(endExclusive){if(runValue!==1)return;let endIndex=Math.min(i1,Math.max(runStart,endExclusive)),x0=sampleX(runStart),x1=sampleX(endIndex);x.fillStyle="#4f5dff";x.fillRect(x0,barTop,Math.max(1,x1-x0),barH)}for(let q=i0+1;q<=i1;q++){let v=R[q][c.name]?1:0;if(v!==runValue){paintRun(q);runStart=q;runValue=v}}paintRun(i1)});function line(commonFrac,col,label,dash=[]){
-            if(commonFrac<state.x0||commonFrac>state.x1){
-              if(!label) return;
-              let isLeft = commonFrac < state.x0;
-              let arrow = isLeft ? `${label} ▶` : `◀ ${label}`;
-              x.save();
-              x.font = "bold 10px Segoe UI, Arial";
-              let tw = x.measureText(arrow).width + 8;
-              let badgeX = isLeft ? (g + 4 + (label === "B" && state.cursorA < state.x0 ? tw + 4 : 0)) : (w - tw - 4 - (label === "A" && state.cursorB > state.x1 ? tw + 4 : 0));
-              x.fillStyle = "#08101e"; x.strokeStyle = col; x.lineWidth = 1.5;
-              x.fillRect(badgeX, h - 20, tw, 16); x.strokeRect(badgeX, h - 20, tw, 16);
-              x.fillStyle = col; x.fillText(arrow, badgeX + 4, h - 8);
-              x.restore();
-              return;
-            }
-            let xx=g+(commonFrac-state.x0)/(state.x1-state.x0)*pw;x.save();x.strokeStyle=col;x.lineWidth=1.5;x.setLineDash(dash);x.beginPath();x.moveTo(xx,0);x.lineTo(xx,h);x.stroke();x.setLineDash([]);x.fillStyle=col;x.fillText(label,xx+3,h-5);x.restore()}line(commonFractionForRecordFraction(rec,sideTriggerFraction(rec)),"#ef4444","",[7,5]);if(state.cursorA>=0&&state.cursorA<=1)line(state.cursorA,"#38bdf8","A");if(state.cursorB>=0&&state.cursorB<=1)line(state.cursorB,"#fb923c","B")}
-      function applySideLayout(slot){invalidateAllCanvasDims();let rec=comtradeSlots[slot],box=document.getElementById(`sideRecord${slot+1}`);if(!rec)return;let f=state.sideLayouts[slot],hasCurrent=selectedSideAnalog(slot,"current").length>0,hasVoltage=selectedSideAnalog(slot,"voltage").length>0,hasDigital=selectedSideDigital(slot).length>0,currentPane=document.getElementById(`sideCurrentPane${slot+1}`),voltagePane=document.getElementById(`sideVoltagePane${slot+1}`),digitalPane=document.getElementById(`sideDigitalPane${slot+1}`),split1=document.getElementById(`sideSplit${slot+1}1`),split2=document.getElementById(`sideSplit${slot+1}2`);currentPane.style.display=hasCurrent?"grid":"none";voltagePane.style.display=hasVoltage?"grid":"none";digitalPane.style.display=hasDigital?"grid":"none";split1.style.display=hasCurrent&&(hasVoltage||hasDigital)?"block":"none";split2.style.display=hasVoltage&&hasDigital?"block":"none";let visible=[];if(hasCurrent)visible.push({frac:f[0],min:70});if(hasVoltage)visible.push({frac:f[1],min:70});if(hasDigital)visible.push({frac:f[2],min:55});let total=Math.max(.001,visible.reduce((a,v)=>a+v.frac,0)),parts=[];visible.forEach((v,i)=>{parts.push(`minmax(${v.min}px,${v.frac/total}fr)`);if(i<visible.length-1)parts.push("7px")});box.style.gridTemplateRows=parts.length?parts.join(" "):"1fr"}
+      function drawSideDigital(canvas,rec,sv,slot){
+        let chs=selectedSideDigital(slot);
+        let chartBox=document.getElementById(`sideDigitalChartBox${slot+1}`)||canvas.parentElement;
+        let emptyEl=document.getElementById(`sideDigitalEmpty${slot+1}`);
+        if(emptyEl) emptyEl.style.display=chs.length?"none":"grid";
+        if(!chs.length){
+          if(chartBox) chartBox.style.overflowY="hidden";
+          canvas.style.height="100%";
+          let {x,w,h}=sizeCanvas(canvas);x.clearRect(0,0,w,h);return;
+        }
+
+        let availH = chartBox ? chartBox.clientHeight : 100;
+        let minLane = 17;
+        let totalNeeded = chs.length * minLane;
+        let hasOverflow = totalNeeded > availH;
+        let lane;
+        if(hasOverflow){
+          lane = minLane;
+          let targetH = totalNeeded;
+          if(canvas.style.height !== targetH + "px"){
+            canvas.style.height = targetH + "px";
+            invalidateAllCanvasDims();
+          }
+          if(chartBox) chartBox.style.overflowY = "auto";
+        } else {
+          lane = Math.max(minLane, availH / chs.length);
+          if(canvas.style.height !== "100%"){
+            canvas.style.height = "100%";
+            invalidateAllCanvasDims();
+          }
+          if(chartBox) chartBox.style.overflowY = "hidden";
+        }
+
+        let {x,w,h}=sizeCanvas(canvas);
+        x.clearRect(0,0,w,h);
+        let g=64,pw=Math.max(1,w-g);
+        x.fillStyle="#081321";x.fillRect(0,0,g,h);x.strokeStyle="#29415e";x.lineWidth=1;x.beginPath();x.moveTo(g-.5,0);x.lineTo(g-.5,h);x.stroke();
+        x.strokeStyle="#17283d";x.lineWidth=1;x.beginPath();
+        for(let n=0;n<=10;n++){let xx=g+n*pw/10;x.moveTo(xx,0);x.lineTo(xx,h)}
+        x.stroke();
+
+        let win=recordWindow(rec,sv);
+        if(win.empty){x.fillStyle="#607790";x.fillText("Sem dados nesta janela",g+8,18);return}
+        let R=rec.rows,i0=win.i0,i1=Math.max(i0,win.i1),spanTime=Math.max(1e-12,win.range.end-win.range.start);
+        let step=Math.max(1,Math.ceil((i1-i0)/Math.max(pw*2,1)));
+
+        function sampleX(index){return g+(win.offset+R[index].t-win.range.start)/spanTime*pw}
+
+        chs.forEach((c,j)=>{
+          let top=j*lane,base=top+Math.round(lane*.72),barTop=top+Math.round(lane*.18),barH=Math.max(4,base-barTop);
+          x.strokeStyle="#20364d";x.lineWidth=1;x.setLineDash([3,5]);x.beginPath();x.moveTo(g,Math.round(base)+.5);x.lineTo(w,Math.round(base)+.5);x.stroke();x.setLineDash([]);
+          let availableStart=null,runStart=null,runValue=null;
+          function paintRun(end){
+            if(runValue!==1||runStart===null)return;
+            x.fillStyle="#4f5dff";
+            x.fillRect(sampleX(runStart),barTop,Math.max(1,sampleX(end)-sampleX(runStart)),barH);
+          }
+          function paintBaseline(end){
+            if(availableStart===null)return;
+            x.strokeStyle="#4f5dff";x.lineWidth=1.2;x.beginPath();x.moveTo(sampleX(availableStart),base);x.lineTo(sampleX(end),base);x.stroke();
+          }
+          for(let q=i0;q<=i1;q+=step){
+            let raw=R[q][c.name];
+            if(raw===undefined){if(availableStart!==null){paintRun(q);paintBaseline(q);availableStart=runStart=runValue=null}continue}
+            let v=raw?1:0;
+            if(availableStart===null){availableStart=q;runStart=q;runValue=v}
+            else if(v!==runValue){paintRun(q);runStart=q;runValue=v}
+          }
+          if(availableStart!==null){paintRun(i1);paintBaseline(i1)}
+        });
+
+        // Rótulos com contorno escuro
+        x.font="bold 9.5px Segoe UI, Arial";x.textBaseline="middle";
+        chs.forEach((c,j)=>{
+          let top=j*lane,textY=top+Math.round(lane*.48);
+          x.save();
+          x.strokeStyle="rgba(4, 8, 16, 0.95)";x.lineWidth=2.5;x.strokeText(c.name,5,textY);
+          x.fillStyle="#ffffff";x.fillText(c.name,5,textY);
+          x.restore();
+        });
+        x.textBaseline="alphabetic";
+
+        // Trigger Line
+        let trigger=commonFractionForRecordFraction(rec,sideTriggerFraction(rec));
+        if(Number.isFinite(trigger)&&trigger>=state.x0&&trigger<=state.x1){
+          let xx=g+(trigger-state.x0)/(state.x1-state.x0)*pw;
+          x.save();x.strokeStyle="#ef4444";x.lineWidth=1.5;x.setLineDash([7,5]);
+          x.beginPath();x.moveTo(xx,0);x.lineTo(xx,h);x.stroke();x.restore();
+        }
+
+        // Cursors A and B
+        function line(commonFrac,col,label){
+          if(commonFrac<state.x0||commonFrac>state.x1){
+            if(!label) return;
+            let isLeft = commonFrac < state.x0;
+            let arrow = isLeft ? `${label} ▶` : `◀ ${label}`;
+            x.save();x.font="bold 10px Segoe UI, Arial";
+            let tw=x.measureText(arrow).width+8;
+            let badgeX=isLeft?(g+4+(label==="B"&&state.cursorA<state.x0?tw+4:0)):(w-tw-4-(label==="A"&&state.cursorB>state.x1?tw+4:0));
+            x.fillStyle="#08101e";x.strokeStyle=col;x.lineWidth=1.5;
+            x.fillRect(badgeX,h-20,tw,16);x.strokeRect(badgeX,h-20,tw,16);
+            x.fillStyle=col;x.fillText(arrow,badgeX+4,h-8);
+            x.restore();return;
+          }
+          let xx=g+(commonFrac-state.x0)/(state.x1-state.x0)*pw;
+          x.save();x.strokeStyle=col;x.lineWidth=1.5;x.beginPath();x.moveTo(xx,0);x.lineTo(xx,h);x.stroke();
+          if(label){
+            let sIdx = sampleIndex(commonFrac), row = ds?.rows?.[sIdx];
+            let duration = ds?.rows?.length ? (ds.rows.at(-1).t - ds.rows[0].t) : commonTimeBounds().duration;
+            let tSec = row ? row.t : (commonFrac * duration);
+            let tMs = state.timeRefMode === "relative" ? (tSec - state.timeRefZero) * 1000 : tSec * 1000;
+            let sign = (state.timeRefMode === "relative" && tMs >= 0) ? "+" : "";
+            let text = `${label}: ${sign}${tMs.toFixed(1)} ms`;
+            x.font="bold 10px Segoe UI, Arial";
+            let tw=x.measureText(text).width+8;
+            let badgeX=(xx+tw+4>w)?xx-tw-4:xx+2;
+            x.fillStyle="#08101e";x.strokeStyle=col;x.lineWidth=1;
+            x.fillRect(badgeX,h-20,tw,16);x.strokeRect(badgeX,h-20,tw,16);
+            x.fillStyle=col;x.fillText(text,badgeX+4,h-8);
+          }
+          x.restore();
+        }
+        line(state.cursorA,"#38bdf8","A");line(state.cursorB,"#fb923c","B");
+      }
+
+      function applySideLayout(slot){
+        invalidateAllCanvasDims();
+        let rec=comtradeSlots[slot],box=document.getElementById(`sideRecord${slot+1}`);
+        if(!rec||!box)return;
+        let f=state.sideLayouts[slot];
+        let hasCurrent=selectedSideAnalog(slot,"current").length>0,hasVoltage=selectedSideAnalog(slot,"voltage").length>0,hasDigital=selectedSideDigital(slot).length>0;
+        let currentPane=document.getElementById(`sideCurrentPane${slot+1}`),voltagePane=document.getElementById(`sideVoltagePane${slot+1}`),digitalPane=document.getElementById(`sideDigitalPane${slot+1}`);
+        let split1=document.getElementById(`sideSplit${slot+1}1`),split2=document.getElementById(`sideSplit${slot+1}2`);
+        if(currentPane) currentPane.style.display=hasCurrent?"grid":"none";
+        if(voltagePane) voltagePane.style.display=hasVoltage?"grid":"none";
+        if(digitalPane) digitalPane.style.display=hasDigital?"grid":"none";
+        if(split1) split1.style.display=hasCurrent&&(hasVoltage||hasDigital)?"block":"none";
+        if(split2) split2.style.display=hasVoltage&&hasDigital?"block":"none";
+
+        // Badges com contagem de canais
+        let cVis = document.getElementById(`sideCurrentVisibleInfo${slot+1}`);
+        if(cVis) cVis.textContent = `${selectedSideAnalog(slot,"current").length} visíveis`;
+        let vVis = document.getElementById(`sideVoltageVisibleInfo${slot+1}`);
+        if(vVis) vVis.textContent = `${selectedSideAnalog(slot,"voltage").length} visíveis`;
+        let dVis = document.getElementById(`sideDigitalVisibleInfo${slot+1}`);
+        if(dVis) dVis.textContent = `${selectedSideDigital(slot).length} de ${(rec.meta?.digital||[]).length} visíveis`;
+
+        let visible=[{isHeader:true,px:26}];
+        if(hasCurrent)visible.push({frac:f[0],min:70});
+        if(hasVoltage)visible.push({frac:f[1],min:70});
+        if(hasDigital)visible.push({frac:f[2],min:55});
+        let panesOnly = visible.filter(v=>!v.isHeader);
+        let total=Math.max(.001,panesOnly.reduce((a,v)=>a+v.frac,0)),parts=["26px"];
+        panesOnly.forEach((v,i)=>{
+          parts.push(`minmax(${v.min}px,${v.frac/total}fr)`);
+          if(i<panesOnly.length-1)parts.push("8px");
+        });
+        box.style.gridTemplateRows=parts.join(" ");
+      }
+
       let sideBySidePending = false;
       function scheduleSideBySide(immediate = false){
         if(immediate){sideBySidePending=false;drawSideBySide();return}
@@ -7204,20 +7870,119 @@
           requestAnimationFrame(()=>{sideBySidePending=false;drawSideBySide()});
         }
       }
+
       function drawSideBySide(){
         let layout = document.getElementById("sideComtradeLayout");
         syncSideStateFromShared();
-        if(layout) layout.title=hasAbsoluteTimeline()?"Sincronização pelo horário absoluto do CFG":"Horário absoluto indisponível em um CFG; usando tempo relativo";
-        comtradeSlots.forEach((rec,i)=>{
-          let box=document.getElementById(`sideRecord${i+1}`);
-          if(!box) return;
-          box.hidden=!rec;box.classList.toggle("empty",!rec);if(!rec)return;
-          applySideLayout(i);
-          if(selectedSideAnalog(i,"current").length)drawSideAnalog(document.getElementById(`sideCurrent${i+1}`),rec,"current",state.sideViews[i],i);
-          if(selectedSideAnalog(i,"voltage").length)drawSideAnalog(document.getElementById(`sideVoltage${i+1}`),rec,"voltage",state.sideViews[i],i);
-          if(selectedSideDigital(i).length)drawSideDigital(document.getElementById(`sideDigital${i+1}`),rec,state.sideViews[i],i);
-        });
+        if(layout){
+          layout.title=hasAbsoluteTimeline()?"Sincronização pelo horário absoluto do CFG":"Horário absoluto indisponível em um CFG; usando tempo relativo";
+          let frac = state.sideColumnSplitFrac || 0.5;
+          layout.style.setProperty("--side-col-left", `${frac}fr`);
+          layout.style.setProperty("--side-col-right", `${1 - frac}fr`);
+        }
+
+        let rec0 = comtradeSlots[0], rec1 = comtradeSlots[1];
+        let box1 = document.getElementById("sideRecord1"), box2 = document.getElementById("sideRecord2");
+        let emptyCard2 = document.getElementById("sideEmptyCard2");
+        let vSplitter = document.getElementById("sideVerticalSplitter");
+
+        // Atualização da Oscilografia 1
+        if(rec0 && box1){
+          box1.style.display = "grid";
+          let t1 = rec0.meta?.device || rec0.meta?.station || rec0.meta?.name || "Oscilografia 1";
+          let d1 = rec0.rows?.length ? (rec0.rows.at(-1).t - rec0.rows[0].t) : 0;
+          let titleEl1 = document.getElementById("sideRecordTitle1"), metaEl1 = document.getElementById("sideRecordMeta1");
+          if(titleEl1) titleEl1.textContent = `1: ${t1}`;
+          if(metaEl1) metaEl1.textContent = `${fmt(d1, 2)} s · ${fmt(rec0.rows?.length||0, 0)} amostras · ${hasAbsoluteTimeline()?"Sincronizado":"Relativo"}`;
+          applySideLayout(0);
+          let curC = document.getElementById("sideCurrent1"), volC = document.getElementById("sideVoltage1"), digC = document.getElementById("sideDigital1");
+          if(curC && selectedSideAnalog(0,"current").length) drawSideAnalog(curC, rec0, "current", state.sideViews[0], 0);
+          if(volC && selectedSideAnalog(0,"voltage").length) drawSideAnalog(volC, rec0, "voltage", state.sideViews[0], 0);
+          if(digC && selectedSideDigital(0).length) drawSideDigital(digC, rec0, state.sideViews[0], 0);
+        }
+
+        // Atualização da Oscilografia 2
+        if(rec1 && box2){
+          box2.style.display = "grid";
+          if(emptyCard2) emptyCard2.style.display = "none";
+          if(vSplitter) vSplitter.style.display = "block";
+          let t2 = rec1.meta?.device || rec1.meta?.station || rec1.meta?.name || "Oscilografia 2";
+          let d2 = rec1.rows?.length ? (rec1.rows.at(-1).t - rec1.rows[0].t) : 0;
+          let titleEl2 = document.getElementById("sideRecordTitle2"), metaEl2 = document.getElementById("sideRecordMeta2");
+          if(titleEl2) titleEl2.textContent = `2: ${t2}`;
+          if(metaEl2) metaEl2.textContent = `${fmt(d2, 2)} s · ${fmt(rec1.rows?.length||0, 0)} amostras · ${hasAbsoluteTimeline()?"Sincronizado":"Relativo"}`;
+          applySideLayout(1);
+          let curC2 = document.getElementById("sideCurrent2"), volC2 = document.getElementById("sideVoltage2"), digC2 = document.getElementById("sideDigital2");
+          if(curC2 && selectedSideAnalog(1,"current").length) drawSideAnalog(curC2, rec1, "current", state.sideViews[1], 1);
+          if(volC2 && selectedSideAnalog(1,"voltage").length) drawSideAnalog(volC2, rec1, "voltage", state.sideViews[1], 1);
+          if(digC2 && selectedSideDigital(1).length) drawSideDigital(digC2, rec1, state.sideViews[1], 1);
+        } else {
+          if(box2) box2.style.display = "none";
+          if(emptyCard2) emptyCard2.style.display = "flex";
+          if(vSplitter) vSplitter.style.display = "block";
+        }
       }
+
+      function showSideCurveTooltip(canvas,rec,kind,slot,e){
+        if(drag || sideCursorDrag || state.mode === "zoom"){document.getElementById("curveTooltip")?.classList.remove("on");return}
+        let curveTooltip = document.getElementById("curveTooltip");
+        if(!curveTooltip || !rec) return;
+        let r = getCanvasDims(canvas), g = 64, pw = Math.max(1, r.w - g);
+        let p = clamp((e.clientX - r.left - g) / pw, 0, 1);
+        let sv = state.sideViews[slot];
+        let commonF = sv.x0 + p * (sv.x1 - sv.x0);
+        let b = commonTimeBounds();
+        let commonTime = b.start + commonF * b.duration;
+        let offset = b.absolute ? recordAbsoluteStart(rec) : 0;
+        let localTime = commonTime - offset;
+        let R = rec.rows;
+        if(!R || !R.length) return;
+        let lo = 0, hi = R.length - 1;
+        while(lo < hi){
+          let mid = (lo + hi) >> 1;
+          if(R[mid].t < localTime) lo = mid + 1;
+          else hi = mid;
+        }
+        let i = clamp(lo, 0, R.length - 1);
+        let channels = selectedSideAnalog(slot, kind);
+        if(!channels.length || !R[i]){curveTooltip.classList.remove("on");return}
+        let py = e.clientY - r.top, band = state.groupedAnalog ? r.h : r.h / channels.length, best = Infinity, rows = [];
+        let shared = 1e-12;
+        let win = recordWindow(rec, sv);
+        let i0 = win.i0, i1 = Math.max(i0 + 1, win.i1);
+        for(let {i: id} of channels) shared = Math.max(shared, exactVisibleMax(R, id, i0, i1));
+        let max = shared;
+        let aData = rec.meta?.analogData, na = rec.meta?.na || (rec.meta?.analog?.length || 0);
+
+        for(let j = 0; j < channels.length; j++){
+          let {c, i: id} = channels[j];
+          let top = state.groupedAnalog ? 0 : j * band, height = state.groupedAnalog ? r.h : band, mid = top + height / 2;
+          let chMax = (state.groupedAnalog || state.yScaleMode !== "individual") ? max : exactVisibleMax(R, id, i0, i1);
+          let val = aData ? aData[i * na + id] : R[i]?.analogAll?.[id] ?? 0;
+          let y = mid - (val / Math.max(1e-12, chMax)) * height * 0.42;
+          best = Math.min(best, Math.abs(y - py));
+          let valStr = `${fmt(val, 3)} ${c.unit || ""}`;
+          if (state.showRmsEnvelope) {
+            let rmsArr = getChannelRms(rec, id);
+            let rmsVal = rmsArr ? rmsArr[i] : 0;
+            valStr += ` <span style="color:#38bdf8;font-size:10px;font-weight:600;margin-left:4px">[RMS: ${fmt(rmsVal, 2)}]</span>`;
+          }
+          rows.push(`<div class="curve-tooltip-row"><span class="curve-tooltip-name" style="color:${sideAnalogColor(slot, id)}">${c.name}</span><span class="curve-tooltip-value">${valStr}</span></div>`);
+        }
+
+        if(best > 14){curveTooltip.classList.remove("on");return}
+        let sIdx = sampleIndex(commonF), row = ds?.rows?.[sIdx];
+        let duration = ds?.rows?.length ? (ds.rows.at(-1).t - ds.rows[0].t) : b.duration;
+        let tSec = row ? row.t : (commonF * duration);
+        let tMs = state.timeRefMode === "relative" ? (tSec - state.timeRefZero) * 1000 : tSec * 1000;
+        let sign = (state.timeRefMode === "relative" && tMs >= 0) ? "+" : "";
+        let clockBadge = (b.absolute && Number.isFinite(commonTime)) ? ` <span style="font-weight:normal;opacity:0.75;font-size:10px">(${formatAbsoluteFooterClock(commonTime)})</span>` : "";
+        curveTooltip.innerHTML = `<b class="curve-tooltip-time">${sign}${fmt(tMs, 3)} ms${clockBadge}</b>${rows.join("")}`;
+        curveTooltip.classList.add("on");
+        curveTooltip.style.left = Math.max(8, Math.min(innerWidth - 190, e.clientX + 14)) + "px";
+        curveTooltip.style.top = Math.max(8, Math.min(innerHeight - 110, e.clientY + 14)) + "px";
+      }
+
       function syncSideStateFromShared(){
         let bounds=commonTimeBounds();
         comtradeSlots.forEach((rec,i)=>{
@@ -7277,7 +8042,7 @@
         if(!canvas) return;
         canvas.addEventListener("wheel",e=>{
           if (isDigital) {
-            let pane = canvas.closest(".side-pane") || canvas.parentElement;
+            let pane = canvas.closest(".digital-chartbox") || canvas.parentElement;
             let hasOverflow = pane && (pane.scrollHeight > pane.clientHeight + 2);
             if (hasOverflow && !e.shiftKey && !e.ctrlKey) {
               let prev = pane.scrollTop;
@@ -7513,7 +8278,7 @@
         if(!splitter) return;
         splitter.addEventListener("mousedown",e=>{
           e.preventDefault();splitter.classList.add("dragging");
-          let box=document.getElementById(`sideRecord${slot+1}`),startY=e.clientY,start=[...state.sideLayouts[slot]],usable=Math.max(220,box.clientHeight-14);
+          let box=document.getElementById(`sideRecord${slot+1}`),startY=e.clientY,start=[...state.sideLayouts[slot]],usable=Math.max(220,box.clientHeight-26-16);
           function move(ev){
             let d=(ev.clientY-startY)/usable,a=index,b=index+1,min=.12,na=start[a]+d,nb=start[b]-d;
             if(na<min){nb-=min-na;na=min}if(nb<min){na-=min-nb;nb=min}
@@ -7527,6 +8292,56 @@
       bindSideSplitter(document.getElementById("sideSplit12"),0,1);
       bindSideSplitter(document.getElementById("sideSplit21"),1,0);
       bindSideSplitter(document.getElementById("sideSplit22"),1,1);
+
+      function bindSideVerticalSplitter(){
+        let splitter = document.getElementById("sideVerticalSplitter");
+        if(!splitter) return;
+        splitter.addEventListener("mousedown", e => {
+          e.preventDefault();
+          splitter.classList.add("dragging");
+          let layout = document.getElementById("sideComtradeLayout");
+          let rect = layout.getBoundingClientRect();
+          let totalW = rect.width;
+          function move(ev){
+            let mouseX = ev.clientX - rect.left;
+            let frac = clamp(mouseX / Math.max(1, totalW), 0.15, 0.85);
+            state.sideColumnSplitFrac = frac;
+            layout.style.setProperty("--side-col-left", `${frac}fr`);
+            layout.style.setProperty("--side-col-right", `${1 - frac}fr`);
+            invalidateAllCanvasDims();
+            scheduleSideBySide();
+          }
+          function up(){
+            splitter.classList.remove("dragging");
+            window.removeEventListener("mousemove", move);
+            window.removeEventListener("mouseup", up);
+            invalidateAllCanvasDims();
+            drawSideBySide();
+          }
+          window.addEventListener("mousemove", move);
+          window.addEventListener("mouseup", up);
+        });
+      }
+      bindSideVerticalSplitter();
+      let sideBtn2 = document.getElementById("sideBtnOpenSlot2");
+      if(sideBtn2){
+        sideBtn2.onclick = () => {
+          let f2 = document.getElementById("comtradeFiles2");
+          if(f2){ f2.value = ""; f2.click(); }
+        };
+      }
+
+      [
+        {c: document.getElementById("sideCurrent1"), k: "current", s: 0},
+        {c: document.getElementById("sideVoltage1"), k: "voltage", s: 0},
+        {c: document.getElementById("sideCurrent2"), k: "current", s: 1},
+        {c: document.getElementById("sideVoltage2"), k: "voltage", s: 1},
+      ].forEach(({c, k, s}) => {
+        if(c){
+          c.addEventListener("mousemove", e => showSideCurveTooltip(c, comtradeSlots[s], k, s, e));
+          c.addEventListener("mouseleave", () => document.getElementById("curveTooltip")?.classList.remove("on"));
+        }
+      });
 
       /* ================= DIAGRAMA FASORIAL ================= */
       function preparePhasorLayout(){
@@ -8047,18 +8862,32 @@
       function redrawSynchronized(immediate = false){
         if(immediate){
           syncRenderScheduled = false;
-          drawWave();drawDigital();renderReadout();
+          if(state.waveformView === "side"){
+            drawSideBySide();
+          } else {
+            drawWave();drawDigital();
+          }
+          renderReadout();
           return;
         }
         if(!syncRenderScheduled){
           syncRenderScheduled = true;
           requestAnimationFrame(()=>{
             syncRenderScheduled = false;
-            drawWave();drawDigital();renderReadout();
+            if(state.waveformView === "side"){
+              drawSideBySide();
+            } else {
+              drawWave();drawDigital();
+            }
+            renderReadout();
           });
         }
       }
-      function resetWaveView(){state.x0=0;state.x1=1;redrawSynchronized(true)}
+      function resetWaveView(){
+        state.x0=0;state.x1=1;
+        if(state.waveformView === "side") resetSynchronizedSideTime();
+        redrawSynchronized(true);
+      }
       function chartPosition(canvas,e,isDigital=false){
         let r=getCanvasDims(canvas),label=64,p=clamp((e.clientX-r.left-label)/Math.max(1,r.w-label),0,1);
         return{r,p,frac:state.x0+p*(state.x1-state.x0)};
@@ -8523,7 +9352,7 @@
         return String(name||"").replace(/\\/g,"/").replace(/^\.\//,"").replace(/\/+/,"/")
       }
       function baseFileName(name) {
-        return normalizeArchivePath(name).replace(/\.(cfg|dat)$/i, "").toLowerCase();
+        return normalizeArchivePath(name).replace(/\.(cfg|dat|hdr|inf)$/i, "").toLowerCase();
       }
       function leafFileName(name){
         let parts=normalizeArchivePath(name).split("/");
@@ -8578,9 +9407,9 @@
           if(uncompressedSize>ZIP_LIMITS.maxSingleEntryBytes)throw Error(`${archive.name}: ${name} excede o limite de segurança de tamanho.`);
           totalUncompressed+=uncompressedSize;
           if(totalUncompressed>ZIP_LIMITS.maxUncompressedBytes)throw Error(`${archive.name}: conteúdo descompactado excede o limite de segurança de 1 GB.`);
-          if(/\.(cfg|dat|inf)$/i.test(name))entries.push({name,flags,method,compressedSize,uncompressedSize,localOffset})
+          if(/\.(cfg|dat|inf|hdr)$/i.test(name))entries.push({name,flags,method,compressedSize,uncompressedSize,localOffset})
         }
-        if(!entries.length)throw Error(`${archive.name}: nenhum arquivo CFG, DAT ou INF foi encontrado dentro do pacote.`);
+        if(!entries.length)throw Error(`${archive.name}: nenhum arquivo CFG, DAT, INF ou HDR foi encontrado dentro do pacote.`);
         let files=[];
         for(let entry of entries){
           let local=entry.localOffset;
@@ -8592,7 +9421,7 @@
           else if(entry.method===8)content=await inflateRaw(compressed);
           else throw Error(`${archive.name}: método de compactação ${entry.method} não suportado em ${entry.name}.`);
           if(entry.uncompressedSize!==content.byteLength)throw Error(`${archive.name}: tamanho descompactado divergente para ${entry.name}.`);
-          files.push(new File([content],entry.name,{type:/\.(cfg|inf)$/i.test(entry.name)?"text/plain":"application/octet-stream",lastModified:archive.lastModified}))
+          files.push(new File([content],entry.name,{type:/\.(cfg|inf|hdr)$/i.test(entry.name)?"text/plain":"application/octet-stream",lastModified:archive.lastModified}))
         }
         console.info("FaultScope archive",{archive:archive.name,comtradeFiles:files.map(f=>f.name),totalUncompressedBytes:totalUncompressed});
         return files
@@ -8602,7 +9431,7 @@
         let expanded=[];
         for(let file of files){
           if(/\.(zip|zic)$/i.test(file.name))expanded.push(...await extractZipComtradeFiles(file));
-          else if(/\.(cfg|dat|inf)$/i.test(file.name))expanded.push(file)
+          else if(/\.(cfg|dat|inf|hdr)$/i.test(file.name))expanded.push(file)
         }
         return expanded
       }
@@ -8610,20 +9439,95 @@
       async function resolveComtradePairs(files) {
         let selected=[...files],hasArchive=selected.some(f=>/\.(zip|zic)$/i.test(f.name)),list=await expandSelectedFiles(selected);
         if(!list.length)throw Error("Selecione um par COMTRADE CFG/DAT ou um arquivo ZIP/ZIC que contenha o par.");
-        let infFiles=list.filter(file=>/\.inf$/i.test(file.name)),groups=new Map();
-        for(let file of list.filter(file=>/\.(cfg|dat)$/i.test(file.name))){let base=baseFileName(file.name),ext=/\.cfg$/i.test(file.name)?"cfg":"dat";if(!groups.has(base))groups.set(base,{});if(groups.get(base)[ext])throw Error(`Arquivo ${ext.toUpperCase()} duplicado para ${base}.`);groups.get(base)[ext]=file}
+        let infFiles=list.filter(file=>/\.inf$/i.test(file.name));
+        let hdrFiles=list.filter(file=>/\.hdr$/i.test(file.name));
+        let groups=new Map();
+        for(let file of list.filter(file=>/\.(cfg|dat)$/i.test(file.name))){
+          let base=baseFileName(file.name),ext=/\.cfg$/i.test(file.name)?"cfg":"dat";
+          if(!groups.has(base))groups.set(base,{});
+          if(groups.get(base)[ext])throw Error(`Arquivo ${ext.toUpperCase()} duplicado para ${base}.`);
+          groups.get(base)[ext]=file;
+        }
         if(groups.size>2)throw Error("O arquivo selecionado contém mais de dois registros COMTRADE. Use um pacote com apenas um registro por oscilografia.");
-        if(groups.size===1&&!hasArchive){let [base,pair]=[...groups][0];if(!pair.cfg)pair.cfg=await chooseCompanion(".cfg");if(!pair.dat)pair.dat=await chooseCompanion(".dat");if(!pair.cfg||!pair.dat)throw Error("A abertura foi cancelada antes de completar o par CFG/DAT.");if(baseFileName(pair.cfg.name)!==baseFileName(pair.dat.name))throw Error("Os arquivos complementares devem possuir o mesmo nome-base.");groups=new Map([[baseFileName(pair.cfg.name),pair]])}
+        if(groups.size===1&&!hasArchive){
+          let [base,pair]=[...groups][0];
+          if(!pair.cfg)pair.cfg=await chooseCompanion(".cfg");
+          if(!pair.dat)pair.dat=await chooseCompanion(".dat");
+          if(!pair.cfg||!pair.dat)throw Error("A abertura foi cancelada antes de completar o par CFG/DAT.");
+          if(baseFileName(pair.cfg.name)!==baseFileName(pair.dat.name))throw Error("Os arquivos complementares devem possuir o mesmo nome-base.");
+          groups=new Map([[baseFileName(pair.cfg.name),pair]]);
+        }
         for(let [base,pair] of groups)if(!pair.cfg||!pair.dat)throw Error(`Par COMTRADE incompleto dentro da seleção: ${base}. O pacote deve conter CFG e DAT com o mesmo caminho e nome-base.`);
-        return [...groups].map(([base,pair])=>({base:leafFileName(base),...pair,infFiles}));
+        return [...groups].map(([base,pair])=>{
+          let matchedHdr = hdrFiles.find(h => baseFileName(h.name) === base) || (hdrFiles.length === 1 ? hdrFiles[0] : null);
+          return {base:leafFileName(base),...pair,infFiles,hdr:matchedHdr};
+        });
       }
 
       async function loadComtradePair(pair) {
         let g=parseCfg(await pair.cfg.text()),infCandidates=[];
+        let hdrText = "";
+        if (pair.hdr) {
+          try { hdrText = await pair.hdr.text(); g.hdrText = hdrText; } catch(e) { console.warn("FaultScope: falha ao ler HDR:", e); }
+        }
         for(let file of pair.infFiles||[]){try{infCandidates.push({file,parsed:parseInf(await file.text(),file.name)})}catch(e){console.warn(e)}}
         let selectedInf=selectInfForCfg(infCandidates,g);
-        if(selectedInf){g.inf=selectedInf.parsed;g.infFileName=selectedInf.file.name;g.infSelectedLine=selectInfTransmissionLine(g.inf,g)}
-        let buf=await pair.dat.arrayBuffer(),text=g.kind==="ASCII"?new TextDecoder().decode(buf):"",rows=parseDat(g,buf,text),fs=g.rates[0]?.fs||1/(rows[1].t-rows[0].t),startEpoch=parseComtradeDateTime(g.start),triggerEpoch=parseComtradeDateTime(g.trigger);
+        if(selectedInf){
+          g.inf=selectedInf.parsed;
+          g.infFileName=selectedInf.file.name;
+          g.infSelectedLine=selectInfTransmissionLine(g.inf,g,hdrText);
+        }
+        let buf=await pair.dat.arrayBuffer(),text=g.kind==="ASCII"?new TextDecoder().decode(buf):"",rows=parseDat(g,buf,text);
+        buf = null; // Libera imediatamente buffer temporário do DAT
+        text = null;
+        g.rows = rows;
+
+        // Verificação e refinamento da linha do INF com base na perturbação real medida nos canais
+        if (g.inf?.transmissionLines?.length > 1) {
+          let verifiedLine = selectInfTransmissionLine(g.inf, g, hdrText, rows);
+          if (verifiedLine && verifiedLine !== g.infSelectedLine) {
+            g.infSelectedLine = verifiedLine;
+            let newMap = channelMap(g, rows);
+            g.channelMap = newMap;
+            let na = g.na || 0;
+            for (let r = 0; r < rows.length; r++) {
+              let row = rows[r];
+              if (row.analogAll) {
+                for (let k of KEYS) {
+                  row[k] = (newMap[k] >= 0 && newMap[k] < na) ? row.analogAll[newMap[k]] : 0;
+                }
+              }
+            }
+          }
+        } else if (!g.infSelectedLine) {
+          let newMap = channelMap(g, rows);
+          if (newMap && (newMap.Ia !== g.channelMap?.Ia || newMap.Ib !== g.channelMap?.Ib || newMap.Ic !== g.channelMap?.Ic)) {
+            g.channelMap = newMap;
+            let na = g.na || 0;
+            for (let r = 0; r < rows.length; r++) {
+              let row = rows[r];
+              if (row.analogAll) {
+                for (let k of KEYS) {
+                  row[k] = (newMap[k] >= 0 && newMap[k] < na) ? row.analogAll[newMap[k]] : 0;
+                }
+              }
+            }
+          }
+        }
+
+        // Sincronizar parâmetros de linha calculados do INF para o settings
+        if (g.infSelectedLine) {
+          let tl = g.infSelectedLine;
+          if (Number.isFinite(tl.nominalVoltageKV) && tl.nominalVoltageKV > 0) settings.vnom = Number(tl.nominalVoltageKV);
+          if (Number.isFinite(tl.lengthKm) && tl.lengthKm > 0) settings.length = Number(tl.lengthKm.toFixed(3));
+          if (Number.isFinite(tl.R1_ohm)) settings.r1 = Number(tl.R1_ohm.toFixed(4));
+          if (Number.isFinite(tl.X1_ohm)) settings.x1 = Number(tl.X1_ohm.toFixed(4));
+          if (Number.isFinite(tl.R0_ohm)) settings.r0 = Number(tl.R0_ohm.toFixed(4));
+          if (Number.isFinite(tl.X0_ohm)) settings.x0 = Number(tl.X0_ohm.toFixed(4));
+          updateK0Display();
+        }
+
+        let fs=g.rates[0]?.fs||(rows.length>1?1/(rows[1].t-rows[0].t):4000),startEpoch=parseComtradeDateTime(g.start),triggerEpoch=parseComtradeDateTime(g.trigger);
         g.startEpochSeconds=Number.isFinite(startEpoch)?startEpoch:NaN;
         g.triggerEpochSeconds=Number.isFinite(triggerEpoch)?triggerEpoch:NaN;
         g.triggerOffsetSeconds=Number.isFinite(startEpoch)&&Number.isFinite(triggerEpoch)?triggerEpoch-startEpoch:NaN;
@@ -8668,8 +9572,12 @@
           analogOffsets.push(aoff);
           rec.meta.analog.forEach(ch=>analog.push({...ch,name:prefix+ch.name,source:rec.base,sourceSlot:slot+1}));
           rec.meta.digital.forEach(ch=>{let name=prefix+ch.name;digital.push({...ch,name,source:rec.base,sourceSlot:slot+1});dmap.push([ch.name,name])});
-          digitalMaps.push(dmap)
+          digitalMaps.push(dmap);
         });
+
+        let totalNa = analog.length;
+        let totalNd = digital.length;
+        let dwords = Math.ceil(totalNd / 16);
 
         let referenceSlot=records[1].rows.length>records[0].rows.length?1:0,
           reference=records[referenceSlot],
@@ -8678,8 +9586,7 @@
           unionStart=Math.min(...starts),unionEnd=Math.max(...ends),
           unionDuration=Math.max(1e-12,unionEnd-unionStart),
           count=Math.max(2,Math.max(...records.map(r=>r.rows.length))),
-          commonStep=unionDuration/(count-1),rows=new Array(count),
-          sourceIndices=new Array(records.length).fill(0);
+          commonStep=unionDuration/(count-1),rows=new Array(count);
 
         let overlap=checkCommonSampleInterval(records);
         console.info("FaultScope combine",{
@@ -8694,36 +9601,122 @@
           overlapSeconds:overlap.overlapSeconds
         });
 
-        for(let n=0;n<count;n++){
-          let absoluteTime=unionStart+n*commonStep,
-            o={t:n*commonStep,analogAll:new Float64Array(analog.length)};
-          o.analogAll.fill(NaN);
+        // Estrutura de memória unificada em TypedArrays planos (evita Out Of Memory e milhões de objetos)
+        let analogData = new Float64Array(count * totalNa);
+        analogData.fill(NaN);
+        let digitalData = new Uint16Array(count * dwords);
 
-          records.forEach((rec,slot)=>{
-            let offset=absolute?recordAbsoluteStart(rec):unionStart,
-              localTime=absoluteTime-offset,source=rec.rows,
-              first=source[0].t,last=source.at(-1).t;
-            if(localTime<first||localTime>last)return;
+        let digitalMap = new Map();
+        for (let d = 0; d < totalNd; d++) {
+          digitalMap.set(digital[d].name, { word: d >> 4, bit: d & 15, id: d });
+        }
 
-            let i=sourceIndices[slot];
-            while(i<source.length-1&&source[i+1].t<=localTime)i++;
-            if(i<source.length-1&&Math.abs(source[i+1].t-localTime)<Math.abs(source[i].t-localTime))i++;
-            sourceIndices[slot]=i;
-            let src=source[i],aoff=analogOffsets[slot];
-            for(let j=0;j<src.analogAll.length;j++)o.analogAll[aoff+j]=src.analogAll[j];
-            for(let [oldName,newName] of digitalMaps[slot])o[newName]=src[oldName]?1:0
-          });
-
-          let referenceOffset=absolute?recordAbsoluteStart(reference):unionStart,
-            referenceLocalTime=absoluteTime-referenceOffset,
-            referenceFirst=reference.rows[0].t,referenceLast=reference.rows.at(-1).t,
-            referenceAnalogOffset=analogOffsets[referenceSlot];
-          for(let k of KEYS){
-            let localId=reference.meta.channelMap?.[k];
-            o[k]=referenceLocalTime>=referenceFirst&&referenceLocalTime<=referenceLast&&Number.isInteger(localId)
-              ?o.analogAll[referenceAnalogOffset+localId]:NaN
+        let digitalProto = new Proxy({}, {
+          get(target, prop, receiver) {
+            if (typeof prop === "string" && digitalMap.has(prop)) {
+              let entry = digitalMap.get(prop);
+              let w = digitalData[receiver._i * dwords + entry.word];
+              return (w >> entry.bit) & 1;
+            }
+            return undefined;
+          },
+          has(target, prop) {
+            return typeof prop === "string" && digitalMap.has(prop);
           }
-          rows[n]=o
+        });
+
+        let slotHelpers = records.map((rec, slot) => {
+          let offset = absolute ? recordAbsoluteStart(rec) : unionStart;
+          let source = rec.rows;
+          let first = source[0].t, last = source.at(-1).t;
+          let aoff = analogOffsets[slot];
+          let na = rec.meta.na || (rec.meta.analog || []).length;
+          let recDwords = rec.meta.dwords || Math.ceil((rec.meta.digital || []).length / 16);
+          let recDigData = rec.meta.digitalData || null;
+          let dt = (source.length > 1) ? (last - first) / (source.length - 1) : 1;
+
+          let digTrans = [];
+          if (rec.meta.digital) {
+            for (let d = 0; d < rec.meta.digital.length; d++) {
+              let oldName = rec.meta.digital[d].name;
+              let newName = `${slot + 1}:${oldName}`;
+              let globalEntry = digitalMap.get(newName);
+              if (globalEntry) {
+                digTrans.push({
+                  oldName,
+                  srcWord: d >> 4,
+                  srcBit: d & 15,
+                  dstWord: globalEntry.word,
+                  dstBit: globalEntry.bit
+                });
+              }
+            }
+          }
+
+          return { offset, source, first, last, aoff, na, dt, recDwords, recDigData, digTrans };
+        });
+
+        let refHelper = slotHelpers[referenceSlot];
+        let refChMap = reference.meta.channelMap || {};
+        let refAnalogOffset = analogOffsets[referenceSlot];
+
+        for(let n=0;n<count;n++){
+          let absoluteTime = unionStart + n * commonStep;
+          let o = Object.create(digitalProto);
+          o.t = n * commonStep;
+          o._i = n;
+          let aSub = analogData.subarray(n * totalNa, (n + 1) * totalNa);
+          o.analogAll = aSub;
+          let dRowBase = n * dwords;
+
+          for (let slot = 0; slot < records.length; slot++) {
+            let h = slotHelpers[slot];
+            let localTime = absoluteTime - h.offset;
+            if (localTime < h.first || localTime > h.last) continue;
+
+            let idx = Math.round((localTime - h.first) / h.dt);
+            if (idx < 0) idx = 0;
+            else if (idx >= h.source.length) idx = h.source.length - 1;
+
+            let src = h.source[idx];
+            if (src && src.analogAll) {
+              let srcAll = src.analogAll;
+              let dstOffset = h.aoff;
+              for (let j = 0; j < srcAll.length; j++) {
+                aSub[dstOffset + j] = srcAll[j];
+              }
+            }
+
+            if (h.recDigData) {
+              let srcDBase = idx * h.recDwords;
+              for (let k = 0; k < h.digTrans.length; k++) {
+                let dt = h.digTrans[k];
+                let bitVal = (h.recDigData[srcDBase + dt.srcWord] >> dt.srcBit) & 1;
+                if (bitVal) {
+                  digitalData[dRowBase + dt.dstWord] |= (1 << dt.dstBit);
+                }
+              }
+            } else if (src) {
+              for (let k = 0; k < h.digTrans.length; k++) {
+                let dt = h.digTrans[k];
+                if (src[dt.oldName]) {
+                  digitalData[dRowBase + dt.dstWord] |= (1 << dt.dstBit);
+                }
+              }
+            }
+          }
+
+          let refLocalTime = absoluteTime - refHelper.offset;
+          if (refLocalTime >= refHelper.first && refLocalTime <= refHelper.last) {
+            for (let k of KEYS) {
+              let localId = refChMap[k];
+              o[k] = (Number.isInteger(localId) && localId >= 0) ? aSub[refAnalogOffset + localId] : NaN;
+            }
+          } else {
+            for (let k of KEYS) o[k] = NaN;
+          }
+
+          rows[n] = o;
         }
 
         let channelMap={};
@@ -8740,6 +9733,7 @@
             device:records.map(r=>r.meta.device||r.meta.kind).join(" + "),
             kind:records.map(r=>r.meta.kind).join(" + "),analog,digital,
             na:analog.length,nd:digital.length,channelMap,
+            digitalData,digitalMap,dwords,analogData,
             triggerOffsetSeconds:combinedTrigger,
             combinedAbsoluteTimeline:absolute,
             unionStartEpoch:absolute?unionStart:NaN,
@@ -9276,7 +10270,11 @@
         btnRmsEnv.onclick = () => {
           state.showRmsEnvelope = !state.showRmsEnvelope;
           btnRmsEnv.classList.toggle("on", state.showRmsEnvelope);
-          drawWave();
+          if (state.waveformView === "side") {
+            drawSideBySide();
+          } else {
+            drawWave();
+          }
         };
       }
 
