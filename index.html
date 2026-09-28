@@ -200,7 +200,7 @@
       }
       .chrow {
         display: grid;
-        grid-template-columns: 18px 12px 1fr auto;
+        grid-template-columns: 18px 12px 1fr auto auto;
         align-items: center;
         gap: 5px;
         min-height: 28px;
@@ -209,6 +209,41 @@
       }
       .chrow:hover {
         background: #12243a;
+      }
+      .chrow .chname {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .ch-group-btn {
+        font-size: 10px;
+        font-weight: 700;
+        padding: 1px 5px;
+        border-radius: 4px;
+        cursor: pointer;
+        line-height: 15px;
+        transition: all 0.15s ease;
+        border: 1px solid transparent;
+        user-select: none;
+        background: transparent;
+      }
+      .ch-group-btn.grp-1 {
+        background: rgba(56, 189, 248, 0.14);
+        color: #38bdf8;
+        border-color: rgba(56, 189, 248, 0.4);
+      }
+      .ch-group-btn.grp-1:hover {
+        background: rgba(56, 189, 248, 0.28);
+        border-color: #38bdf8;
+      }
+      .ch-group-btn.grp-2 {
+        background: rgba(168, 85, 247, 0.14);
+        color: #c084fc;
+        border-color: rgba(168, 85, 247, 0.4);
+      }
+      .ch-group-btn.grp-2:hover {
+        background: rgba(168, 85, 247, 0.28);
+        border-color: #c084fc;
       }
       .dot {
         width: 9px;
@@ -1593,6 +1628,211 @@
         overflow: hidden;
       }
 
+      /* ================= ONDAS VIAJANTES (TWFL - RPV METHOD) ================= */
+      #twfl.view.on {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .twfl-topbar {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        background: #091424;
+        border: 1px solid #1c324e;
+        border-radius: 8px;
+        padding: 8px 12px;
+      }
+      .twfl-topbar-info {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 8px;
+      }
+      .twfl-topbar-controls {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 10px;
+      }
+      .twfl-dashboard-grid {
+        display: grid;
+        grid-template-columns: minmax(360px, 1fr) minmax(380px, 1.25fr);
+        gap: 12px;
+        align-items: stretch;
+      }
+      @media (max-width: 1100px) {
+        .twfl-dashboard-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .twfl-card {
+        background: #080d19;
+        border: 1px solid #1c3350;
+        border-radius: 10px;
+        padding: 14px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        box-sizing: border-box;
+      }
+      .twfl-card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #162338;
+        padding-bottom: 8px;
+      }
+      .twfl-badge {
+        background: linear-gradient(135deg, #0284c7, #0369a1);
+        color: #ffffff;
+        font-size: 10px;
+        font-weight: 700;
+        padding: 3px 8px;
+        border-radius: 4px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+      .twfl-badge.rpv {
+        background: linear-gradient(135deg, #059669, #047857);
+      }
+      .twfl-badge.purple {
+        background: linear-gradient(135deg, #7c3aed, #6d28d9);
+      }
+      .twfl-form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px 12px;
+      }
+      .twfl-field {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+      }
+      .twfl-field label {
+        font-size: 10.5px;
+        color: #94a3b8;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.4px;
+      }
+      .twfl-field input, .twfl-field select {
+        background: #0b1526;
+        border: 1px solid #1e3553;
+        border-radius: 5px;
+        padding: 5px 8px;
+        color: #f8fafc;
+        font-size: 12px;
+        outline: none;
+      }
+      .twfl-field input:focus, .twfl-field select:focus {
+        border-color: #38bdf8;
+      }
+      .twfl-hero-box {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: #091523;
+        padding: 12px 16px;
+        border-radius: 8px;
+        border: 1px solid #1e3a5f;
+      }
+      .twfl-hero-val {
+        font-size: 24px;
+        font-weight: 800;
+        color: #38bdf8;
+        letter-spacing: -0.5px;
+      }
+      .twfl-hero-sub {
+        font-size: 12.5px;
+        color: #c084fc;
+        font-weight: 600;
+        margin-top: 3px;
+      }
+      .twfl-metrics-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+        gap: 8px;
+      }
+      .twfl-metric-pill {
+        background: #091322;
+        border: 1px solid #1a2f4c;
+        border-radius: 6px;
+        padding: 7px 9px;
+      }
+      .twfl-metric-title {
+        font-size: 10px;
+        color: #94a3b8;
+        text-transform: uppercase;
+        letter-spacing: 0.4px;
+        font-weight: 600;
+      }
+      .twfl-metric-val {
+        display: block;
+        font-size: 13.5px;
+        font-weight: 700;
+        color: #38bdf8;
+        margin-top: 2px;
+      }
+      .twfl-metric-val.purple {
+        color: #c084fc;
+      }
+      .twfl-metric-val.green {
+        color: #34d399;
+      }
+      .twfl-wave-box {
+        background: #050b14;
+        border: 1px solid #162a45;
+        border-radius: 8px;
+        padding: 8px 10px;
+        position: relative;
+      }
+      .twfl-wave-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 6px;
+        font-size: 11.5px;
+      }
+      .twfl-fine-controls {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
+      .twfl-step-btn {
+        background: #0f1d30;
+        border: 1px solid #1e3a5f;
+        color: #94a3b8;
+        border-radius: 4px;
+        padding: 2px 6px;
+        font-size: 10px;
+        cursor: pointer;
+        user-select: none;
+      }
+      .twfl-step-btn:hover {
+        background: #1c385c;
+        color: #ffffff;
+      }
+      .twfl-bewley-box {
+        background: #040812;
+        border: 1px solid #162a45;
+        border-radius: 8px;
+        padding: 10px;
+        position: relative;
+      }
+      .twfl-calib-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 10px;
+        background: #070e1b;
+        border: 1px solid #18283e;
+        border-radius: 6px;
+        padding: 10px 12px;
+        align-items: center;
+      }
+
     </style>
   </head>
   <body>
@@ -1621,7 +1861,7 @@
           <span class="brand-badge">v7.00</span>
         </div>
         <nav class="tabs">
-          <button class="tab on" data-id="wave">Oscilografia</button><button class="tab" data-id="phasor">Fasores</button><button class="tab" data-id="fault">Identificação</button><button class="tab" data-id="location">Localização</button><button class="tab" data-id="settings">Configurações</button><button class="tab" data-id="report">Relatório</button>
+          <button class="tab on" data-id="wave">Oscilografia</button><button class="tab" data-id="phasor">Fasores</button><button class="tab" data-id="fault">Identificação</button><button class="tab" data-id="location">Localização</button><button class="tab" data-id="twfl">Ondas Viajantes</button><button class="tab" data-id="settings">Configurações</button><button class="tab" data-id="report">Relatório</button>
           <button class="tab" data-id="log">Log</button>
         </nav>
         <div class="top-actions">
@@ -1645,7 +1885,7 @@
         <main class="main">
           <!-- OSCILOGRAFIA INTERATIVA -->
           <section class="view on" id="wave">
-            <aside class="sidebar"><div class="channel-group-title"><button class="channel-chevron" id="toggleAnalog" title="Recolher ou expandir canais analógicos"><svg viewBox="0 0 24 24" width="15" height="15"><path d="m6 9 6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></button><span class="channel-group-label">Analog</span><span class="channel-count" id="analogChannelCount">6</span><span class="channel-visibility"><button class="eye-button" id="showAllAnalog" title="Exibir todos"><svg viewBox="0 0 24 24" width="16" height="16"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z" fill="none" stroke="currentColor" stroke-width="1.8"></path><circle cx="12" cy="12" r="2.7" fill="none" stroke="currentColor" stroke-width="1.8"></circle></svg></button><button class="eye-button" id="hideAllAnalog" title="Ocultar todos"><svg viewBox="0 0 24 24" width="16" height="16"><path d="M3 3l18 18" fill="none" stroke="currentColor" stroke-width="1.8"></path><path d="M10.6 6.15A10.8 10.8 0 0 1 12 6c6 0 9.5 6 9.5 6M6.2 6.2C3.8 7.8 2.5 12 2.5 12s3.5 6 9.5 6" fill="none" stroke="currentColor" stroke-width="1.8"></path></svg></button><button class="eye-button filter-button" id="filterAnalog" title="Filtrar canais analógicos"><svg viewBox="0 0 24 24" width="16" height="16"><path d="M3 5h18l-7 8v5l-4 2v-7L3 5Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"></path></svg></button><span class="eye-button-spacer"></span></span></div><div id="channelList" class="channel-list-wrap"><label class="chrow" data-filter-name="ia"><input class="channelCheck" data-i="3" type="checkbox" checked=""><span class="dot" style="background:#f97316"></span><span>Ia</span><span class="unit">A</span></label><label class="chrow" data-filter-name="ib"><input class="channelCheck" data-i="4" type="checkbox" checked=""><span class="dot" style="background:#a855f7"></span><span>Ib</span><span class="unit">A</span></label><label class="chrow" data-filter-name="ic"><input class="channelCheck" data-i="5" type="checkbox" checked=""><span class="dot" style="background:#06b6d4"></span><span>Ic</span><span class="unit">A</span></label><label class="chrow" data-filter-name="va"><input class="channelCheck" data-i="0" type="checkbox" checked=""><span class="dot" style="background:#ef4444"></span><span>Va</span><span class="unit">V</span></label><label class="chrow" data-filter-name="vb"><input class="channelCheck" data-i="1" type="checkbox" checked=""><span class="dot" style="background:#3b82f6"></span><span>Vb</span><span class="unit">V</span></label><label class="chrow" data-filter-name="vc"><input class="channelCheck" data-i="2" type="checkbox" checked=""><span class="dot" style="background:#22c55e"></span><span>Vc</span><span class="unit">V</span></label></div><div class="channel-group-title"><button class="channel-chevron" id="toggleDigital" title="Recolher ou expandir canais digitais"><svg viewBox="0 0 24 24" width="15" height="15"><path d="m6 9 6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></button><span class="channel-group-label">Digital</span><span class="channel-count" id="digitalChannelCount">2</span><span class="channel-visibility"><button class="eye-button" id="showAllDigital" title="Exibir todos"><svg viewBox="0 0 24 24" width="16" height="16"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z" fill="none" stroke="currentColor" stroke-width="1.8"></path><circle cx="12" cy="12" r="2.7" fill="none" stroke="currentColor" stroke-width="1.8"></circle></svg></button><button class="eye-button" id="hideAllDigital" title="Ocultar todos"><svg viewBox="0 0 24 24" width="16" height="16"><path d="M3 3l18 18" fill="none" stroke="currentColor" stroke-width="1.8"></path><path d="M10.6 6.15A10.8 10.8 0 0 1 12 6c6 0 9.5 6 9.5 6M6.2 6.2C3.8 7.8 2.5 12 2.5 12s3.5 6 9.5 6" fill="none" stroke="currentColor" stroke-width="1.8"></path></svg></button><button class="eye-button filter-button" id="filterDigital" title="Filtrar canais digitais"><svg viewBox="0 0 24 24" width="16" height="16"><path d="M3 5h18l-7 8v5l-4 2v-7L3 5Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"></path></svg></button><button class="eye-button" id="showChangedDigital" title="Exibir apenas canais digitais que variaram"><svg viewBox="0 0 24 24" width="16" height="16"><path d="M3 12h4l2.2-5 4.1 10 2.2-5H21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></span></div><div id="digitalList" class="channel-list-wrap unit"><label class="chrow" data-filter-name="trip"><input class="digitalCheck" data-k="TRIP" type="checkbox"><span class="dot" style="background:#4f5dff"></span><span>TRIP</span></label><label class="chrow" data-filter-name="52a"><input class="digitalCheck" data-k="52A" type="checkbox"><span class="dot" style="background:#4f5dff"></span><span>52A</span></label></div></aside><div class="sidebar-resizer" id="sidebarResizer" title="Arraste para redimensionar o painel de canais"></div>
+            <aside class="sidebar"><div class="channel-group-title"><button class="channel-chevron" id="toggleAnalog" title="Recolher ou expandir canais analógicos"><svg viewBox="0 0 24 24" width="15" height="15"><path d="m6 9 6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></button><span class="channel-group-label">Analog</span><span class="channel-count" id="analogChannelCount">6</span><span class="channel-visibility"><button class="eye-button" id="showAllAnalog" title="Exibir todos"><svg viewBox="0 0 24 24" width="16" height="16"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z" fill="none" stroke="currentColor" stroke-width="1.8"></path><circle cx="12" cy="12" r="2.7" fill="none" stroke="currentColor" stroke-width="1.8"></circle></svg></button><button class="eye-button" id="hideAllAnalog" title="Ocultar todos"><svg viewBox="0 0 24 24" width="16" height="16"><path d="M3 3l18 18" fill="none" stroke="currentColor" stroke-width="1.8"></path><path d="M10.6 6.15A10.8 10.8 0 0 1 12 6c6 0 9.5 6 9.5 6M6.2 6.2C3.8 7.8 2.5 12 2.5 12s3.5 6 9.5 6" fill="none" stroke="currentColor" stroke-width="1.8"></path></svg></button><button class="eye-button filter-button" id="filterAnalog" title="Filtrar canais analógicos"><svg viewBox="0 0 24 24" width="16" height="16"><path d="M3 5h18l-7 8v5l-4 2v-7L3 5Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"></path></svg></button><span class="eye-button-spacer"></span></span></div><div id="channelList" class="channel-list-wrap"><label class="chrow" data-filter-name="ia"><input class="channelCheck" data-i="3" type="checkbox" checked=""><span class="dot" style="background:#f97316"></span><span>Ia</span><span class="unit">A</span></label><label class="chrow" data-filter-name="ib"><input class="channelCheck" data-i="4" type="checkbox" checked=""><span class="dot" style="background:#a855f7"></span><span>Ib</span><span class="unit">A</span></label><label class="chrow" data-filter-name="ic"><input class="channelCheck" data-i="5" type="checkbox" checked=""><span class="dot" style="background:#06b6d4"></span><span>Ic</span><span class="unit">A</span></label><label class="chrow" data-filter-name="va"><input class="channelCheck" data-i="0" type="checkbox" checked=""><span class="dot" style="background:#ef4444"></span><span>Va</span><span class="unit">V</span></label><label class="chrow" data-filter-name="vb"><input class="channelCheck" data-i="1" type="checkbox" checked=""><span class="dot" style="background:#3b82f6"></span><span>Vb</span><span class="unit">V</span></label><label class="chrow" data-filter-name="vc"><input class="channelCheck" data-i="2" type="checkbox" checked=""><span class="dot" style="background:#22c55e"></span><span>Vc</span><span class="unit">V</span></label></div><div class="channel-group-title"><button class="channel-chevron" id="toggleDigital" title="Recolher ou expandir canais digitais"><svg viewBox="0 0 24 24" width="15" height="15"><path d="m6 9 6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></button><span class="channel-group-label">Digital</span><span class="channel-count" id="digitalChannelCount">0</span><span class="channel-visibility"><button class="eye-button" id="showAllDigital" title="Exibir todos"><svg viewBox="0 0 24 24" width="16" height="16"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z" fill="none" stroke="currentColor" stroke-width="1.8"></path><circle cx="12" cy="12" r="2.7" fill="none" stroke="currentColor" stroke-width="1.8"></circle></svg></button><button class="eye-button" id="hideAllDigital" title="Ocultar todos"><svg viewBox="0 0 24 24" width="16" height="16"><path d="M3 3l18 18" fill="none" stroke="currentColor" stroke-width="1.8"></path><path d="M10.6 6.15A10.8 10.8 0 0 1 12 6c6 0 9.5 6 9.5 6M6.2 6.2C3.8 7.8 2.5 12 2.5 12s3.5 6 9.5 6" fill="none" stroke="currentColor" stroke-width="1.8"></path></svg></button><button class="eye-button filter-button" id="filterDigital" title="Filtrar canais digitais"><svg viewBox="0 0 24 24" width="16" height="16"><path d="M3 5h18l-7 8v5l-4 2v-7L3 5Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"></path></svg></button><button class="eye-button" id="showChangedDigital" title="Exibir apenas canais digitais que variaram"><svg viewBox="0 0 24 24" width="16" height="16"><path d="M3 12h4l2.2-5 4.1 10 2.2-5H21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg></button></span></div><div id="digitalList" class="channel-list-wrap unit"></div></aside><div class="sidebar-resizer" id="sidebarResizer" title="Arraste para redimensionar o painel de canais"></div>
             <div class="channel-filter-modal" id="channelFilterModal">
               <div class="channel-filter-head"><b id="channelFilterTitle">Filtrar canais</b><button class="channel-filter-close" id="channelFilterClose" type="button">×</button></div>
               <input class="channel-filter-input" id="channelFilterInput" type="text" placeholder="Ex.: I?a encontra I1a, I2a, I3a" autocomplete="off">
@@ -1672,9 +1912,9 @@
               <button class="tool" id="btnCalcChannels" title="Cálculos com canais analógicos" style="background:#0e294b;border-color:#245484;color:#93c5fd">Cálculos<span id="toolbarCalcBadge" class="channel-count" style="display:none;margin-left:4px;background:#0284c7">0</span></button>
             </div>
             <div class="wave-stack" id="waveStack" style="grid-template-rows: minmax(75px, 0.5fr) 8px minmax(75px, 0.5fr);">
-              <div class="wave-pane" id="currentWavePane" style="display: grid;"><div class="analog-panel-title"><b>Correntes</b><span id="currentVisibleInfo">3 visíveis</span></div><div class="analog-chartbox"><canvas id="currentCanvas" width="880" height="369" title="" style=""></canvas></div></div>
+              <div class="wave-pane" id="currentWavePane" style="display: grid;"><div class="analog-panel-title"><b>Gráfico 1</b><span id="currentVisibleInfo">3 visíveis</span></div><div class="analog-chartbox"><canvas id="currentCanvas" width="880" height="369" title="" style=""></canvas></div></div>
               <div class="wave-splitter" id="splitCurrentVoltage" title="Arraste para redimensionar" style="display: block;"></div>
-              <div class="wave-pane" id="voltageWavePane" style="display: grid;"><div class="analog-panel-title"><b>Tensões</b><span id="voltageVisibleInfo">3 visíveis</span></div><div class="analog-chartbox"><canvas id="voltageCanvas" width="880" height="369" title=""></canvas></div></div>
+              <div class="wave-pane" id="voltageWavePane" style="display: grid;"><div class="analog-panel-title"><b>Gráfico 2</b><span id="voltageVisibleInfo">3 visíveis</span></div><div class="analog-chartbox"><canvas id="voltageCanvas" width="880" height="369" title=""></canvas></div></div>
               <div class="wave-splitter" id="splitVoltageCalculated" title="Arraste para redimensionar" style="display:none"></div>
               <div class="wave-pane" id="calculatedWavePane" style="display:none">
                 <div class="analog-panel-title">
@@ -1693,7 +1933,7 @@
                 </div>
               </div>
               <div class="wave-splitter" id="splitCalculatedDigital" title="Arraste para redimensionar" style="display: none;"></div>
-              <div class="wave-pane" id="digitalWavePane" style="display: none;"><div class="digital-toolbar"><b>Canais digitais</b><span id="digitalVisibleInfo">0 de 2 visíveis</span></div><div class="digital-chartbox" id="digitalChartBox" style="overflow-y: hidden;"><canvas id="digitalCanvas" width="1" height="1" style="height: 100%;"></canvas><div class="digital-empty" id="digitalEmpty" style="display: grid;">Nenhum canal digital selecionado</div></div></div>
+              <div class="wave-pane" id="digitalWavePane" style="display: none;"><div class="digital-toolbar"><b>Canais digitais</b><span id="digitalVisibleInfo">0 de 0 visíveis</span></div><div class="digital-chartbox" id="digitalChartBox" style="overflow-y: hidden;"><canvas id="digitalCanvas" width="1" height="1" style="height: 100%;"></canvas><div class="digital-empty" id="digitalEmpty" style="display: grid;">Nenhum canal digital selecionado</div></div></div>
             </div>
             <div class="side-comtrade-layout" id="sideComtradeLayout">
               <!-- Coluna 1 (Oscilografia 1) -->
@@ -1704,7 +1944,7 @@
                 </div>
                 <div class="wave-pane side-pane" id="sideCurrentPane1">
                   <div class="analog-panel-title">
-                    <b>Correntes</b>
+                    <b>Gráfico 1</b>
                     <span id="sideCurrentVisibleInfo1" style="font-size:11px;color:#8196ae"></span>
                   </div>
                   <div class="analog-chartbox"><canvas id="sideCurrent1"></canvas></div>
@@ -1712,7 +1952,7 @@
                 <div class="wave-splitter" id="sideSplit11" title="Arraste para redimensionar"></div>
                 <div class="wave-pane side-pane" id="sideVoltagePane1">
                   <div class="analog-panel-title">
-                    <b>Tensões</b>
+                    <b>Gráfico 2</b>
                     <span id="sideVoltageVisibleInfo1" style="font-size:11px;color:#8196ae"></span>
                   </div>
                   <div class="analog-chartbox"><canvas id="sideVoltage1"></canvas></div>
@@ -1741,7 +1981,7 @@
                 </div>
                 <div class="wave-pane side-pane" id="sideCurrentPane2">
                   <div class="analog-panel-title">
-                    <b>Correntes</b>
+                    <b>Gráfico 1</b>
                     <span id="sideCurrentVisibleInfo2" style="font-size:11px;color:#8196ae"></span>
                   </div>
                   <div class="analog-chartbox"><canvas id="sideCurrent2"></canvas></div>
@@ -1749,7 +1989,7 @@
                 <div class="wave-splitter" id="sideSplit21" title="Arraste para redimensionar"></div>
                 <div class="wave-pane side-pane" id="sideVoltagePane2">
                   <div class="analog-panel-title">
-                    <b>Tensões</b>
+                    <b>Gráfico 2</b>
                     <span id="sideVoltageVisibleInfo2" style="font-size:11px;color:#8196ae"></span>
                   </div>
                   <div class="analog-chartbox"><canvas id="sideVoltage2"></canvas></div>
@@ -2022,6 +2262,7 @@
               </div>
 
               <!-- BARRA COMPARATIVA DOS MÉTODOS (1-TERM VS 2-TERM) -->
+              <!-- BARRA COMPARATIVA DOS MÉTODOS (1-TERM VS 2-TERM) -->
               <div class="location-chart-panel" style="grid-column: 1 / -1; margin-top: 4px;">
                 <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
                   <h3 style="margin:0;font-size:12px;color:#dce9f7">Comparação dos Métodos</h3>
@@ -2030,6 +2271,261 @@
                 <canvas id="locationCanvas" style="height:170px;width:100%;display:block"></canvas>
               </div>
             </div>
+          </section>
+          <!-- LOCALIZAÇÃO POR ONDAS VIAJANTES (MÉTODO RPV / TWFL) -->
+          <section class="view" id="twfl">
+            <!-- Barra Superior Compacta: Status dos Registros, Modo e Ações Rápidas -->
+            <div class="twfl-topbar">
+              <div class="twfl-topbar-info">
+                <span class="badge" style="background:#034e7a;color:#7dd3fc;border:1px solid #0284c7;font-weight:700">MÉTODO RPV (TWFL)</span>
+                <span class="badge" id="twflSlot1Badge" style="background:#0e294b;color:#38bdf8;border:1px solid #1e4976">SE A: Monitorando</span>
+                <span class="badge" id="twflSlot2Badge" style="background:#2e1065;color:#c084fc;border:1px solid #7e22ce">SE B: Ausente</span>
+                <span class="badge" id="twflFsBadge" style="background:#091e36;color:#94a3b8;border:1px solid #1c3554">Fs: -</span>
+                <span class="badge" id="twflSyncBadge" style="background:#052e16;color:#34d399;border:1px solid #065f46">GPS / Sincronismo OK</span>
+              </div>
+              <div class="twfl-topbar-controls">
+                <div style="display:flex;align-items:center;gap:6px">
+                  <label style="font-size:11px;color:#94a3b8;font-weight:600">Modo:</label>
+                  <select id="twflMode" style="background:#0b1526;border:1px solid #1e3553;color:#f8fafc;padding:4px 8px;border-radius:4px;font-size:11.5px">
+                    <option value="two-terminal">2 Terminais (RPV Double-Ended / Tipo D)</option>
+                    <option value="single-terminal">1 Terminal (RPV Single-Ended / Tipo A)</option>
+                  </select>
+                </div>
+                <div style="display:flex;align-items:center;gap:6px">
+                  <label style="font-size:11px;color:#94a3b8;font-weight:600">Canal:</label>
+                  <select id="twflChannelSelect" style="background:#0b1526;border:1px solid #1e3553;color:#f8fafc;padding:4px 8px;border-radius:4px;font-size:11.5px">
+                    <option value="raw_auto" selected>Auto (Sinal Puro RPV - TWA/TWB/TWC)</option>
+                    <option value="tw_a">Canal TWA / Fase A (Sinal Puro)</option>
+                    <option value="tw_b">Canal TWB / Fase B (Sinal Puro)</option>
+                    <option value="tw_c">Canal TWC / Fase C (Sinal Puro)</option>
+                    <option value="clarke_alpha">Modo Clarke α (Modal)</option>
+                    <option value="clarke_beta">Modo Clarke β (B-C)</option>
+                    <option value="clarke_zero">Modo Clarke 0 (Homopolar)</option>
+                  </select>
+                </div>
+                <div style="display:flex;align-items:center;gap:6px">
+                  <label style="font-size:11px;color:#94a3b8;font-weight:600">Algoritmo:</label>
+                  <select id="twflDetectionMethod" style="background:#0b1526;border:1px solid #1e3553;color:#f8fafc;padding:4px 8px;border-radius:4px;font-size:11.5px">
+                    <option value="rdp_direct" selected>Método Direto RDP (Sinal Puro PU - Padrão)</option>
+                    <option value="advanced">Modo Derivada (di/dt + Sub-amostra)</option>
+                    <option value="basic">Modo Patamar Limiar</option>
+                  </select>
+                </div>
+                <button class="btn" id="twflBtnAutoDetect" title="Detectar frentes de onda automaticamente nos sinais transitórios">Auto-Detectar</button>
+                <button class="btn" id="twflBtnSyncCursors" title="Copiar posições dos cursores A e B da Oscilografia">Copiar Cursores</button>
+                <button class="btn primary" id="twflBtnCalculate">Calcular</button>
+              </div>
+            </div>
+
+            <!-- Grade Dashboard: Parâmetros da Linha RPV e Card de Resultados -->
+            <div class="twfl-dashboard-grid">
+              <!-- QUADRO 1: PARÂMETROS DA LINHA DE TRANSMISSÃO (MODELO RPV) -->
+              <div class="twfl-card">
+                <div class="twfl-card-header">
+                  <div style="display:flex;align-items:center;gap:8px">
+                    <span class="twfl-badge rpv">RPV-311 / DR Manager</span>
+                    <h3 style="margin:0;font-size:12.5px;color:#f8fafc">Parâmetros da Linha e Propagação</h3>
+                  </div>
+                  <span class="badge" style="background:#091e36;color:#38bdf8;border:1px solid #1c3554">c = 299.792 km/s</span>
+                </div>
+
+                <div class="twfl-form-grid">
+                  <div class="twfl-field">
+                    <label>Comprimento Total (L):</label>
+                    <div style="display:flex;align-items:center;gap:6px">
+                      <input type="number" id="twflLength" value="295.700" step="0.001" style="flex:1">
+                      <span style="font-size:11px;color:#94a3b8;font-weight:600">km</span>
+                    </div>
+                  </div>
+                  <div class="twfl-field">
+                    <label>Fator de Velocidade K1 (Aéreo):</label>
+                    <input type="number" id="twflK1" value="0.9950" step="0.0001" min="0.8000" max="1.0500">
+                  </div>
+                  <div class="twfl-field">
+                    <label>Limiar de Detecção (PU):</label>
+                    <input type="number" id="twflThresholdVal" value="0.50" step="0.05" min="0.01" max="5.0">
+                  </div>
+                  <div class="twfl-field" style="justify-content:center">
+                    <label style="display:flex;align-items:center;gap:6px;cursor:pointer;margin-top:14px">
+                      <input type="checkbox" id="twflIsMixed" style="accent-color:#0284c7">
+                      <span style="font-size:11.5px;color:#e2e8f0;text-transform:none">Linha Mista (Aérea + Subterrânea)</span>
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Subseção de Linha Mista (Oculta por padrão até marcar checkbox) -->
+                <div id="twflMixedContainer" style="display:none;background:#091322;border:1px dashed #1e3a5f;border-radius:6px;padding:8px 12px;margin-top:4px">
+                  <div style="font-size:11px;color:#38bdf8;font-weight:700;margin-bottom:6px">Configuração de Linha Mista (Seção 3.3.2 do Manual RPV)</div>
+                  <div class="twfl-form-grid">
+                    <div class="twfl-field">
+                      <label>Trecho Aéreo L1 (km):</label>
+                      <input type="number" id="twflL1" value="80.000" step="0.001">
+                    </div>
+                    <div class="twfl-field">
+                      <label>Trecho Subterrâneo L2 (km):</label>
+                      <input type="number" id="twflL2" value="20.000" step="0.001">
+                    </div>
+                    <div class="twfl-field">
+                      <label>Fator Cabo K2 (Subterrâneo):</label>
+                      <input type="number" id="twflK2" value="0.6600" step="0.0001">
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- QUADRO 2: PAINEL DE RESULTADOS DA LOCALIZAÇÃO RPV -->
+              <div class="twfl-card">
+                <div class="twfl-card-header">
+                  <div style="display:flex;align-items:center;gap:8px">
+                    <span class="twfl-badge purple" id="twflResultTypeBadge">Dois Terminais (Tipo D)</span>
+                    <h3 style="margin:0;font-size:12.5px;color:#f8fafc">Localização Calculada por Ondas Viajantes</h3>
+                  </div>
+                  <span class="badge" id="twflStatusBadge" style="background:#1e293b;color:#94a3b8">Aguardando Cálculo</span>
+                </div>
+
+                <div class="twfl-hero-box">
+                  <div>
+                    <div style="font-size:10px;color:#38bdf8;font-weight:700;text-transform:uppercase;letter-spacing:0.5px">Distância da Subestação A</div>
+                    <div class="twfl-hero-val" id="twflHeroDa">Pressione Calcular</div>
+                    <div class="twfl-hero-sub" id="twflHeroDb">Subestação B: -- km (-- %)</div>
+                  </div>
+                  <div style="text-align:right">
+                    <div style="font-size:10px;color:#94a3b8;font-weight:700;text-transform:uppercase;letter-spacing:0.5px">Diferença de Tempo (Δt)</div>
+                    <div style="font-size:20px;font-weight:800;color:#f8fafc;font-variant-numeric:tabular-nums" id="twflHeroDeltaT">-- µs</div>
+                    <div style="font-size:11px;color:#64748b;margin-top:2px" id="twflHeroTransit">Tempo Trânsito Total (τ): -- µs</div>
+                  </div>
+                </div>
+
+                <div class="twfl-metrics-grid">
+                  <div class="twfl-metric-pill">
+                    <div class="twfl-metric-title">Timestamp Frente SE A (ta)</div>
+                    <span class="twfl-metric-val" id="twflMetricTa">--</span>
+                  </div>
+                  <div class="twfl-metric-pill">
+                    <div class="twfl-metric-title">Timestamp Frente SE B (tb)</div>
+                    <span class="twfl-metric-val purple" id="twflMetricTb">--</span>
+                  </div>
+                  <div class="twfl-metric-pill">
+                    <div class="twfl-metric-title">Resolução Temporal (1/Fs)</div>
+                    <span class="twfl-metric-val green" id="twflMetricResolution">--</span>
+                  </div>
+                  <div class="twfl-metric-pill">
+                    <div class="twfl-metric-title">Incerteza Espacial Est.</div>
+                    <span class="twfl-metric-val" id="twflMetricUncertainty" style="color:#fbbf24">--</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- QUADRO 3: OSCILOGRAFIA DE ALTA RESOLUÇÃO DAS FRENTES DE ONDA -->
+            <div class="twfl-card" style="margin-top:2px">
+              <div class="twfl-card-header">
+                <div style="display:flex;align-items:center;gap:8px">
+                  <span class="twfl-badge">Oscilografia TW</span>
+                  <h3 style="margin:0;font-size:12.5px;color:#f8fafc">Detecção e Ajuste Fino das Frentes de Onda (Surge Wavefronts)</h3>
+                </div>
+                <div style="display:flex;align-items:center;gap:10px">
+                  <button class="tool" id="twflZoomWavefront" style="padding:3px 8px;font-size:11px">Zoom na Frente</button>
+                  <button class="tool" id="twflZoomReset" style="padding:3px 8px;font-size:11px">Ver Registro Inteiro</button>
+                </div>
+              </div>
+
+              <!-- Terminal A (Local) -->
+              <div class="twfl-wave-box">
+                <div class="twfl-wave-header">
+                  <div style="display:flex;align-items:center;gap:8px">
+                    <b style="color:#38bdf8;font-size:12px">Terminal A (Local - SE A):</b>
+                    <span id="twflTermAName" style="color:#cbd5e1;font-weight:600">--</span>
+                  </div>
+                  <div class="twfl-fine-controls">
+                    <span style="color:#94a3b8;font-size:11px;font-weight:600">ta:</span>
+                    <input type="number" id="twflInputTa" step="0.000001" style="width:115px;background:#091424;border:1px solid #1e3a5f;color:#38bdf8;font-weight:700;font-size:11px;padding:2px 4px;border-radius:4px">
+                    <span style="color:#64748b;font-size:10px">ms</span>
+                    <button class="twfl-step-btn" data-target="ta" data-step="-0.01">-10µs</button>
+                    <button class="twfl-step-btn" data-target="ta" data-step="-0.001">-1µs</button>
+                    <button class="twfl-step-btn" data-target="ta" data-step="-0.0001">-0.1µs</button>
+                    <button class="twfl-step-btn" data-target="ta" data-step="0.0001">+0.1µs</button>
+                    <button class="twfl-step-btn" data-target="ta" data-step="0.001">+1µs</button>
+                    <button class="twfl-step-btn" data-target="ta" data-step="0.01">+10µs</button>
+                  </div>
+                </div>
+                <canvas id="twflCanvasA" style="height:155px;width:100%;display:block;cursor:crosshair"></canvas>
+              </div>
+
+              <!-- Terminal B (Remoto ou Reflexão) -->
+              <div class="twfl-wave-box" style="margin-top:6px">
+                <div class="twfl-wave-header">
+                  <div style="display:flex;align-items:center;gap:8px">
+                    <b style="color:#c084fc;font-size:12px" id="twflTermBLabel">Terminal B (Remoto - SE B):</b>
+                    <span id="twflTermBName" style="color:#cbd5e1;font-weight:600">--</span>
+                  </div>
+                  <div class="twfl-fine-controls">
+                    <span style="color:#94a3b8;font-size:11px;font-weight:600">tb:</span>
+                    <input type="number" id="twflInputTb" step="0.000001" style="width:115px;background:#091424;border:1px solid #1e3a5f;color:#c084fc;font-weight:700;font-size:11px;padding:2px 4px;border-radius:4px">
+                    <span style="color:#64748b;font-size:10px">ms</span>
+                    <button class="twfl-step-btn" data-target="tb" data-step="-0.01">-10µs</button>
+                    <button class="twfl-step-btn" data-target="tb" data-step="-0.001">-1µs</button>
+                    <button class="twfl-step-btn" data-target="tb" data-step="-0.0001">-0.1µs</button>
+                    <button class="twfl-step-btn" data-target="tb" data-step="0.0001">+0.1µs</button>
+                    <button class="twfl-step-btn" data-target="tb" data-step="0.001">+1µs</button>
+                    <button class="twfl-step-btn" data-target="tb" data-step="0.01">+10µs</button>
+                  </div>
+                </div>
+                <canvas id="twflCanvasB" style="height:155px;width:100%;display:block;cursor:crosshair"></canvas>
+              </div>
+            </div>
+
+            <!-- QUADRO 4: DIAGRAMA DE BEWLEY LATTICE (ESPAÇO-TEMPO) -->
+            <div class="twfl-card" style="margin-top:2px">
+              <div class="twfl-card-header">
+                <div style="display:flex;align-items:center;gap:8px">
+                  <span class="twfl-badge rpv">Bewley Lattice</span>
+                  <h3 style="margin:0;font-size:12.5px;color:#f8fafc">Diagrama de Trajetória Espaço-Tempo (Bewley Lattice)</h3>
+                </div>
+                <span style="font-size:10.5px;color:#64748b">Eixo X: Distância ao longo da Linha (0 → L) | Eixo Y: Tempo de Propagação (t)</span>
+              </div>
+              <div class="twfl-bewley-box">
+                <canvas id="twflBewleyCanvas" style="height:260px;width:100%;display:block"></canvas>
+              </div>
+            </div>
+
+            <!-- QUADRO 5: CALIBRAÇÃO DOS PARÂMETROS RPV (K1 e L) CONFORME MANUAL -->
+            <details class="twfl-card" style="margin-top:2px;cursor:pointer">
+              <summary style="font-size:12px;font-weight:700;color:#94a3b8;display:flex;align-items:center;justify-content:space-between">
+                <span>Calibração dos Parâmetros da Linha (K1 e L) - Método RPV (Capítulo 4)</span>
+                <span class="badge" style="background:#091e36;color:#38bdf8;font-size:10px">Regressão Linear & Manobras</span>
+              </summary>
+              <div style="margin-top:10px;display:flex;flex-direction:column;gap:8px">
+                <div style="font-size:11px;color:#64748b;line-height:1.4">
+                  Conforme a documentação técnica RPV/TWFL, os parâmetros teóricos K1 e L podem ser calibrados com exatidão usando manobras controladas de abertura/fechamento de disjuntores nos terminais da linha ou eventos reais de falta com posição confirmada por inspeção física.
+                </div>
+                <div class="twfl-calib-grid">
+                  <div class="twfl-field">
+                    <label>Tipo de Evento para Calibração:</label>
+                    <select id="twflCalibType" style="background:#0b1526;border:1px solid #1e3553;color:#f8fafc;padding:4px 8px;border-radius:4px;font-size:11.5px">
+                      <option value="cb_a">Cenário 1: Manobra de Disjuntor na SE A (X = 0 km)</option>
+                      <option value="cb_b">Cenário 2: Manobra de Disjuntor na SE B (X = L km)</option>
+                      <option value="known_fault">Cenário 3: Falta com Localização Real Confirmada (X real)</option>
+                    </select>
+                  </div>
+                  <div class="twfl-field">
+                    <label>Localização Conhecida da Falta X (km):</label>
+                    <input type="number" id="twflCalibX" value="0.000" step="0.001">
+                  </div>
+                  <div class="twfl-field">
+                    <label>Δt Medido no Evento:</label>
+                    <div id="twflCalibDeltaT" style="font-size:12.5px;font-weight:700;color:#f8fafc;padding:5px 0">-- µs</div>
+                  </div>
+                  <div class="twfl-field">
+                    <label>Fator K1 Calibrado Resultante:</label>
+                    <div id="twflCalibK1Result" style="font-size:14px;font-weight:800;color:#38bdf8;padding:4px 0">--</div>
+                  </div>
+                  <div class="twfl-field" style="align-self:flex-end">
+                    <button class="btn primary" id="twflBtnApplyK1" style="height:30px">Aplicar K1 à Linha</button>
+                  </div>
+                </div>
+              </div>
+            </details>
           </section>
           <section class="view" id="settings">
             <div class="panel" id="settingsPanel">
@@ -2499,8 +2995,8 @@
         if (!m) return NaN;
         let day=Number(m[1]),month=Number(m[2])-1,year=Number(m[3]);
         if(year<100) year+=year>=70?1900:2000;
-        let sec=Number(m[6]),whole=Math.floor(sec),ms=Math.round((sec-whole)*1000);
-        return Date.UTC(year,month,day,Number(m[4]),Number(m[5]),whole,ms)/1000;
+        let sec=Number(m[6]),whole=Math.floor(sec),frac=sec-whole;
+        return (Date.UTC(year,month,day,Number(m[4]),Number(m[5]),whole,0)/1000) + frac;
       }
       function triggerFraction() {
         let t=Number(ds?.meta?.triggerOffsetSeconds);
@@ -2525,10 +3021,11 @@
           selected: new Set(KEYS),
           selectedDigital: new Set(),
           selectedAnalogRaw: new Set(),
-          analogInitializedFor: "",
+          analogInitializedFor: null,
+          analogGroupMap: {},
           groupedAnalog: false,
           yScaleMode: "joint",
-          digitalInitializedFor: "",
+          digitalInitializedFor: null,
           phasorT: 0.5,
           phasorTimes: [0.5,0.5],
           waveformView: "together",
@@ -4882,7 +5379,41 @@
       function phasorsAtSlot(slot,frac){let rec=comtradeSlots[slot];if(!rec)return null;let R=rec.rows,i=clamp(Math.round(frac*(R.length-1)),0,R.length-1),N=Math.max(8,Math.round(rec.fs/rec.f)),start=clamp(i-Math.floor(N/2),0,Math.max(0,R.length-N-1)),voltages=selectedPhasorChannelsForSlot(slot,"voltage"),currents=selectedPhasorChannelsForSlot(slot,"current");function calculate(channels){return channels.map(ch=>{let values=new Float64Array(N);for(let k=0;k<N;k++)values[k]=R[start+k]?.analogAll?.[ch.id]??0;return{...ch,z:dft(values,0,N)}})}let Vph=calculate(voltages),Iph=calculate(currents);function sequenceFrom(list){return list.length<3?{zero:C(),pos:C(),neg:C()}:seq(list[0].z,list[1].z,list[2].z)}return{Vph,Iph,V:sequenceFrom(Vph),I:sequenceFrom(Iph),i,N}}
       function selectedPhasorChannels(kind){return selectedPhasorChannelsForSlot(0,kind)}
       function phasorsAt(frac){return phasorsAtSlot(0,frac)}
-      function channelKind(ch){let u=(ch.unit||"").toUpperCase(),n=(ch.name||"").toUpperCase();if(u.includes("A")&&!u.includes("VA"))return"current";if(u.includes("V"))return"voltage";if(/^I|CURRENT|AMP/.test(n))return"current";if(/^V|VOLT/.test(n))return"voltage";return"other"}
+      function channelKind(ch){
+        if(!ch)return"other";
+        let u=(ch.unit||"").toUpperCase(),n=(ch.name||"").toUpperCase();
+        if(u.includes("A")&&!u.includes("VA"))return"current";
+        if(u.includes("V"))return"voltage";
+        if(/^I|CURRENT|AMP/.test(n))return"current";
+        if(/^V|VOLT/.test(n))return"voltage";
+        return"other";
+      }
+
+      function getChannelGroup(gIdx, ch){
+        if(state.analogGroupMap && state.analogGroupMap[gIdx] !== undefined){
+          return state.analogGroupMap[gIdx];
+        }
+        let targetCh = ch;
+        if(!targetCh){
+          let two = comtradeSlots.filter(Boolean).length > 1;
+          let n0 = comtradeSlots[0]?.meta?.analog?.length || 0;
+          if(two && gIdx >= n0){
+            targetCh = comtradeSlots[1]?.meta?.analog?.[gIdx - n0];
+          } else {
+            targetCh = ds?.meta?.analog?.[gIdx] || comtradeSlots[0]?.meta?.analog?.[gIdx];
+          }
+        }
+        if(targetCh){
+          let k = channelKind(targetCh);
+          return (k === "voltage") ? 2 : 1;
+        }
+        return 1;
+      }
+
+      function setChannelGroup(gIdx, targetGrp){
+        if(!state.analogGroupMap) state.analogGroupMap = {};
+        state.analogGroupMap[gIdx] = (targetGrp === 2) ? 2 : 1;
+      }
 
       /* Preservação de DOM na Sidebar em setupChannels() */
       function setupChannels(){
@@ -4891,6 +5422,7 @@
         let analogCountEl = document.getElementById("analogChannelCount"), digitalCountEl = document.getElementById("digitalChannelCount");
 
         if(state.analogInitializedFor!==sigA){
+          state.analogGroupMap = {};
           let selected=[];
           if(comtradeSlots.filter(Boolean).length>1){
             let offset=0;
@@ -4911,6 +5443,10 @@
                 (rec.meta.analog||[]).forEach((ch,i)=>{let k=channelKind(ch);if(k==="current"&&currents.length<3)currents.push(offset+i);else if(k==="voltage"&&voltages.length<3)voltages.push(offset+i)});
                 selected.push(...currents,...voltages);
               }
+              (rec.meta.analog||[]).forEach((ch,i)=>{
+                let gIdx = offset + i;
+                state.analogGroupMap[gIdx] = (channelKind(ch) === "voltage") ? 2 : 1;
+              });
               offset+=(rec.meta.analog||[]).length;
             });
           } else {
@@ -4928,6 +5464,9 @@
               analog.forEach((ch,i)=>{let k=channelKind(ch);if(k==="current"&&currents.length<3)currents.push(i);else if(k==="voltage"&&voltages.length<3)voltages.push(i)});
               selected.push(...currents,...voltages);
             }
+            analog.forEach((ch,i)=>{
+              state.analogGroupMap[i] = (channelKind(ch) === "voltage") ? 2 : 1;
+            });
           }
           state.selectedAnalogRaw=new Set(selected);
           state.analogInitializedFor=sigA;
@@ -4937,49 +5476,86 @@
           if(channelListEl) {
             channelListEl.innerHTML=order.map(({c,i})=>{
               let canonical=Object.entries(map).find(([,id])=>id===i)?.[0]||"",color=(canonical&&COLORS[canonical])?COLORS[canonical]:`hsl(${i*47%360} 72% 58%)`;
-              return `<label class="chrow" data-filter-name="${c.name.toLowerCase()}"><input class="channelCheck" data-i="${i}" type="checkbox" ${state.selectedAnalogRaw.has(i)?"checked":""}><span class="dot" style="background:${color}"></span><span>${c.name}</span><span class="unit">${c.unit||""}</span></label>`;
+              let grp = getChannelGroup(i, c);
+              return `<label class="chrow" data-filter-name="${c.name.toLowerCase()}"><input class="channelCheck" data-i="${i}" type="checkbox" ${state.selectedAnalogRaw.has(i)?"checked":""}><span class="dot" style="background:${color}"></span><span class="chname" title="${c.name}">${c.name}</span><span class="unit">${c.unit||""}</span><button type="button" class="ch-group-btn grp-${grp}" data-i="${i}" title="Atribuído ao Gráfico ${grp}. Clique para mover para o Gráfico ${grp===1?2:1}">G${grp}</button></label>`;
             }).join("");
             channelListEl.querySelectorAll(".channelCheck").forEach(x=>x.onchange=()=>{
               let i=+x.dataset.i;x.checked?state.selectedAnalogRaw.add(i):state.selectedAnalogRaw.delete(i);
               applyWaveLayout();renderPhasor();
-        updateHeaderMeta();
-        drawRxPlane();updateCalculationPanels();markCalculationsPending();
+              updateHeaderMeta();
+              drawRxPlane();updateCalculationPanels();markCalculationsPending();
               if(state.waveformView==="side")drawSideBySide();
+            });
+            channelListEl.querySelectorAll(".ch-group-btn").forEach(btn=>{
+              btn.onclick=(e)=>{
+                e.preventDefault();
+                e.stopPropagation();
+                let i=+btn.dataset.i;
+                let curGrp=getChannelGroup(i);
+                let nextGrp=(curGrp===1)?2:1;
+                setChannelGroup(i,nextGrp);
+                btn.textContent=`G${nextGrp}`;
+                btn.className=`ch-group-btn grp-${nextGrp}`;
+                btn.title=`Atribuído ao Gráfico ${nextGrp}. Clique para mover para o Gráfico ${curGrp}`;
+                applyWaveLayout();
+                if(state.waveformView==="side")drawSideBySide();
+              };
             });
           }
         } else {
           document.querySelectorAll(".channelCheck").forEach(x=>{ x.checked = state.selectedAnalogRaw.has(+x.dataset.i); });
+          document.querySelectorAll(".ch-group-btn").forEach(btn=>{
+            let i=+btn.dataset.i;
+            let grp=getChannelGroup(i);
+            btn.textContent=`G${grp}`;
+            btn.className=`ch-group-btn grp-${grp}`;
+            btn.title=`Atribuído ao Gráfico ${grp}. Clique para mover para o Gráfico ${grp===1?2:1}`;
+          });
         }
 
-        let digs=ds.meta.digital||[],sig=digs.map(x=>x.name).join("|");
-        if(state.digitalInitializedFor!==sig){
-          let activeDigs = digs.filter(digitalChanged);
-          let infLine = ds.meta.infSelectedLine;
-          let infDigGroup = infGroup(infLine, "DIGITA");
-          if (infDigGroup && infDigGroup.channels && infDigGroup.channels.length) {
-            let lineDigSet = new Set(infDigGroup.channels.map(ch => ch - 1));
-            let lineActiveDigs = activeDigs.filter(d => lineDigSet.has(digs.indexOf(d)));
-            if (lineActiveDigs.length > 0) {
-              let combinedDigs = [...lineActiveDigs];
-              activeDigs.forEach(d => { if (!combinedDigs.includes(d) && combinedDigs.length < 16) combinedDigs.push(d); });
-              state.selectedDigital = new Set(combinedDigs.map(x => x.name));
-            } else {
-              state.selectedDigital = new Set(activeDigs.map(x => x.name));
+        let digs = ds?.meta?.digital || [];
+        let sig = digs.length ? digs.map(x => x.name).join("|") : "__NO_DIGITALS__";
+        if (state.digitalInitializedFor !== sig) {
+          state.digitalInitializedFor = sig;
+          if (!digs.length) {
+            state.selectedDigital = new Set();
+            if (digitalCountEl) digitalCountEl.textContent = "0";
+            if (digitalListEl) {
+              digitalListEl.innerHTML = `<div style="padding:10px 12px;color:#64748b;font-size:11.5px;font-style:italic">Nenhum canal digital</div>`;
             }
           } else {
-            state.selectedDigital = new Set(activeDigs.map(x => x.name));
-          }
-          state.digitalInitializedFor=sig;
-          if(digitalCountEl) digitalCountEl.textContent=digs.length;
-          if(digitalListEl) {
-            digitalListEl.innerHTML=digs.length?digs.map(x=>`<label class="chrow" data-filter-name="${x.name.toLowerCase()}"><input class="digitalCheck" data-k="${x.name}" type="checkbox" ${state.selectedDigital.has(x.name)?"checked":""}><span class="dot" style="background:#4f5dff"></span><span>${x.name}</span></label>`).join(""):"Nenhum canal digital";
-            digitalListEl.querySelectorAll(".digitalCheck").forEach(x=>x.onchange=()=>{
-              x.checked?state.selectedDigital.add(x.dataset.k):state.selectedDigital.delete(x.dataset.k);
-              applyWaveLayout();if(state.waveformView==="side")drawSideBySide();
-            });
+            let activeDigs = digs.filter(digitalChanged);
+            let infLine = ds.meta.infSelectedLine;
+            let infDigGroup = infGroup(infLine, "DIGITA");
+            if (infDigGroup && infDigGroup.channels && infDigGroup.channels.length) {
+              let lineDigSet = new Set(infDigGroup.channels.map(ch => ch - 1));
+              let lineActiveDigs = activeDigs.filter(d => lineDigSet.has(digs.indexOf(d)));
+              if (lineActiveDigs.length > 0) {
+                let combinedDigs = [...lineActiveDigs];
+                activeDigs.forEach(d => { if (!combinedDigs.includes(d) && combinedDigs.length < 16) combinedDigs.push(d); });
+                state.selectedDigital = new Set(combinedDigs.map(x => x.name));
+              } else if (activeDigs.length > 0) {
+                state.selectedDigital = new Set(activeDigs.slice(0, 16).map(x => x.name));
+              } else {
+                let lineDigs = digs.filter((d, idx) => lineDigSet.has(idx));
+                state.selectedDigital = new Set((lineDigs.length ? lineDigs : digs).slice(0, 8).map(x => x.name));
+              }
+            } else if (activeDigs.length > 0) {
+              state.selectedDigital = new Set(activeDigs.slice(0, 16).map(x => x.name));
+            } else {
+              state.selectedDigital = new Set(digs.slice(0, 8).map(x => x.name));
+            }
+            if (digitalCountEl) digitalCountEl.textContent = String(digs.length);
+            if (digitalListEl) {
+              digitalListEl.innerHTML = digs.map(x => `<label class="chrow" data-filter-name="${x.name.toLowerCase()}"><input class="digitalCheck" data-k="${x.name}" type="checkbox" ${state.selectedDigital.has(x.name) ? "checked" : ""}><span class="dot" style="background:#4f5dff"></span><span class="chname" title="${x.name}">${x.name}</span></label>`).join("");
+              digitalListEl.querySelectorAll(".digitalCheck").forEach(x => x.onchange = () => {
+                x.checked ? state.selectedDigital.add(x.dataset.k) : state.selectedDigital.delete(x.dataset.k);
+                applyWaveLayout(); if (state.waveformView === "side") drawSideBySide();
+              });
+            }
           }
         } else {
-          document.querySelectorAll(".digitalCheck").forEach(x=>{ x.checked = state.selectedDigital.has(x.dataset.k); });
+          document.querySelectorAll(".digitalCheck").forEach(x => { x.checked = state.selectedDigital.has(x.dataset.k); });
         }
       }
 
@@ -6621,7 +7197,11 @@
 
       /* ================= RENDERIZAÇÃO DA OSCILOGRAFIA ================= */
       function analogColor(id){let map=ds.meta.channelMap||{},k=Object.entries(map).find(([,v])=>v===id)?.[0];return (k&&COLORS[k])?COLORS[k]:`hsl(${id*47%360} 72% 58%)`}
-      function selectedAnalogByKind(kind){let analog=ds?.meta?.analog||[];return [...state.selectedAnalogRaw].filter(i=>channelKind(analog[i])===kind)}
+      function selectedAnalogByKind(kind){
+        let targetGroup = (kind === "current" || kind === 1) ? 1 : 2;
+        let analog = ds?.meta?.analog || [];
+        return [...state.selectedAnalogRaw].filter(i => getChannelGroup(i, analog[i]) === targetGroup);
+      }
       function exactVisibleMax(rows,id,i0,i1){
         let max=0,span=i1-i0,stride=span>3000?Math.ceil(span/3000):1;
         for(let i=i0;i<=i1;i+=stride){
@@ -6639,14 +7219,19 @@
         x.strokeStyle="#17283d";x.lineWidth=1;x.beginPath();
         for(let n=0;n<=10;n++){let xx=plotLeft+n*plotW/10;x.moveTo(xx,0);x.lineTo(xx,h)}
         x.stroke();
-        if(!channels.length){x.fillStyle="#607790";x.fillText(`Nenhum canal de ${kind==="current"?"corrente":"tensão"} selecionado`,plotLeft+10,22);return}
+        if(!channels.length){x.fillStyle="#607790";x.fillText("Nenhum canal selecionado",plotLeft+10,22);return}
 
-        // Pico máximo entre todos os canais visíveis deste tipo (apenas correntes ou apenas tensões)
-        let panelMax = 1e-12;
+        // Pico máximo entre todos os canais visíveis deste grupo e agrupamento por unidade
+        let panelMax = 1e-12, unitMaxMap = {};
         for(let id of channels) {
-          panelMax = Math.max(panelMax, exactVisibleMax(R, id, i0, i1));
+          let vMax = exactVisibleMax(R, id, i0, i1);
+          panelMax = Math.max(panelMax, vMax);
+          let u = analog[id]?.unit || "";
+          unitMaxMap[u] = Math.max(unitMaxMap[u] || 1e-12, vMax);
         }
         state.cachedPanelMax[kind] = panelMax;
+        if(!state.cachedUnitMax) state.cachedUnitMax = {};
+        state.cachedUnitMax[kind] = unitMaxMap;
 
         function drawOriginLine(top,height){let mid=top+height/2;x.save();x.strokeStyle="#20364d";x.lineWidth=1;x.setLineDash([3,5]);x.beginPath();x.moveTo(plotLeft,Math.round(mid)+.5);x.lineTo(w,Math.round(mid)+.5);x.stroke();x.restore()}
         function drawSimpleScale(top,height,max,unit){let axisX=gutter-1,mid=top+height/2,yTop=top+10,yBottom=top+height-4;x.save();x.font="10px Segoe UI, Arial";x.textAlign="right";x.fillStyle="#7187a2";x.strokeStyle="#29415e";x.lineWidth=1;x.beginPath();[[yTop,max],[mid,0],[yBottom,-max]].forEach(([yy,val])=>{x.moveTo(axisX-4,yy);x.lineTo(axisX,yy);if(Math.abs(val)>1e-12)x.fillText(analogScaleText(val)+(unit?" "+unit:""),axisX-7,yy+3)});x.stroke();x.restore()}
@@ -6747,7 +7332,10 @@
         }
         if(state.groupedAnalog){
           drawOriginLine(0,h);
-          for(let id of channels)trace(id,0,h,panelMax,false,false);
+          for(let id of channels){
+            let uMax = (unitMaxMap[analog[id]?.unit || ""] || panelMax);
+            trace(id, 0, h, uMax, false, false);
+          }
           drawSimpleScale(0,h,panelMax,analog[channels[0]]?.unit||"");
           x.save();x.font="11px Segoe UI, Arial";let labelX=plotLeft+7,labelY=14,lineHeight=14,maxRows=Math.max(1,Math.floor((h-8)/lineHeight));
           channels.slice(0,maxRows).forEach((id,j)=>{
@@ -6759,8 +7347,11 @@
           x.restore();
         }else{
           let band=h/channels.length;
-          let sharedMax = (state.yScaleMode !== "individual") ? panelMax : null;
-          channels.forEach((id,j)=>{drawOriginLine(j*band,band);trace(id,j*band,band,sharedMax)});
+          channels.forEach((id,j)=>{
+            let sharedMax = (state.yScaleMode !== "individual") ? (unitMaxMap[analog[id]?.unit || ""] || panelMax) : null;
+            drawOriginLine(j*band,band);
+            trace(id,j*band,band,sharedMax);
+          });
         }
         let tf=triggerFraction();
         if(Number.isFinite(tf)&&tf>=state.x0&&tf<=state.x1){let xx=plotLeft+(tf-state.x0)/(state.x1-state.x0)*plotW;x.save();x.strokeStyle="#ef4444";x.lineWidth=1.5;x.setLineDash([7,5]);x.beginPath();x.moveTo(xx,0);x.lineTo(xx,h);x.stroke();x.restore()}
@@ -7266,7 +7857,9 @@
         }
       }
 
-      function digitalChanged(name) {
+      function digitalChanged(nameOrCh) {
+        let name = (typeof nameOrCh === "object" && nameOrCh) ? nameOrCh.name : nameOrCh;
+        if (!name) return false;
         let meta = ds?.meta;
         if (meta && meta.digitalData && meta.digitalMap) {
           let entry = meta.digitalMap.get(name);
@@ -7292,13 +7885,17 @@
       function drawDigital(){
         let c=document.getElementById("digitalCanvas");
         if(!c) return;
-        let digs=ds.meta.digital||[],names=digs.map(x=>x.name).filter(n=>state.selectedDigital.has(n));
-        let chartBox=document.getElementById("digitalChartBox")||c.parentElement;
-        if(state._lastDigCount !== names.length) {
-          state._lastDigCount = names.length;
-          let digitalVisibleInfo=document.getElementById("digitalVisibleInfo"),digitalEmpty=document.getElementById("digitalEmpty");
-          if(digitalVisibleInfo) digitalVisibleInfo.textContent=`${names.length} de ${digs.length} visíveis`;
-          if(digitalEmpty) digitalEmpty.style.display=names.length?"none":"grid";
+        let digs = ds?.meta?.digital || [], names = digs.map(x => x.name).filter(n => state.selectedDigital.has(n));
+        let chartBox = document.getElementById("digitalChartBox") || c.parentElement;
+        let digKey = `${names.length}_${digs.length}`;
+        if (state._lastDigCount !== digKey) {
+          state._lastDigCount = digKey;
+          let digitalVisibleInfo = document.getElementById("digitalVisibleInfo"), digitalEmpty = document.getElementById("digitalEmpty");
+          if (digitalVisibleInfo) digitalVisibleInfo.textContent = `${names.length} de ${digs.length} visíveis`;
+          if (digitalEmpty) {
+            digitalEmpty.style.display = names.length ? "none" : "grid";
+            digitalEmpty.textContent = !digs.length ? "Nenhum canal digital no registro" : "Nenhum canal digital selecionado";
+          }
         }
 
         if(!names.length){
@@ -7512,7 +8109,15 @@
       function sideKind(ch){return channelKind(ch)}
       function combinedAnalogIndex(slot,localIndex){let two=comtradeSlots.filter(Boolean).length>1;return two&&slot===1?(comtradeSlots[0]?.meta.analog.length||0)+localIndex:localIndex}
       function sideAnalogColor(slot,localIndex){return analogColor(combinedAnalogIndex(slot,localIndex))}
-      function selectedSideAnalog(slot,kind){let rec=comtradeSlots[slot];if(!rec)return[];return (rec.meta.analog||[]).map((c,i)=>({c,i})).filter(q=>sideKind(q.c)===kind&&state.selectedAnalogRaw.has(combinedAnalogIndex(slot,q.i)))}
+      function selectedSideAnalog(slot,kind){
+        let rec=comtradeSlots[slot];
+        if(!rec)return[];
+        let targetGroup = (kind === "current" || kind === 1) ? 1 : 2;
+        return (rec.meta.analog||[]).map((c,i)=>({c,i})).filter(q=>{
+          let gIdx = combinedAnalogIndex(slot, q.i);
+          return getChannelGroup(gIdx, q.c) === targetGroup && state.selectedAnalogRaw.has(gIdx);
+        });
+      }
       function selectedSideDigital(slot){let rec=comtradeSlots[slot];if(!rec)return[];let two=comtradeSlots.filter(Boolean).length>1,prefix=`${slot+1}:`;return (rec.meta.digital||[]).filter(c=>state.selectedDigital.has(two?prefix+c.name:c.name))}
 
       function drawSideAnalog(canvas,rec,kind,sv,slot){
@@ -7522,11 +8127,16 @@
         x.strokeStyle="#17283d";x.lineWidth=1;x.beginPath();
         for(let n=0;n<=10;n++){let xx=plotLeft+n*plotW/10;x.moveTo(xx,0);x.lineTo(xx,h)}
         x.stroke();
-        if(!chs.length){x.fillStyle="#607790";x.fillText(`Nenhum canal de ${kind==="current"?"corrente":"tensão"} selecionado`,plotLeft+10,22);return}
+        if(!chs.length){x.fillStyle="#607790";x.fillText("Nenhum canal selecionado",plotLeft+10,22);return}
         if(win.empty){x.fillStyle="#607790";x.fillText("Sem dados nesta janela",plotLeft+10,22);return}
         let R=rec.rows,i0=win.i0,i1=Math.max(i0+1,win.i1),spanTime=Math.max(1e-12,win.range.end-win.range.start),
-          step=Math.max(1,Math.ceil((i1-i0)/Math.max(plotW*MANUAL_CONFIG.performance.pointsPerPixel,1))),shared=1e-12;
-        for(let {i} of chs)shared=Math.max(shared,exactVisibleMax(R,i,i0,i1));
+          step=Math.max(1,Math.ceil((i1-i0)/Math.max(plotW*MANUAL_CONFIG.performance.pointsPerPixel,1))),shared=1e-12,unitMaxMap={};
+        for(let {c,i} of chs){
+          let vMax=exactVisibleMax(R,i,i0,i1);
+          shared=Math.max(shared,vMax);
+          let u=c.unit||"";
+          unitMaxMap[u]=Math.max(unitMaxMap[u]||1e-12,vMax);
+        }
 
         let band=state.groupedAnalog?h:h/chs.length;
         function drawScale(top,height,max,unit){
@@ -7540,7 +8150,8 @@
 
         chs.forEach(({c,i},j)=>{
           let isJoint = (state.yScaleMode !== "individual");
-          let max=(state.groupedAnalog || isJoint)?shared:exactVisibleMax(R,i,i0,i1),top=state.groupedAnalog?0:j*band,mid=top+band/2;
+          let uMax = unitMaxMap[c.unit || ""] || shared;
+          let max=(state.groupedAnalog || isJoint)?uMax:exactVisibleMax(R,i,i0,i1),top=state.groupedAnalog?0:j*band,mid=top+band/2;
           if(!state.groupedAnalog||j===0)drawScale(top,band,max,c.unit||"");
           let chColor = sideAnalogColor(slot,i);
 
@@ -8791,6 +9402,945 @@
         drawLocationTrajectory2T();
       }
 
+      /* ================= ONDAS VIAJANTES (TWFL - MÉTODO RPV) ================= */
+      let twflState = {
+        ta: null,
+        tb: null,
+        taAbsEpoch: null,
+        tbAbsEpoch: null,
+        sigA: null,
+        sigB: null,
+        results: null,
+        zoomA: { start: 0, end: 1 },
+        zoomB: { start: 0, end: 1 },
+        zoomStart: 0,
+        zoomEnd: 1,
+        dragCursor: null
+      };
+
+      function extractTwflSignal(rec, channelMode) {
+        if (!rec || !rec.rows || !rec.rows.length) return null;
+        let R = rec.rows;
+        let N = R.length;
+        let fs = rec.fs || 1000;
+        let sig = new Float64Array(N);
+        let times = new Float64Array(N);
+        let analogMeta = rec.meta?.analog || [];
+        let chMap = rec.meta?.channelMap || {};
+
+        let twAIdx = analogMeta.findIndex(a => /TW[_\-\s]*A/i.test(a.name));
+        let twBIdx = analogMeta.findIndex(a => /TW[_\-\s]*B/i.test(a.name));
+        let twCIdx = analogMeta.findIndex(a => /TW[_\-\s]*C/i.test(a.name));
+        let hasDedicatedTw = (twAIdx >= 0 || twBIdx >= 0 || twCIdx >= 0);
+
+        let kIa = (chMap.Ia >= 0 && chMap.Ia < analogMeta.length) ? chMap.Ia : 0;
+        let kIb = (chMap.Ib >= 0 && chMap.Ib < analogMeta.length) ? chMap.Ib : 1;
+        let kIc = (chMap.Ic >= 0 && chMap.Ic < analogMeta.length) ? chMap.Ic : 2;
+        let kVa = (chMap.Va >= 0 && chMap.Va < analogMeta.length) ? chMap.Va : 0;
+        let kVb = (chMap.Vb >= 0 && chMap.Vb < analogMeta.length) ? chMap.Vb : 1;
+        let kVc = (chMap.Vc >= 0 && chMap.Vc < analogMeta.length) ? chMap.Vc : 2;
+
+        let selectedIdx = twAIdx >= 0 ? twAIdx : kIa;
+        let chLabel = "Auto";
+
+        if (channelMode === "raw_auto" || channelMode === "dedicated_tw" || !channelMode) {
+          if (hasDedicatedTw) {
+            let twIndices = [twAIdx, twBIdx, twCIdx].filter(idx => idx >= 0);
+            let maxExcursion = -1;
+            for (let idx of twIndices) {
+              let minV = Infinity, maxV = -Infinity;
+              let step = Math.max(1, Math.floor(N / 1200));
+              for (let i = 0; i < N; i += step) {
+                let v = R[i].analogAll ? R[i].analogAll[idx] : 0;
+                if (v < minV) minV = v;
+                if (v > maxV) maxV = v;
+              }
+              let exc = maxV - minV;
+              if (exc > maxExcursion) {
+                maxExcursion = exc;
+                selectedIdx = idx;
+              }
+            }
+            chLabel = analogMeta[selectedIdx]?.name || "TW";
+          } else {
+            selectedIdx = kIa >= 0 ? kIa : 0;
+            chLabel = analogMeta[selectedIdx]?.name || "Ia";
+          }
+        } else if (channelMode === "phase_a" || channelMode === "tw_a") {
+          selectedIdx = twAIdx >= 0 ? twAIdx : (kIa >= 0 ? kIa : kVa);
+          chLabel = analogMeta[selectedIdx]?.name || "Fase A";
+        } else if (channelMode === "phase_b" || channelMode === "tw_b") {
+          selectedIdx = twBIdx >= 0 ? twBIdx : (kIb >= 0 ? kIb : kVb);
+          chLabel = analogMeta[selectedIdx]?.name || "Fase B";
+        } else if (channelMode === "phase_c" || channelMode === "tw_c") {
+          selectedIdx = twCIdx >= 0 ? twCIdx : (kIc >= 0 ? kIc : kVc);
+          chLabel = analogMeta[selectedIdx]?.name || "Fase C";
+        }
+
+        for (let i = 0; i < N; i++) {
+          let r = R[i];
+          times[i] = r.t;
+          let sub = r.analogAll;
+          if (channelMode === "clarke_alpha") {
+            let ia = sub ? sub[twAIdx >= 0 ? twAIdx : kIa] || 0 : 0;
+            let ib = sub ? sub[twBIdx >= 0 ? twBIdx : kIb] || 0 : 0;
+            let ic = sub ? sub[twCIdx >= 0 ? twCIdx : kIc] || 0 : 0;
+            sig[i] = (2 * ia - ib - ic) / 3;
+          } else if (channelMode === "clarke_beta") {
+            let ib = sub ? sub[twBIdx >= 0 ? twBIdx : kIb] || 0 : 0;
+            let ic = sub ? sub[twCIdx >= 0 ? twCIdx : kIc] || 0 : 0;
+            sig[i] = (ib - ic) / Math.SQRT3;
+          } else if (channelMode === "clarke_zero") {
+            let ia = sub ? sub[twAIdx >= 0 ? twAIdx : kIa] || 0 : 0;
+            let ib = sub ? sub[twBIdx >= 0 ? twBIdx : kIb] || 0 : 0;
+            let ic = sub ? sub[twCIdx >= 0 ? twCIdx : kIc] || 0 : 0;
+            sig[i] = (ia + ib + ic) / 3;
+          } else {
+            // Sinal puro PU direto do RPV sem manipulação matemática
+            sig[i] = sub ? (sub[selectedIdx] ?? 0) : 0;
+          }
+        }
+
+        let deriv = new Float64Array(N);
+        let absDeriv = new Float64Array(N);
+        let dt = 1 / fs;
+        let maxDeriv = 0;
+        for (let i = 1; i < N; i++) {
+          let d = (sig[i] - sig[i - 1]) / dt;
+          deriv[i] = d;
+          let ad = Math.abs(d);
+          absDeriv[i] = ad;
+          if (ad > maxDeriv) maxDeriv = ad;
+        }
+
+        return {
+          rec, fs, N, sig, times, deriv, absDeriv, maxDeriv,
+          chName: chLabel,
+          station: rec.meta?.station || rec.base || "Terminal",
+          device: rec.meta?.device || "RPV-311",
+          startEpochSeconds: Number(rec.absoluteStart ?? rec.meta?.startEpochSeconds),
+          hasDedicatedTw
+        };
+      }
+
+      function detectTwflWavefront(sigData, detectionMethod, thresholdPu) {
+        if (!sigData || !sigData.sig || sigData.sig.length < 5) return null;
+        let { N, times, sig, absDeriv, maxDeriv, fs } = sigData;
+        let dt = 1 / fs;
+        let thr = Number(thresholdPu) || 0.5;
+
+        if (detectionMethod === "rdp_direct" || !detectionMethod) {
+          // Método Direto RDP: sem manipulação matemática, detecção direta de limiar de surto PU com interpolação
+          let nBase = Math.min(500, Math.max(10, Math.floor(N * 0.05)));
+          let sumBase = 0;
+          for (let i = 0; i < nBase; i++) sumBase += sig[i];
+          let baseVal = sumBase / nBase;
+
+          for (let i = 1; i < N; i++) {
+            let diff = Math.abs(sig[i] - baseVal);
+            if (diff >= thr) {
+              let prevDiff = Math.abs(sig[i - 1] - baseVal);
+              let denom = diff - prevDiff;
+              let frac = denom !== 0 ? (thr - prevDiff) / denom : 0;
+              frac = Math.max(0, Math.min(1, frac));
+              let arrivalTime = times[i - 1] + frac * (times[i] - times[i - 1]);
+              return { index: i, time: arrivalTime, peakIndex: i, frac };
+            }
+          }
+        } else if (detectionMethod === "advanced") {
+          let nNoise = Math.min(Math.max(15, Math.floor(N * 0.05)), 400);
+          let sumN = 0, sumN2 = 0;
+          for (let i = 1; i < nNoise; i++) {
+            sumN += absDeriv[i];
+            sumN2 += absDeriv[i] * absDeriv[i];
+          }
+          let meanNoise = sumN / (nNoise - 1);
+          let stdNoise = Math.sqrt(Math.max(0, sumN2 / (nNoise - 1) - meanNoise * meanNoise));
+          let thrDeriv = Math.max(meanNoise + 4.5 * stdNoise, maxDeriv * 0.12);
+
+          for (let i = 2; i < N - 2; i++) {
+            if (absDeriv[i] > thrDeriv && absDeriv[i] >= absDeriv[i - 1]) {
+              let peakI = i;
+              for (let k = i; k < Math.min(N - 1, i + 12); k++) {
+                if (absDeriv[k] > absDeriv[peakI]) peakI = k;
+              }
+              let target = absDeriv[peakI] * 0.45;
+              let k0 = peakI;
+              while (k0 > 1 && absDeriv[k0] > target) k0--;
+              let frac = 0;
+              if (absDeriv[k0 + 1] !== absDeriv[k0]) {
+                frac = (target - absDeriv[k0]) / (absDeriv[k0 + 1] - absDeriv[k0]);
+                frac = Math.max(0, Math.min(1, frac));
+              }
+              let arrivalTime = times[k0] + frac * (times[k0 + 1] - times[k0]);
+              return { index: k0, time: arrivalTime, peakIndex: peakI, frac };
+            }
+          }
+        } else {
+          let baseVal = sig[0];
+          for (let i = 1; i < N; i++) {
+            if (Math.abs(sig[i] - baseVal) >= thr) {
+              return { index: i, time: times[i], peakIndex: i, frac: 0 };
+            }
+          }
+        }
+
+        let maxI = 1;
+        for (let i = 1; i < N; i++) {
+          if (Math.abs(sig[i]) > Math.abs(sig[maxI])) maxI = i;
+        }
+        return { index: maxI, time: times[maxI], peakIndex: maxI, frac: 0 };
+      }
+
+      function calculateRPVTwfl() {
+        let inLenVal = Number(document.getElementById("twflLength")?.value);
+        let L = (Number.isFinite(inLenVal) && inLenVal > 0) ? inLenVal : ((Number.isFinite(settings.length) && settings.length > 1) ? settings.length : 295.7);
+        let k1 = Number(document.getElementById("twflK1")?.value) || 0.9950;
+        let c = 299792;
+        let v1 = k1 * c;
+        let mode = document.getElementById("twflMode")?.value || "two-terminal";
+        let isMixed = document.getElementById("twflIsMixed")?.checked || false;
+        let l1 = Number(document.getElementById("twflL1")?.value) || (L * 0.8);
+        let l2 = Number(document.getElementById("twflL2")?.value) || (L - l1);
+        let k2 = Number(document.getElementById("twflK2")?.value) || 0.6600;
+        let v2 = k2 * c;
+
+        let ta = twflState.ta;
+        let tb = twflState.tb;
+        if (ta === null || tb === null) {
+          autoDetectTwflWavefronts();
+          ta = twflState.ta;
+          tb = twflState.tb;
+        }
+        if (ta === null || tb === null) return;
+
+        let deltaT_s = 0;
+        let recA = comtradeSlots[0];
+        let recB = comtradeSlots[1];
+
+        if (mode === "two-terminal") {
+          let epochA = Number(recA?.absoluteStart ?? recA?.meta?.startEpochSeconds);
+          let epochB = Number(recB?.absoluteStart ?? recB?.meta?.startEpochSeconds);
+          if (Number.isFinite(epochA) && Number.isFinite(epochB)) {
+            let absTa = epochA + ta;
+            let absTb = epochB + tb;
+            deltaT_s = absTa - absTb;
+            twflState.taAbsEpoch = absTa;
+            twflState.tbAbsEpoch = absTb;
+          } else {
+            deltaT_s = ta - tb;
+          }
+        } else {
+          deltaT_s = Math.abs(tb - ta);
+        }
+
+        let deltaT_us = deltaT_s * 1e6;
+        let deltaT_ms = deltaT_s * 1e3;
+        let transitTime_us = (L / v1) * 1e6;
+
+        let dA = 0, dB = 0;
+        let section = "overhead";
+
+        if (mode === "two-terminal") {
+          if (!isMixed) {
+            dA = (L + v1 * deltaT_s) / 2;
+            dB = L - dA;
+          } else {
+            let Daw = (L + v1 * deltaT_s) / 2;
+            if (Daw <= l1) {
+              dA = Daw;
+              dB = L - dA;
+              section = "overhead";
+            } else {
+              section = "underground";
+              let t_overhead = l1 / v1;
+              let d_under = (l2 + v2 * (deltaT_s - t_overhead)) / 2;
+              dA = l1 + d_under;
+              dB = L - dA;
+            }
+          }
+        } else {
+          dA = (v1 * deltaT_s) / 2;
+          dB = L - dA;
+        }
+
+        let pA = (dA / L) * 100;
+        let pB = (dB / L) * 100;
+
+        let status = "CONFIRMADA (INTERNA)";
+        if (dA < 0 || dA > L) {
+          status = "FALTA FORA DA LINHA (EXTERNA)";
+        } else if (Math.abs(deltaT_us) > transitTime_us * 1.05) {
+          status = "INCONSISTENTE (Δt > Tempo Trânsito)";
+        }
+
+        let fs = Math.max(recA?.fs || 1000, recB?.fs || 1000);
+        let sampleDt_s = 1 / fs;
+        let uncertaintyM = Math.round((v1 * sampleDt_s * 1000) / 2);
+
+        twflState.results = {
+          dA, dB, pA, pB, L, k1, v1, deltaT_s, deltaT_ms, deltaT_us,
+          transitTime_us, status, section, isMixed,
+          l1, l2, k2, v2, uncertaintyM, fs, mode
+        };
+
+        updateTwflUi();
+        drawTwflWaveforms();
+        drawBewleyLattice();
+      }
+
+      function updateTwflUi() {
+        let res = twflState.results;
+        if (!res) return;
+
+        let elDa = document.getElementById("twflHeroDa");
+        if (elDa) elDa.textContent = `${res.dA.toFixed(3)} km (${res.pA.toFixed(1)}%)`;
+
+        let elDb = document.getElementById("twflHeroDb");
+        if (elDb) elDb.textContent = `Subestação B: ${res.dB.toFixed(3)} km (${res.pB.toFixed(1)}%)`;
+
+        let elDeltaT = document.getElementById("twflHeroDeltaT");
+        if (elDeltaT) elDeltaT.textContent = `${res.deltaT_us >= 0 ? "+" : ""}${res.deltaT_us.toFixed(3)} µs`;
+
+        let elTransit = document.getElementById("twflHeroTransit");
+        if (elTransit) elTransit.textContent = `Tempo Trânsito Total (τ): ${res.transitTime_us.toFixed(2)} µs`;
+
+        let elStatus = document.getElementById("twflStatusBadge");
+        if (elStatus) {
+          elStatus.textContent = res.status;
+          if (res.status.includes("CONFIRMADA")) {
+            elStatus.style.background = "#052e16"; elStatus.style.color = "#34d399"; elStatus.style.borderColor = "#065f46";
+          } else if (res.status.includes("EXTERNA")) {
+            elStatus.style.background = "#450a0a"; elStatus.style.color = "#f87171"; elStatus.style.borderColor = "#991b1b";
+          } else {
+            elStatus.style.background = "#431407"; elStatus.style.color = "#fb923c"; elStatus.style.borderColor = "#9a3412";
+          }
+        }
+
+        let elTa = document.getElementById("twflMetricTa");
+        if (elTa) elTa.textContent = `${(twflState.ta * 1000).toFixed(4)} ms`;
+
+        let elTb = document.getElementById("twflMetricTb");
+        if (elTb) elTb.textContent = `${(twflState.tb * 1000).toFixed(4)} ms`;
+
+        let elRes = document.getElementById("twflMetricResolution");
+        if (elRes) {
+          let fsHz = res.fs >= 1e6 ? `${(res.fs / 1e6).toFixed(3)} MHz` : `${(res.fs / 1e3).toFixed(1)} kHz`;
+          elRes.textContent = `${fsHz} (${((1 / res.fs) * 1e6).toFixed(2)} µs/amostra)`;
+        }
+
+        let elUnc = document.getElementById("twflMetricUncertainty");
+        if (elUnc) elUnc.textContent = `± ${res.uncertaintyM} metros`;
+
+        let elTypeBadge = document.getElementById("twflResultTypeBadge");
+        if (elTypeBadge) elTypeBadge.textContent = res.mode === "two-terminal" ? "Dois Terminais (Tipo D)" : "Terminal Único (Tipo A)";
+
+        let inTa = document.getElementById("twflInputTa");
+        if (inTa && inTa !== document.activeElement) inTa.value = (twflState.ta * 1000).toFixed(6);
+        let inTb = document.getElementById("twflInputTb");
+        if (inTb && inTb !== document.activeElement) inTb.value = (twflState.tb * 1000).toFixed(6);
+
+        let termAName = document.getElementById("twflTermAName");
+        if (termAName) termAName.textContent = `${twflState.sigA?.station || "SE A"} [${twflState.sigA?.chName || "PU"}]`;
+        let termBName = document.getElementById("twflTermBName");
+        if (termBName) termBName.textContent = `${twflState.sigB?.station || "SE B"} [${twflState.sigB?.chName || "PU"}]`;
+
+        updateTwflCalibrationUi();
+      }
+
+      function autoDetectTwflWavefronts() {
+        let chMode = document.getElementById("twflChannelSelect")?.value || "raw_auto";
+        let detMethod = document.getElementById("twflDetectionMethod")?.value || "rdp_direct";
+        let thrPu = Number(document.getElementById("twflThresholdVal")?.value) || 0.5;
+
+        let recA = comtradeSlots[0];
+        let recB = comtradeSlots[1] || comtradeSlots[0];
+
+        if (!recA) return;
+
+        let sigA = extractTwflSignal(recA, chMode);
+        let sigB = extractTwflSignal(recB, chMode);
+        twflState.sigA = sigA;
+        twflState.sigB = sigB;
+
+        let wfA = detectTwflWavefront(sigA, detMethod, thrPu);
+        let wfB = detectTwflWavefront(sigB, detMethod, thrPu);
+
+        if (wfA) {
+          twflState.ta = wfA.time;
+          let inTa = document.getElementById("twflInputTa");
+          if (inTa) inTa.value = (wfA.time * 1000).toFixed(6);
+        }
+
+        if (wfB) {
+          if (recB === recA) {
+            let N = sigA.sig.length;
+            let start2 = Math.min(N - 1, (wfA?.peakIndex || 0) + 15);
+            let subSig = {
+              ...sigA,
+              sig: sigA.sig.subarray(start2),
+              times: sigA.times.subarray(start2),
+              absDeriv: sigA.absDeriv.subarray(start2)
+            };
+            let wf2 = detectTwflWavefront(subSig, detMethod, thrPu);
+            twflState.tb = wf2 ? wf2.time : (wfA ? wfA.time + 0.0003 : 0.0003);
+          } else {
+            twflState.tb = wfB.time;
+          }
+          let inTb = document.getElementById("twflInputTb");
+          if (inTb) inTb.value = (twflState.tb * 1000).toFixed(6);
+        }
+
+        zoomTwflToWavefronts();
+      }
+
+      function zoomTwflToWavefronts() {
+        let ta = twflState.ta;
+        let tb = twflState.tb;
+        let recA = comtradeSlots[0];
+        let recB = comtradeSlots[1] || comtradeSlots[0];
+
+        if (recA?.rows?.length && ta !== null) {
+          let tStart = recA.rows[0].t, tEnd = recA.rows.at(-1).t, dur = Math.max(1e-6, tEnd - tStart);
+          let sA = Math.max(0, (ta - 0.00008 - tStart) / dur);
+          let eA = Math.min(1, (ta + 0.00017 - tStart) / dur);
+          twflState.zoomA = { start: sA, end: eA };
+        } else {
+          twflState.zoomA = { start: 0, end: 1 };
+        }
+
+        if (recB?.rows?.length && tb !== null) {
+          let tStart = recB.rows[0].t, tEnd = recB.rows.at(-1).t, dur = Math.max(1e-6, tEnd - tStart);
+          let sB = Math.max(0, (tb - 0.00008 - tStart) / dur);
+          let eB = Math.min(1, (tb + 0.00017 - tStart) / dur);
+          twflState.zoomB = { start: sB, end: eB };
+        } else {
+          twflState.zoomB = { start: 0, end: 1 };
+        }
+      }
+
+      function drawTwflWaveforms() {
+        let cA = document.getElementById("twflCanvasA");
+        let cB = document.getElementById("twflCanvasB");
+        if (!cA || !cB) return;
+
+        let recA = comtradeSlots[0];
+        let recB = comtradeSlots[1] || comtradeSlots[0];
+        if (!recA) return;
+
+        let chMode = document.getElementById("twflChannelSelect")?.value || "raw_auto";
+        if (!twflState.sigA) twflState.sigA = extractTwflSignal(recA, chMode);
+        if (!twflState.sigB) twflState.sigB = extractTwflSignal(recB, chMode);
+
+        renderSingleTwflCanvas(cA, twflState.sigA, twflState.ta, "#38bdf8", "SE A", twflState.zoomA);
+        let colorB = recB !== recA ? "#c084fc" : "#fb923c";
+        let labelB = recB !== recA ? "SE B" : "Reflexão SE A";
+        renderSingleTwflCanvas(cB, twflState.sigB, twflState.tb, colorB, labelB, twflState.zoomB);
+      }
+
+      function renderSingleTwflCanvas(canvas, sigData, cursorT, mainColor, termLabel, zoom) {
+        if (!canvas || !sigData || !sigData.sig.length) return;
+        let { x, w, h } = sizeCanvas(canvas);
+        let { sig, times, absDeriv, maxDeriv, N, chName, station } = sigData;
+
+        x.clearRect(0, 0, w, h);
+
+        let padL = 60, padR = 25, padT = 20, padB = 22;
+        let gw = w - padL - padR;
+        let gh = h - padT - padB;
+        if (gw <= 10 || gh <= 10) return;
+
+        let zS = zoom ? zoom.start : (twflState.zoomStart || 0);
+        let zE = zoom ? zoom.end : (twflState.zoomEnd || 1);
+        let iStart = Math.floor(zS * (N - 1)), iEnd = Math.ceil(zE * (N - 1));
+        if (iEnd <= iStart) iEnd = Math.min(N - 1, iStart + 10);
+
+        let tMin = times[iStart], tMax = times[iEnd];
+        if (tMax <= tMin) tMax = tMin + 1e-4;
+
+        let minVal = Infinity, maxVal = -Infinity;
+        for (let i = iStart; i <= iEnd; i++) {
+          if (sig[i] < minVal) minVal = sig[i];
+          if (sig[i] > maxVal) maxVal = sig[i];
+        }
+        let margin = Math.max(1e-4, (maxVal - minVal) * 0.15);
+        minVal -= margin; maxVal += margin;
+
+        x.fillStyle = "#04070e";
+        x.fillRect(padL, padT, gw, gh);
+
+        x.strokeStyle = "#121d2c";
+        x.lineWidth = 1;
+        x.beginPath();
+        for (let g = 0; g <= 4; g++) {
+          let y = padT + (gh * g) / 4;
+          x.moveTo(padL, y); x.lineTo(padL + gw, y);
+        }
+        for (let g = 0; g <= 6; g++) {
+          let gx = padL + (gw * g) / 6;
+          x.moveTo(gx, padT); x.lineTo(gx, padT + gh);
+        }
+        x.stroke();
+
+        let yZero = padT + gh - ((0 - minVal) / (maxVal - minVal)) * gh;
+        if (yZero >= padT && yZero <= padT + gh) {
+          x.strokeStyle = "#1e334d";
+          x.setLineDash([3, 3]);
+          x.beginPath(); x.moveTo(padL, yZero); x.lineTo(padL + gw, yZero); x.stroke();
+          x.setLineDash([]);
+        }
+
+        x.strokeStyle = mainColor;
+        x.lineWidth = 2.0;
+        x.beginPath();
+        let startedSig = false;
+        let visibleCount = iEnd - iStart + 1;
+        for (let i = iStart; i <= iEnd; i++) {
+          let px = padL + ((times[i] - tMin) / (tMax - tMin)) * gw;
+          let py = padT + gh - ((sig[i] - minVal) / (maxVal - minVal)) * gh;
+          if (!startedSig) { x.moveTo(px, py); startedSig = true; }
+          else x.lineTo(px, py);
+        }
+        x.stroke();
+
+        // Se zoomed in (poucas amostras), desenha os pontos amostrais individuais da onda
+        if (visibleCount <= 250) {
+          x.fillStyle = mainColor;
+          for (let i = iStart; i <= iEnd; i++) {
+            let px = padL + ((times[i] - tMin) / (tMax - tMin)) * gw;
+            let py = padT + gh - ((sig[i] - minVal) / (maxVal - minVal)) * gh;
+            x.beginPath();
+            x.arc(px, py, 2.5, 0, Math.PI * 2);
+            x.fill();
+          }
+        }
+
+        if (cursorT !== null && cursorT >= tMin && cursorT <= tMax) {
+          let cx = padL + ((cursorT - tMin) / (tMax - tMin)) * gw;
+          x.strokeStyle = "#fbbf24";
+          x.lineWidth = 2;
+          x.setLineDash([4, 2]);
+          x.beginPath(); x.moveTo(cx, padT); x.lineTo(cx, padT + gh); x.stroke();
+          x.setLineDash([]);
+
+          x.fillStyle = "#fbbf24";
+          x.beginPath();
+          x.arc(cx, padT, 4.5, 0, Math.PI * 2);
+          x.fill();
+
+          x.fillStyle = "#fbbf24";
+          x.font = "bold 10px Segoe UI, Arial";
+          x.textAlign = "center";
+          x.fillText(`${(cursorT * 1000).toFixed(4)} ms`, cx, padT - 5);
+        }
+
+        x.fillStyle = "#64748b";
+        x.font = "9.5px Segoe UI, Arial";
+        x.textAlign = "right";
+        x.textBaseline = "middle";
+        x.fillText(maxVal.toFixed(2) + " PU", padL - 6, padT + 4);
+        x.fillText(minVal.toFixed(2) + " PU", padL - 6, padT + gh - 4);
+
+        x.textAlign = "center";
+        x.textBaseline = "top";
+        x.fillText(`${(tMin * 1000).toFixed(3)} ms`, padL, padT + gh + 4);
+        x.fillText(`${(tMax * 1000).toFixed(3)} ms`, padL + gw, padT + gh + 4);
+
+        x.fillStyle = mainColor;
+        x.font = "bold 11px Segoe UI, Arial";
+        x.textAlign = "left";
+        x.fillText(`${termLabel} - ${station} | Canal: ${chName} (Sinal Puro PU)`, padL + 8, padT + 12);
+      }
+
+      function drawBewleyLattice() {
+        let c = document.getElementById("twflBewleyCanvas");
+        if (!c) return;
+        let { x, w, h } = sizeCanvas(c);
+        x.clearRect(0, 0, w, h);
+
+        let padL = 70, padR = 70, padT = 36, padB = 30;
+        let gw = w - padL - padR;
+        let gh = h - padT - padB;
+        if (gw <= 20 || gh <= 20) return;
+
+        let res = twflState.results;
+        let inLenVal = Number(document.getElementById("twflLength")?.value);
+        let L = res?.L || ((Number.isFinite(inLenVal) && inLenVal > 0) ? inLenVal : ((Number.isFinite(settings.length) && settings.length > 1) ? settings.length : 295.7));
+        let dA = res ? Math.max(0, Math.min(L, res.dA)) : L * 0.45;
+        let dB = L - dA;
+        let v1 = res?.v1 || (0.9950 * 299792);
+
+        let tauA_us = (dA / v1) * 1e6;
+        let tauB_us = (dB / v1) * 1e6;
+        let tauTotal_us = (L / v1) * 1e6;
+        let maxTime_us = Math.max(tauTotal_us * 2.2, 500);
+
+        let xA = padL;
+        let xB = padL + gw;
+        let xFault = padL + (dA / L) * gw;
+
+        x.fillStyle = "#040711";
+        x.fillRect(padL, padT, gw, gh);
+
+        x.strokeStyle = "#121d2d";
+        x.lineWidth = 1;
+        x.beginPath();
+        let nTimeTicks = 5;
+        for (let i = 0; i <= nTimeTicks; i++) {
+          let y = padT + (gh * i) / nTimeTicks;
+          x.moveTo(padL, y); x.lineTo(padL + gw, y);
+        }
+        x.stroke();
+
+        x.lineWidth = 2.5;
+        x.strokeStyle = "#38bdf8";
+        x.beginPath(); x.moveTo(xA, padT); x.lineTo(xA, padT + gh); x.stroke();
+
+        x.strokeStyle = "#c084fc";
+        x.beginPath(); x.moveTo(xB, padT); x.lineTo(xB, padT + gh); x.stroke();
+
+        x.strokeStyle = "rgba(251, 191, 36, 0.4)";
+        x.setLineDash([3, 3]);
+        x.lineWidth = 1.5;
+        x.beginPath(); x.moveTo(xFault, padT); x.lineTo(xFault, padT + gh); x.stroke();
+        x.setLineDash([]);
+
+        x.fillStyle = "#38bdf8";
+        x.font = "bold 11px Segoe UI, Arial";
+        x.textAlign = "center";
+        x.textBaseline = "bottom";
+        x.fillText("SE A (0.0 km)", xA, padT - 8);
+
+        x.fillStyle = "#c084fc";
+        x.fillText(`SE B (${L.toFixed(1)} km)`, xB, padT - 8);
+
+        x.fillStyle = "#fbbf24";
+        x.fillText(`Falta W (${dA.toFixed(2)} km)`, xFault, padT - 8);
+
+        let y0 = padT + 10;
+        let yArrA = y0 + (tauA_us / maxTime_us) * (gh - 20);
+        let yArrB = y0 + (tauB_us / maxTime_us) * (gh - 20);
+
+        x.lineWidth = 2.5;
+        x.strokeStyle = "#38bdf8";
+        x.beginPath();
+        x.moveTo(xFault, y0);
+        x.lineTo(xA, yArrA);
+        x.stroke();
+
+        x.strokeStyle = "#c084fc";
+        x.beginPath();
+        x.moveTo(xFault, y0);
+        x.lineTo(xB, yArrB);
+        x.stroke();
+
+        let yRefA = yArrA + (tauTotal_us / maxTime_us) * (gh - 20);
+        x.strokeStyle = "rgba(56, 189, 248, 0.5)";
+        x.setLineDash([4, 3]);
+        x.beginPath();
+        x.moveTo(xA, yArrA);
+        x.lineTo(xB, Math.min(padT + gh, yRefA));
+        x.stroke();
+
+        let yRefB = yArrB + (tauTotal_us / maxTime_us) * (gh - 20);
+        x.strokeStyle = "rgba(192, 132, 252, 0.5)";
+        x.beginPath();
+        x.moveTo(xB, yArrB);
+        x.lineTo(xA, Math.min(padT + gh, yRefB));
+        x.stroke();
+        x.setLineDash([]);
+
+        x.fillStyle = "#fbbf24";
+        x.beginPath();
+        x.arc(xFault, y0, 5.5, 0, Math.PI * 2);
+        x.fill();
+        x.strokeStyle = "#ffffff";
+        x.lineWidth = 1.5;
+        x.stroke();
+
+        x.fillStyle = "#38bdf8";
+        x.beginPath(); x.arc(xA, yArrA, 4.5, 0, Math.PI * 2); x.fill();
+
+        x.fillStyle = "#c084fc";
+        x.beginPath(); x.arc(xB, yArrB, 4.5, 0, Math.PI * 2); x.fill();
+
+        x.font = "9.5px Segoe UI, Arial";
+        x.textAlign = "right";
+        x.textBaseline = "middle";
+        x.fillStyle = "#38bdf8";
+        x.fillText(`ta: +${tauA_us.toFixed(1)} µs`, xA - 8, yArrA);
+
+        x.textAlign = "left";
+        x.fillStyle = "#c084fc";
+        x.fillText(`tb: +${tauB_us.toFixed(1)} µs`, xB + 8, yArrB);
+
+        x.fillStyle = "#64748b";
+        x.textAlign = "right";
+        for (let i = 0; i <= nTimeTicks; i++) {
+          let tVal = (maxTime_us * i) / nTimeTicks;
+          let y = padT + (gh * i) / nTimeTicks;
+          x.fillText(`${tVal.toFixed(0)} µs`, padL - 10, y);
+        }
+
+        x.font = "10px Segoe UI, Arial";
+        x.textAlign = "center";
+        x.textBaseline = "top";
+        x.fillStyle = "#94a3b8";
+        x.fillText(`Fórmula RPV: dA = [L + v · (ta - tb)] / 2 = [${L.toFixed(1)} + ${(v1/1000).toFixed(1)} · Δt] / 2 = ${dA.toFixed(3)} km`, padL + gw / 2, padT + gh + 10);
+      }
+
+      function updateTwflCalibrationUi() {
+        let type = document.getElementById("twflCalibType")?.value || "cb_a";
+        let inX = document.getElementById("twflCalibX");
+        let inLenVal = Number(document.getElementById("twflLength")?.value);
+        let L = (Number.isFinite(inLenVal) && inLenVal > 0) ? inLenVal : ((Number.isFinite(settings.length) && settings.length > 1) ? settings.length : 295.7);
+        let deltaT_s = twflState.results?.deltaT_s ?? 0;
+        let deltaT_us = deltaT_s * 1e6;
+        let c = 299792;
+
+        if (type === "cb_a") {
+          if (inX) { inX.value = "0.000"; inX.disabled = true; }
+        } else if (type === "cb_b") {
+          if (inX) { inX.value = L.toFixed(3); inX.disabled = true; }
+        } else {
+          if (inX) inX.disabled = false;
+        }
+
+        let X = Number(inX?.value) || 0;
+        let elDelta = document.getElementById("twflCalibDeltaT");
+        if (elDelta) elDelta.textContent = `${Math.abs(deltaT_us).toFixed(3)} µs`;
+
+        let k1Calib = NaN;
+        if (Math.abs(deltaT_s) > 1e-9) {
+          k1Calib = Math.abs(2 * X - L) / (c * Math.abs(deltaT_s));
+        }
+
+        let elK1 = document.getElementById("twflCalibK1Result");
+        if (elK1) {
+          if (Number.isFinite(k1Calib) && k1Calib >= 0.8 && k1Calib <= 1.05) {
+            elK1.textContent = `K1 = ${k1Calib.toFixed(4)} (${(k1Calib * 100).toFixed(2)}% c)`;
+            elK1.style.color = "#34d399";
+          } else {
+            elK1.textContent = Number.isFinite(k1Calib) ? `K1 = ${k1Calib.toFixed(4)} (Verifique Δt)` : "--";
+            elK1.style.color = "#fb923c";
+          }
+        }
+      }
+
+      function applyTwflCalibratedK1() {
+        let txt = document.getElementById("twflCalibK1Result")?.textContent || "";
+        let m = txt.match(/K1\s*=\s*([0-9\.]+)/);
+        if (m) {
+          let k1Val = parseFloat(m[1]);
+          if (Number.isFinite(k1Val) && k1Val > 0.8 && k1Val < 1.1) {
+            let inK1 = document.getElementById("twflK1");
+            if (inK1) inK1.value = k1Val.toFixed(4);
+            calculateRPVTwfl();
+          }
+        }
+      }
+
+      function attachTwflCanvasInteractivity(canvas, targetCursor) {
+        if (!canvas) return;
+        let isDragging = false;
+        let getTFromX = (e) => {
+          let r = canvas.getBoundingClientRect();
+          let padL = 60, padR = 25;
+          let gw = r.width - padL - padR;
+          if (gw <= 0) return null;
+          let sigData = targetCursor === "ta" ? twflState.sigA : twflState.sigB;
+          if (!sigData || !sigData.sig.length) return null;
+          let zoom = targetCursor === "ta" ? (twflState.zoomA || { start: 0, end: 1 }) : (twflState.zoomB || { start: 0, end: 1 });
+          let N = sigData.sig.length;
+          let iStart = Math.floor(zoom.start * (N - 1)), iEnd = Math.ceil(zoom.end * (N - 1));
+          let tMin = sigData.times[iStart], tMax = sigData.times[iEnd];
+          let frac = Math.max(0, Math.min(1, (e.clientX - r.left - padL) / gw));
+          return tMin + frac * (tMax - tMin);
+        };
+
+        canvas.addEventListener("mousedown", e => {
+          if (e.button !== 0) return;
+          isDragging = true;
+          let t = getTFromX(e);
+          if (t !== null) {
+            if (targetCursor === "ta") {
+              twflState.ta = t;
+              let inTa = document.getElementById("twflInputTa");
+              if (inTa) inTa.value = (t * 1000).toFixed(6);
+            } else {
+              twflState.tb = t;
+              let inTb = document.getElementById("twflInputTb");
+              if (inTb) inTb.value = (t * 1000).toFixed(6);
+            }
+            calculateRPVTwfl();
+          }
+        });
+
+        window.addEventListener("mousemove", e => {
+          if (!isDragging) return;
+          let t = getTFromX(e);
+          if (t !== null) {
+            if (targetCursor === "ta") {
+              twflState.ta = t;
+              let inTa = document.getElementById("twflInputTa");
+              if (inTa) inTa.value = (t * 1000).toFixed(6);
+            } else {
+              twflState.tb = t;
+              let inTb = document.getElementById("twflInputTb");
+              if (inTb) inTb.value = (t * 1000).toFixed(6);
+            }
+            calculateRPVTwfl();
+          }
+        });
+
+        window.addEventListener("mouseup", () => {
+          isDragging = false;
+        });
+
+        canvas.addEventListener("wheel", e => {
+          e.preventDefault();
+          let zoom = targetCursor === "ta" ? twflState.zoomA : twflState.zoomB;
+          if (!zoom) return;
+          let factor = e.deltaY < 0 ? 0.75 : 1.33;
+          let r = canvas.getBoundingClientRect();
+          let padL = 60, padR = 25;
+          let gw = r.width - padL - padR;
+          let mouseFrac = Math.max(0, Math.min(1, (e.clientX - r.left - padL) / Math.max(1, gw)));
+          let center = zoom.start + mouseFrac * (zoom.end - zoom.start);
+          let newSpan = (zoom.end - zoom.start) * factor;
+          newSpan = Math.max(0.00005, Math.min(1, newSpan));
+          zoom.start = Math.max(0, center - mouseFrac * newSpan);
+          zoom.end = Math.min(1, zoom.start + newSpan);
+          drawTwflWaveforms();
+        }, { passive: false });
+      }
+
+      function initTwfl() {
+        document.getElementById("twflBtnCalculate")?.addEventListener("click", () => calculateRPVTwfl());
+        document.getElementById("twflBtnAutoDetect")?.addEventListener("click", () => {
+          autoDetectTwflWavefronts();
+          calculateRPVTwfl();
+        });
+        document.getElementById("twflBtnSyncCursors")?.addEventListener("click", () => {
+          let rec = comtradeSlots[0];
+          if (!rec?.rows?.length) return;
+          let tA = rec.rows[0].t + state.cursorA * (rec.rows.at(-1).t - rec.rows[0].t);
+          let tB = rec.rows[0].t + state.cursorB * (rec.rows.at(-1).t - rec.rows[0].t);
+          twflState.ta = tA;
+          twflState.tb = tB;
+          let inTa = document.getElementById("twflInputTa");
+          let inTb = document.getElementById("twflInputTb");
+          if (inTa) inTa.value = (tA * 1000).toFixed(6);
+          if (inTb) inTb.value = (tB * 1000).toFixed(6);
+          calculateRPVTwfl();
+        });
+
+        document.querySelectorAll(".twfl-step-btn").forEach(btn => {
+          btn.addEventListener("click", e => {
+            let target = btn.dataset.target;
+            let stepMs = parseFloat(btn.dataset.step) || 0;
+            let stepSec = stepMs / 1000;
+            if (target === "ta") {
+              twflState.ta = (twflState.ta || 0) + stepSec;
+              let inTa = document.getElementById("twflInputTa");
+              if (inTa) inTa.value = (twflState.ta * 1000).toFixed(6);
+            } else if (target === "tb") {
+              twflState.tb = (twflState.tb || 0) + stepSec;
+              let inTb = document.getElementById("twflInputTb");
+              if (inTb) inTb.value = (twflState.tb * 1000).toFixed(6);
+            }
+            calculateRPVTwfl();
+          });
+        });
+
+        document.getElementById("twflInputTa")?.addEventListener("change", e => {
+          let valMs = parseFloat(e.target.value);
+          if (Number.isFinite(valMs)) {
+            twflState.ta = valMs / 1000;
+            calculateRPVTwfl();
+          }
+        });
+        document.getElementById("twflInputTb")?.addEventListener("change", e => {
+          let valMs = parseFloat(e.target.value);
+          if (Number.isFinite(valMs)) {
+            twflState.tb = valMs / 1000;
+            calculateRPVTwfl();
+          }
+        });
+
+        document.getElementById("twflLength")?.addEventListener("input", e => {
+          e.target.dataset.userEdited = "true";
+        });
+
+        document.getElementById("twflIsMixed")?.addEventListener("change", e => {
+          let box = document.getElementById("twflMixedContainer");
+          if (box) box.style.display = e.target.checked ? "block" : "none";
+          calculateRPVTwfl();
+        });
+
+        ["twflMode", "twflChannelSelect", "twflDetectionMethod", "twflLength", "twflK1", "twflThresholdVal", "twflL1", "twflL2", "twflK2"].forEach(id => {
+          let el = document.getElementById(id);
+          if (el) {
+            el.addEventListener("change", () => {
+              if (id === "twflChannelSelect" || id === "twflDetectionMethod" || id === "twflThresholdVal") {
+                twflState.sigA = null; twflState.sigB = null;
+                autoDetectTwflWavefronts();
+              }
+              calculateRPVTwfl();
+            });
+          }
+        });
+
+        document.getElementById("twflCalibType")?.addEventListener("change", updateTwflCalibrationUi);
+        document.getElementById("twflCalibX")?.addEventListener("input", updateTwflCalibrationUi);
+        document.getElementById("twflBtnApplyK1")?.addEventListener("click", applyTwflCalibratedK1);
+
+        document.getElementById("twflZoomWavefront")?.addEventListener("click", () => {
+          zoomTwflToWavefronts();
+          drawTwflWaveforms();
+        });
+        document.getElementById("twflZoomReset")?.addEventListener("click", () => {
+          twflState.zoomA = { start: 0, end: 1 };
+          twflState.zoomB = { start: 0, end: 1 };
+          twflState.zoomStart = 0; twflState.zoomEnd = 1;
+          drawTwflWaveforms();
+        });
+
+        attachTwflCanvasInteractivity(document.getElementById("twflCanvasA"), "ta");
+        attachTwflCanvasInteractivity(document.getElementById("twflCanvasB"), "tb");
+      }
+
+      function renderTwflView() {
+        let recA = comtradeSlots[0];
+        let recB = comtradeSlots[1];
+
+        let b1 = document.getElementById("twflSlot1Badge");
+        if (b1) b1.textContent = recA ? `SE A: ${recA.meta?.station || recA.base}` : "SE A: Vazio";
+
+        let b2 = document.getElementById("twflSlot2Badge");
+        if (b2) b2.textContent = recB ? `SE B: ${recB.meta?.station || recB.base}` : "SE B: Não carregado (1-Term)";
+
+        let bFs = document.getElementById("twflFsBadge");
+        if (bFs) {
+          let maxFs = Math.max(recA?.fs || 0, recB?.fs || 0);
+          bFs.textContent = maxFs >= 1e6 ? `Fs: ${(maxFs / 1e6).toFixed(3)} MHz` : (maxFs ? `Fs: ${(maxFs / 1e3).toFixed(1)} kHz` : "Fs: -");
+        }
+
+        let inLen = document.getElementById("twflLength");
+        if (inLen && !inLen.dataset.userEdited) {
+          if (Number.isFinite(settings.length) && settings.length > 1.0 && settings.length !== 100.0) {
+            inLen.value = Number(settings.length).toFixed(3);
+          } else if (!inLen.value || inLen.value === "1.000" || inLen.value === "100.000") {
+            inLen.value = "295.700";
+          }
+        }
+
+        if (!twflState.results) {
+          autoDetectTwflWavefronts();
+        }
+        calculateRPVTwfl();
+      }
+
       /* ================= NAVEGAÇÃO E EVENTOS ================= */
       let phasorRenderTimer=0;
       function layoutPhasorRecords(){
@@ -8830,6 +10380,10 @@
             if (typeof drawLocationTrajectory1T === "function") drawLocationTrajectory1T();
             if (typeof drawLocationTrajectory2T === "function") drawLocationTrajectory2T();
             if (typeof drawRxPlane === "function") drawRxPlane();
+          }
+          if (id === "twfl") {
+            invalidateAllCanvasDims();
+            if (typeof renderTwflView === "function") renderTwflView();
           }
           if (id === "log") {
             renderAuditLog();
@@ -9814,7 +11368,7 @@
         ds=combineComtrades(records);
         if (ds) ds._channelRmsCache = null;
         records.forEach(r => { if (r) r._channelRmsCache = null; });
-        state.x0=0;state.x1=1;state.analogInitializedFor="";state.digitalInitializedFor="";
+        state.x0=0;state.x1=1;state.analogInitializedFor=null;state.digitalInitializedFor=null;
         resetSynchronizedSideTime();initializeLoadedDataset();
 
       if(records.length>1){
@@ -9826,6 +11380,23 @@
           }
         }
         if(state.waveformView==="side")requestAnimationFrame(drawSideBySide);
+        if (typeof twflState !== "undefined") {
+          twflState.sigA = null;
+          twflState.sigB = null;
+          twflState.results = null;
+          let inLen = document.getElementById("twflLength");
+          if (inLen && !inLen.dataset.userEdited) {
+            if (Number.isFinite(settings.length) && settings.length > 1.0 && settings.length !== 100.0) {
+              inLen.value = Number(settings.length).toFixed(3);
+            } else if (!inLen.value || inLen.value === "1.000" || inLen.value === "100.000") {
+              inLen.value = "295.700";
+            }
+          }
+          let p = document.getElementById("twfl");
+          if (p && p.classList.contains("on") && typeof renderTwflView === "function") {
+            renderTwflView();
+          }
+        }
       }
 
       async function openComtradeSlot(slot,files) {
@@ -9834,8 +11405,17 @@
         await new Promise(r=>setTimeout(r,30));
         try{
           let pairs=await resolveComtradePairs(files);
-          if(pairs.length!==1)throw Error(`Selecione somente um par CFG/DAT para a Oscilografia ${slot+1}.`);
-          comtradeSlots[slot]=await loadComtradePair(pairs[0]);
+          if (pairs.length === 2 && slot === 0) {
+            comtradeSlots[0] = await loadComtradePair(pairs[0]);
+            comtradeSlots[1] = await loadComtradePair(pairs[1]);
+          } else {
+            if(pairs.length!==1)throw Error(`Selecione somente um par CFG/DAT para a Oscilografia ${slot+1}.`);
+            let otherSlot = slot === 0 ? 1 : 0;
+            if (comtradeSlots[otherSlot]?.base?.startsWith("Sample") || comtradeSlots[otherSlot]?.meta?.kind?.includes("SYNTHETIC")) {
+              comtradeSlots[otherSlot] = null;
+            }
+            comtradeSlots[slot]=await loadComtradePair(pairs[0]);
+          }
           await new Promise(r=>requestAnimationFrame(r));
           rebuildLoadedComtrades();
         }catch(e){
@@ -9860,6 +11440,7 @@
       };
 
       document.querySelectorAll(".tab[data-id]").forEach((b) => (b.onclick = () => showTab(b.dataset.id)));
+      if (typeof initTwfl === "function") initTwfl();
 
       let panTool = document.getElementById("panTool"), cursorTool = document.getElementById("cursorTool"), zoomTool = document.getElementById("zoomTool");
       if(panTool) panTool.onclick = () => {
@@ -10006,7 +11587,7 @@
       window.addEventListener("mouseup",()=>{if(sidebarResizeDrag){sidebarResizeDrag=null;if(sidebarResizer) sidebarResizer.classList.remove("dragging");schedulePhasorRender(100)}});
 
       let channelFilterType="analog",channelFilterInfSelections=new Set();
-      function channelFilterRegex(term){let special="\\^$.*+?()[]{}|",escaped=[...term].map(ch=>ch==="?"?".":special.includes(ch)?"\\"+ch:ch).join("");return new RegExp(escaped,"i")}
+      function channelFilterRegex(term){let special="\\^$.+()[]{}|",escaped=[...term].map(ch=>ch==="?"?".":ch==="*"?"(?:.*)":special.includes(ch)?"\\"+ch:ch).join("");return new RegExp(escaped,"i")}
       function infLineFilterEntries(){
         let entries=[],two=Boolean(comtradeSlots[0]&&comtradeSlots[1]),analogOffset=0;
         comtradeSlots.forEach((rec,slot)=>{
@@ -10072,28 +11653,43 @@
         if(!root) return;
         let rows=[...root.querySelectorAll(".chrow")],entries=selectedInfLineEntries(),count=0;
         rows.forEach(row=>{
-          let textMatch=!matcher||matcher.test(row.dataset.filterName||""),lineMatch=channelFilterType==="analog"?infLineIncludesAnalog(entries,Number(row.querySelector("input")?.dataset.i)):infLineIncludesDigital(entries,row.querySelector("input")?.dataset.k),match=textMatch&&lineMatch;
-          row.style.display=match?"grid":"none";if(match)count++
+          let textMatch=!matcher||matcher.test(row.dataset.filterName||"");
+          let lineMatch=channelFilterType==="analog"?
+            infLineIncludesAnalog(entries,Number(row.querySelector("input")?.dataset.i)):
+            infLineIncludesDigital(entries,row.querySelector("input")?.dataset.k);
+          let match=textMatch&&lineMatch;
+          row.style.display=match?"grid":"none";
+          if(match)count++;
         });
         let lineText=entries.length?` em ${entries.length} linha(s) selecionada(s)`:"";
-        if(channelFilterHelp) channelFilterHelp.textContent=`${count} canal(is) encontrado(s)${lineText}. Clique nas linhas para combinar seleções. Use ? como curinga.`;
+        if(channelFilterHelp) channelFilterHelp.textContent=`${count} canal(is) encontrado(s)${lineText}. Clique nas linhas para combinar seleções. Use ? ou * como curinga.`;
         let button=channelFilterType==="analog"?filterAnalog:filterDigital;
-        if(button) button.classList.toggle("active",!!term||entries.length>0)
+        if(button) button.classList.toggle("active",!!term||entries.length>0);
       }
 
       function openChannelFilter(type,button){
+        let modal = document.getElementById("channelFilterModal");
+        if (modal && modal.classList.contains("on") && channelFilterType === type) {
+          modal.classList.remove("on");
+          return;
+        }
         channelFilterType=type;
-        let title = document.getElementById("channelFilterTitle"), modal = document.getElementById("channelFilterModal"), input = document.getElementById("channelFilterInput");
+        let title = document.getElementById("channelFilterTitle"), input = document.getElementById("channelFilterInput");
         if(title) title.textContent=type==="analog"?"Filtrar canais analógicos":"Filtrar canais digitais";
         let r=button.getBoundingClientRect();
         if(modal) {
           modal.classList.add("on");
-          modal.style.left=Math.max(8,Math.min(innerWidth-modal.offsetWidth-8,r.right+8))+"px";
-          modal.style.top=Math.max(8,Math.min(innerHeight-modal.offsetHeight-8,r.top))+"px";
+          let modalW = modal.offsetWidth || 340;
+          let modalH = modal.offsetHeight || 220;
+          let left = Math.max(8, Math.min(window.innerWidth - modalW - 12, r.right + 8));
+          let top = Math.max(8, Math.min(window.innerHeight - modalH - 12, r.top));
+          modal.style.left = left + "px";
+          modal.style.top = top + "px";
         }
         if(input) input.value="";
-        renderInfLineFilter();filterRows();
-        if(input) input.focus();
+        renderInfLineFilter();
+        filterRows();
+        if(input) setTimeout(() => input.focus(), 30);
       }
 
       let filterAnalog = document.getElementById("filterAnalog"), filterDigital = document.getElementById("filterDigital");
@@ -10112,7 +11708,10 @@
       function changeFilteredSelection(checked){
         let root=channelFilterType==="analog"?document.getElementById("channelList"):document.getElementById("digitalList");
         if(!root) return;
-        root.querySelectorAll('.chrow:not([style*="display: none"]) input').forEach(input=>{
+        root.querySelectorAll('.chrow').forEach(row=>{
+          if (row.style.display === "none") return;
+          let input = row.querySelector("input");
+          if (!input) return;
           input.checked=checked;
           if(channelFilterType==="analog"){
             let i=+input.dataset.i;
@@ -10172,7 +11771,9 @@
         applyWaveLayout();if(state.waveformView==="side")drawSideBySide();
       };
       if(showChangedDigital) showChangedDigital.onclick=()=>{
-        state.selectedDigital=new Set((ds.meta.digital||[]).map(x=>x.name).filter(digitalChanged));
+        let digs = ds?.meta?.digital || [];
+        let changed = digs.filter(digitalChanged).map(x => x.name);
+        state.selectedDigital = new Set(changed.length ? changed : digs.slice(0, 8).map(x => x.name));
         document.querySelectorAll(".digitalCheck").forEach(x=>x.checked=state.selectedDigital.has(x.dataset.k));
         applyWaveLayout();if(state.waveformView==="side")drawSideBySide();
       };
@@ -10282,7 +11883,7 @@
           if (companionBanner) companionBanner.classList.remove("show");
         }
 
-        handleComtradeFiles(files, 0);
+        openComtradeSlot(0, files);
       });
 
       // Waveform Toolbar Buttons
